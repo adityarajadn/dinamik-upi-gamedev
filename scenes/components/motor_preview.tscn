@@ -1,0 +1,55 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/components/motor_preview.gd" id="1_mp"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/mot_frame_bebek.png" id="2_frame"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/part_wh_01.png" id="3_wh"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/part_bd_01.png" id="4_bd"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/part_en_01.png" id="5_en"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/part_ex_01.png" id="6_ex"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/part_lt_01.png" id="7_lt"]
+
+[node name="MotorPreview" type="Node2D"]
+scale = Vector2(-1, 1)
+script = ExtResource("1_mp")
+
+[node name="RearWheel" type="Sprite2D" parent="."]
+position = Vector2(-230, 113)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("3_wh")
+flip_h = true
+
+[node name="FrontWheel" type="Sprite2D" parent="."]
+position = Vector2(302, 113)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("3_wh")
+flip_h = true
+
+[node name="Frame" type="Sprite2D" parent="."]
+position = Vector2(0, 0)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_frame")
+flip_h = true
+
+[node name="Engine" type="Sprite2D" parent="."]
+position = Vector2(5.54, 114.3)
+scale = Vector2(0.4441, 0.4441)
+texture = ExtResource("5_en")
+flip_h = true
+
+[node name="Body" type="Sprite2D" parent="."]
+position = Vector2(0, 0)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_bd")
+flip_h = true
+
+[node name="Exhaust" type="Sprite2D" parent="."]
+position = Vector2(0, 0)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("6_ex")
+flip_h = true
+
+[node name="Headlight" type="Sprite2D" parent="."]
+position = Vector2(0, 0)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("7_lt")
+flip_h = true

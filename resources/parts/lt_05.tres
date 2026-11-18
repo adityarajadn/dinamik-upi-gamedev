@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PartData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/part_data.gd" id="1_s"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/part_lt_05.png" id="2_t"]
+
+[resource]
+script = ExtResource("1_s")
+part_id = &"LT-05"
+slot = 4
+display_name = "Lampu Dual Eye Neon"
+tier = 5
+cost_price = 450000
+selling_price = 700000
+value_score = 120
+texture = ExtResource("2_t")

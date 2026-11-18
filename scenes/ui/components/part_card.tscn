@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/components/part_card.gd" id="1_pc"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/part_wh_03.png" id="2_ic"]
+
+[node name="PartCard" type="PanelContainer"]
+custom_minimum_size = Vector2(190, 262)
+offset_right = 190.0
+offset_bottom = 262.0
+theme_type_variation = &"CardPanel"
+script = ExtResource("1_pc")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="IdLabel" type="Label" parent="VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"SmallLabel"
+theme_override_colors/font_color = Color(1, 0.4, 0, 1)
+text = "WH-03  T3"
+horizontal_alignment = 1
+
+[node name="Icon" type="TextureRect" parent="VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 100)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+texture = ExtResource("2_ic")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 44)
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"SmallLabel"
+theme_override_font_sizes/font_size = 17
+text = "Velg Racing Cast Star Orange"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="PriceLabel" type="Label" parent="VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"PriceLabel"
+theme_override_font_sizes/font_size = 22
+text = "Rp 200.000"
+horizontal_alignment = 1
+
+[node name="StockLabel" type="Label" parent="VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"SmallLabel"
+text = "[Stok: 1]"
+horizontal_alignment = 1

@@ -1,0 +1,799 @@
+[gd_scene format=3 uid="uid://y76e5bwkhgfo"]
+
+[ext_resource type="Script" uid="uid://b48jku1nq4b5f" path="res://scripts/systems/workshop.gd" id="1_ws"]
+[ext_resource type="Texture2D" uid="uid://7mubeen28ost" path="res://assets/baked_processed/bg_workshop_interior.png" id="2_bg"]
+[ext_resource type="Texture2D" uid="uid://clyevypab5xw7" path="res://assets/generated/prop_workbench.png" id="3_lift"]
+[ext_resource type="Script" uid="uid://cwkfkxgft7ior" path="res://scripts/components/motor_visual.gd" id="4_mv"]
+[ext_resource type="Texture2D" uid="uid://doe74b0vnfxhq" path="res://assets/baked_processed/mot_base_frame.png" id="5_frame"]
+[ext_resource type="Texture2D" uid="uid://bri2luxbf65md" path="res://assets/baked_processed/part_wh_01.png" id="6_wh"]
+[ext_resource type="Texture2D" uid="uid://dbm2bc1kevo8x" path="res://assets/baked_processed/part_bd_01.png" id="7_bd"]
+[ext_resource type="Texture2D" uid="uid://x52mregw1uyg" path="res://assets/baked_processed/part_en_01.png" id="8_en"]
+[ext_resource type="Texture2D" uid="uid://bohriuu3frqar" path="res://assets/baked_processed/part_ex_01.png" id="9_ex"]
+[ext_resource type="Texture2D" uid="uid://dgwshgqaxx7pl" path="res://assets/baked_processed/part_lt_01.png" id="10_lt"]
+[ext_resource type="Theme" uid="uid://cc8al127ss4fa" path="res://themes/game_theme.tres" id="11_th"]
+[ext_resource type="Texture2D" uid="uid://dh0cju8hfhc8q" path="res://assets/baked_processed/char_sport_idle.png" id="12_cl"]
+[ext_resource type="Texture2D" uid="uid://devqi5413tc1g" path="res://assets/baked_processed/prop_table.png" id="13_e7k1j"]
+[ext_resource type="Texture2D" uid="uid://65na4fki5pep" path="res://assets/baked_processed/prop_jar_full.png" id="14_pig"]
+[ext_resource type="SpriteFrames" uid="uid://bpxtng70b83ja" path="res://resources/characters/player_frames.tres" id="15_fr"]
+[ext_resource type="Texture2D" uid="uid://bqrfl46vfv3e6" path="res://assets/generated/fx_clang.png" id="16_clang"]
+[ext_resource type="Texture2D" uid="uid://bxggbtnpm3qy2" path="res://assets/generated/fx_spark.png" id="17_spark"]
+[ext_resource type="PackedScene" uid="uid://i3xf8p2mjf8v" path="res://scenes/ui/hud/hud.tscn" id="18_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/components/part_card.tscn" id="19_card"]
+[ext_resource type="Script" uid="uid://7ttfm2yi5jp2" path="res://scripts/components/popup_animator.gd" id="20_pop"]
+[ext_resource type="Script" uid="uid://botktt15830n" path="res://scripts/components/ui_button_animation.gd" id="21_btn"]
+[ext_resource type="Texture2D" uid="uid://ny8xvbfdg0uw" path="res://assets/baked_processed/char_sport_panic.png" id="22_panic"]
+[ext_resource type="Texture2D" uid="uid://70nphlp00q51" path="res://assets/baked_processed/fx_smoke_cloud.png" id="30_smk"]
+[ext_resource type="Texture2D" uid="uid://b8rsdwrarp2jg" path="res://assets/baked_processed/fx_screwdriver_teal.png" id="31_smk"]
+[ext_resource type="Texture2D" uid="uid://cxbgm5pw256sk" path="res://assets/baked_processed/fx_screwdriver_orange.png" id="32_smk"]
+[ext_resource type="Texture2D" uid="uid://dfclhoshrbcxp" path="res://assets/baked_processed/fx_screwdriver_blue.png" id="33_smk"]
+[ext_resource type="Texture2D" uid="uid://be1nwh28rfc0e" path="res://assets/baked_processed/fx_screwdriver_red.png" id="34_smk"]
+
+[sub_resource type="CircleShape2D" id="Circle_hot"]
+radius = 95.0
+
+[sub_resource type="CircleShape2D" id="Circle_pig"]
+radius = 70.0
+
+[sub_resource type="Curve" id="Curve_spark"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="StyleBoxFlat" id="Tab_box"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 0.0784, 0.5765, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.0941, 0.0941, 0.1216, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="Tab_box_hover"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 0.35, 0.7, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.0941, 0.0941, 0.1216, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[node name="Workshop" type="Node2D" unique_id=527537726]
+script = ExtResource("1_ws")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1330827041]
+texture = ExtResource("2_bg")
+centered = false
+
+[node name="Lift" type="Sprite2D" parent="." unique_id=665922026]
+visible = false
+position = Vector2(960, 880)
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("3_lift")
+
+[node name="Motor" type="Node2D" parent="." unique_id=1621009481]
+position = Vector2(960, 786)
+scale = Vector2(-1, 1)
+script = ExtResource("4_mv")
+
+[node name="RearWheel" type="Sprite2D" parent="Motor" unique_id=1996766619]
+position = Vector2(-230, 113)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("6_wh")
+flip_h = true
+
+[node name="FrontWheel" type="Sprite2D" parent="Motor" unique_id=1517125861]
+position = Vector2(302, 113)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("6_wh")
+flip_h = true
+
+[node name="Frame" type="Sprite2D" parent="Motor" unique_id=2132994648]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("5_frame")
+flip_h = true
+
+[node name="Engine" type="Sprite2D" parent="Motor" unique_id=1211035813]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("8_en")
+flip_h = true
+
+[node name="Body" type="Sprite2D" parent="Motor" unique_id=1843187569]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("7_bd")
+flip_h = true
+
+[node name="Exhaust" type="Sprite2D" parent="Motor" unique_id=1677586462]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("9_ex")
+flip_h = true
+
+[node name="Headlight" type="Sprite2D" parent="Motor" unique_id=426681669]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("10_lt")
+flip_h = true
+
+[node name="Hotspots" type="Node2D" parent="Motor" unique_id=1310474033]
+
+[node name="BodyHotspot" type="Area2D" parent="Motor/Hotspots" unique_id=922107342]
+position = Vector2(42, -45)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Motor/Hotspots/BodyHotspot" unique_id=1822814505]
+shape = SubResource("Circle_hot")
+
+[node name="ExhaustHotspot" type="Area2D" parent="Motor/Hotspots" unique_id=1004952040]
+position = Vector2(-181, 90)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Motor/Hotspots/ExhaustHotspot" unique_id=540407851]
+shape = SubResource("Circle_hot")
+
+[node name="EngineHotspot" type="Area2D" parent="Motor/Hotspots" unique_id=628857325]
+position = Vector2(0, 69)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Motor/Hotspots/EngineHotspot" unique_id=1095223313]
+shape = SubResource("Circle_hot")
+
+[node name="WheelsHotspot" type="Area2D" parent="Motor/Hotspots" unique_id=803240023]
+position = Vector2(302, 113)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Motor/Hotspots/WheelsHotspot" unique_id=61237692]
+shape = SubResource("Circle_hot")
+
+[node name="LightHotspot" type="Area2D" parent="Motor/Hotspots" unique_id=1505096463]
+position = Vector2(168, -171)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Motor/Hotspots/LightHotspot" unique_id=1693497132]
+shape = SubResource("Circle_hot")
+
+[node name="Tags" type="Node2D" parent="Motor" unique_id=188461824]
+
+[node name="BodyTag" type="Label" parent="Motor/Tags" unique_id=1497430875]
+offset_left = -10.0
+offset_top = -250.0
+offset_right = 170.0
+offset_bottom = -210.0
+pivot_offset = Vector2(90, 20)
+theme = ExtResource("11_th")
+text = "BODY"
+horizontal_alignment = 1
+
+[node name="ExhaustTag" type="Label" parent="Motor/Tags" unique_id=98142161]
+offset_left = -460.0
+offset_top = 260.0
+offset_right = -240.0
+offset_bottom = 300.0
+pivot_offset = Vector2(110, 20)
+theme = ExtResource("11_th")
+text = "KNALPOT"
+horizontal_alignment = 1
+
+[node name="EngineTag" type="Label" parent="Motor/Tags" unique_id=622369198]
+offset_left = -200.0
+offset_top = -30.0
+offset_right = -40.0
+offset_bottom = 10.0
+pivot_offset = Vector2(80, 20)
+theme = ExtResource("11_th")
+text = "MESIN"
+horizontal_alignment = 1
+
+[node name="WheelsTag" type="Label" parent="Motor/Tags" unique_id=698722808]
+offset_left = 290.0
+offset_top = 260.0
+offset_right = 420.0
+offset_bottom = 300.0
+pivot_offset = Vector2(65, 20)
+theme = ExtResource("11_th")
+text = "RODA"
+horizontal_alignment = 1
+
+[node name="LightTag" type="Label" parent="Motor/Tags" unique_id=419767992]
+offset_left = 360.0
+offset_top = -280.0
+offset_right = 500.0
+offset_bottom = -240.0
+pivot_offset = Vector2(70, 20)
+theme = ExtResource("11_th")
+text = "LAMPU"
+horizontal_alignment = 1
+
+[node name="Client" type="Sprite2D" parent="." unique_id=1433735030]
+position = Vector2(357, 1012)
+scale = Vector2(0.92800033, 0.92800033)
+texture = ExtResource("12_cl")
+offset = Vector2(0, -320)
+
+[node name="Counter" type="Sprite2D" parent="." unique_id=79764107]
+position = Vector2(215, 946.99994)
+scale = Vector2(0.18847656, 0.18847656)
+texture = ExtResource("13_e7k1j")
+flip_h = true
+
+[node name="PiggyBank" type="Area2D" parent="." unique_id=1126148645]
+position = Vector2(209.00003, 795)
+scale = Vector2(1.6000006, 1.6000006)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="Sprite" type="Sprite2D" parent="PiggyBank" unique_id=1051033679]
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("14_pig")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PiggyBank" unique_id=1898518209]
+shape = SubResource("Circle_pig")
+
+[node name="PlayerAvatar" type="AnimatedSprite2D" parent="." unique_id=1029832631]
+position = Vector2(1567, 1045)
+scale = Vector2(1.0436363, 1.0436363)
+sprite_frames = ExtResource("15_fr")
+animation = &"walk"
+autoplay = "idle"
+offset = Vector2(0, -320)
+
+[node name="Fx" type="Node2D" parent="." unique_id=1099866605]
+
+[node name="Sparks" type="CPUParticles2D" parent="Fx" unique_id=1391452773]
+emitting = false
+amount = 28
+texture = ExtResource("17_spark")
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 700)
+initial_velocity_min = 220.0
+initial_velocity_max = 460.0
+scale_amount_min = 0.4
+scale_amount_curve = SubResource("Curve_spark")
+
+[node name="Clang" type="Sprite2D" parent="Fx" unique_id=1585310936]
+visible = false
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("16_clang")
+
+[node name="Smoke" type="Node2D" parent="Fx" unique_id=729296617]
+visible = false
+z_index = 5
+
+[node name="Cloud" type="Sprite2D" parent="Fx/Smoke" unique_id=89678182]
+texture = ExtResource("30_smk")
+
+[node name="Screwdriver1" type="Sprite2D" parent="Fx/Smoke" unique_id=1856786129]
+texture = ExtResource("31_smk")
+
+[node name="Screwdriver2" type="Sprite2D" parent="Fx/Smoke" unique_id=567584342]
+texture = ExtResource("32_smk")
+
+[node name="Screwdriver3" type="Sprite2D" parent="Fx/Smoke" unique_id=1379629818]
+texture = ExtResource("33_smk")
+
+[node name="Screwdriver4" type="Sprite2D" parent="Fx/Smoke" unique_id=1274497178]
+texture = ExtResource("34_smk")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1618854]
+position = Vector2(960, 540)
+
+[node name="HUD" parent="." unique_id=950551765 instance=ExtResource("18_hud")]
+show_exit_button = true
+esc_pauses = false
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1497284252]
+layer = 5
+
+[node name="Root" type="Control" parent="UI" unique_id=1036595803]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("11_th")
+
+[node name="Bubble" type="PanelContainer" parent="UI/Root" unique_id=588755529]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 357.0
+offset_top = 200.0
+offset_right = 974.0
+offset_bottom = 605.0
+scale = Vector2(0.61, 0.61)
+mouse_filter = 2
+theme_type_variation = &"BubblePanel"
+
+[node name="BubbleLabel" type="Label" parent="UI/Root/Bubble" unique_id=1317207441]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 24
+text = "Doni Skater:
+\"Gue pengen roda racing oranye! Budget: Rp 350rb\""
+autowrap_mode = 3
+
+[node name="OrderPanel" type="PanelContainer" parent="UI/Root" unique_id=1516078139]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -500.0
+offset_top = 215.0
+offset_right = -16.0
+offset_bottom = 640.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="VBox" type="VBoxContainer" parent="UI/Root/OrderPanel" unique_id=739593612]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Header" type="HBoxContainer" parent="UI/Root/OrderPanel/VBox" unique_id=2075342649]
+layout_mode = 2
+
+[node name="OrderTitle" type="Label" parent="UI/Root/OrderPanel/VBox/Header" unique_id=1584058198]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"PinkLabel"
+text = "PESANAN KLIEN"
+
+[node name="CloseOrderButton" type="Button" parent="UI/Root/OrderPanel/VBox/Header" unique_id=429288613]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+tooltip_text = "Tutup panel (Tab)"
+focus_mode = 0
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("Tab_box")
+theme_override_styles/pressed = SubResource("Tab_box")
+theme_override_styles/hover = SubResource("Tab_box_hover")
+theme_override_styles/focus = SubResource("Tab_box")
+text = ">"
+
+[node name="ClientNameLabel" type="Label" parent="UI/Root/OrderPanel/VBox" unique_id=1723227815]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"SmallLabel"
+text = "Doni Skater (Anak tongkrongan)"
+autowrap_mode = 3
+
+[node name="OrderLines" type="VBoxContainer" parent="UI/Root/OrderPanel/VBox" unique_id=1492778965]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(440, 0)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="BudgetLabel" type="Label" parent="UI/Root/OrderPanel/VBox" unique_id=1430384916]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PriceLabel"
+text = "Budget: Rp 350.000"
+
+[node name="EstimateLabel" type="Label" parent="UI/Root/OrderPanel/VBox" unique_id=1189058183]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_type_variation = &"SmallLabel"
+theme_override_font_sizes/font_size = 18
+text = "Estimasi bayar: Rp 0 | Modal part: Rp 0"
+autowrap_mode = 3
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/Root/OrderPanel/VBox" unique_id=2080968459]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="DeliverButton" type="Button" parent="UI/Root/OrderPanel/VBox" unique_id=1865366293]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+theme_type_variation = &"GreenButton"
+theme_override_font_sizes/font_size = 26
+text = "SERAHKAN MOTOR"
+script = ExtResource("21_btn")
+
+[node name="OpenOrderButton" type="Button" parent="UI/Root" unique_id=1486885383]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(52, 110)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -55.0
+offset_right = -8.0
+offset_bottom = 55.0
+grow_horizontal = 0
+grow_vertical = 2
+tooltip_text = "Buka pesanan klien (Tab)"
+focus_mode = 0
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("Tab_box")
+theme_override_styles/pressed = SubResource("Tab_box")
+theme_override_styles/hover = SubResource("Tab_box_hover")
+theme_override_styles/focus = SubResource("Tab_box")
+text = "<"
+
+[node name="Tray" type="PanelContainer" parent="UI/Root" unique_id=1421675069]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -560.0
+offset_top = 725.0
+offset_right = 560.0
+offset_bottom = 1046.0
+grow_horizontal = 2
+
+[node name="PopupAnimator" type="Node" parent="UI/Root/Tray" unique_id=407450097]
+script = ExtResource("20_pop")
+duration = 0.2
+
+[node name="VBox" type="VBoxContainer" parent="UI/Root/Tray" unique_id=307530769]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TrayCards" type="HBoxContainer" parent="UI/Root/Tray/VBox" unique_id=1355329034]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Card1" parent="UI/Root/Tray/VBox/TrayCards" unique_id=925624040 instance=ExtResource("19_card")]
+layout_mode = 2
+
+[node name="Card2" parent="UI/Root/Tray/VBox/TrayCards" unique_id=1473889795 instance=ExtResource("19_card")]
+layout_mode = 2
+
+[node name="Card3" parent="UI/Root/Tray/VBox/TrayCards" unique_id=634262154 instance=ExtResource("19_card")]
+layout_mode = 2
+
+[node name="Card4" parent="UI/Root/Tray/VBox/TrayCards" unique_id=799053362 instance=ExtResource("19_card")]
+layout_mode = 2
+
+[node name="Card5" parent="UI/Root/Tray/VBox/TrayCards" unique_id=462800591 instance=ExtResource("19_card")]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="UI/Root/Tray/VBox" unique_id=1828327968]
+layout_mode = 2
+alignment = 1
+
+[node name="TrayTitle" type="Label" parent="UI/Root/Tray/VBox/Header" unique_id=667376459]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_type_variation = &"PriceLabel"
+text = "TRAY PART: RODA"
+
+[node name="TrayClose" type="Button" parent="UI/Root/Tray/VBox/Header" unique_id=1157195548]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(200, 56)
+layout_mode = 2
+theme_type_variation = &"DarkButton"
+theme_override_font_sizes/font_size = 22
+text = "BATAL"
+script = ExtResource("21_btn")
+
+[node name="DragGhost" type="TextureRect" parent="UI/Root" unique_id=1426244224]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 160.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TwistOverlay" type="Control" parent="UI/Root" unique_id=185568977]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="UI/Root/TwistOverlay" unique_id=1263641695]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.25)
+
+[node name="TwistPanel" type="PanelContainer" parent="UI/Root/TwistOverlay" unique_id=335811970]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -760.0
+offset_top = -420.0
+offset_right = 760.0
+offset_bottom = 420.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"TwistPanel"
+
+[node name="PopupAnimator" type="Node" parent="UI/Root/TwistOverlay/TwistPanel" unique_id=854341693]
+script = ExtResource("20_pop")
+duration = 0.3
+
+[node name="HBox" type="HBoxContainer" parent="UI/Root/TwistOverlay/TwistPanel" unique_id=1132607438]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="TwistPortrait" type="TextureRect" parent="UI/Root/TwistOverlay/TwistPanel/HBox" unique_id=543481300]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 420)
+layout_mode = 2
+texture = ExtResource("22_panic")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBox" type="VBoxContainer" parent="UI/Root/TwistOverlay/TwistPanel/HBox" unique_id=2040523609]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="TwistTitle" type="Label" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox" unique_id=2124007305]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+theme_override_colors/font_color = Color(1, 0.0784, 0.5765, 1)
+text = "REVISI DADAKAN!"
+
+[node name="TwistBubble" type="PanelContainer" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox" unique_id=1493529497]
+layout_mode = 2
+theme_type_variation = &"BubblePanel"
+
+[node name="TwistDialog" type="Label" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox/TwistBubble" unique_id=1493529496]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 24
+text = "\"Duh Bang, sorry banget!\""
+autowrap_mode = 3
+
+[node name="Choices" type="GridContainer" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox" unique_id=866992128]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 10
+columns = 3
+
+[node name="Accept" type="VBoxContainer" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox/Choices" unique_id=2037613300]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AcceptButton" type="Button" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox/Choices/Accept" unique_id=1977146895]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_type_variation = &"OrangeButton"
+theme_override_font_sizes/font_size = 22
+text = "TURUNKAN"
+script = ExtResource("21_btn")
+
+[node name="AcceptDesc" type="Label" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox/Choices/Accept" unique_id=1744670872]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 18
+text = "Ganti sesuai budget."
+autowrap_mode = 3
+
+[node name="Absorb" type="VBoxContainer" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox/Choices" unique_id=1895609987]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AbsorbButton" type="Button" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox/Choices/Absorb" unique_id=433693974]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_type_variation = &"YellowButton"
+theme_override_font_sizes/font_size = 22
+text = "PASANG"
+script = ExtResource("21_btn")
+
+[node name="AbsorbDesc" type="Label" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox/Choices/Absorb" unique_id=2058316249]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 18
+text = "Tanggung rugi."
+autowrap_mode = 3
+
+[node name="Reject" type="VBoxContainer" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox/Choices" unique_id=580641789]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RejectButton" type="Button" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox/Choices/Reject" unique_id=62005694]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 72)
+layout_mode = 2
+theme_type_variation = &"RedButton"
+theme_override_font_sizes/font_size = 22
+text = "TOLAK"
+script = ExtResource("21_btn")
+
+[node name="RejectDesc" type="Label" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox/Choices/Reject" unique_id=980473306]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 18
+text = "Tolak."
+autowrap_mode = 3
+
+[node name="ResultOverlay" type="Control" parent="UI/Root" unique_id=227114275]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="UI/Root/ResultOverlay" unique_id=1447683954]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.25)
+
+[node name="ResultPanel" type="Control" parent="UI/Root/ResultOverlay" unique_id=804901870]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -600.0
+offset_top = -350.0
+offset_right = 600.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PopupAnimator" type="Node" parent="UI/Root/ResultOverlay/ResultPanel" unique_id=2141146922]
+script = ExtResource("20_pop")
+
+[node name="ResultBox" type="PanelContainer" parent="UI/Root/ResultOverlay/ResultPanel" unique_id=258658079]
+layout_mode = 0
+offset_top = 155.0
+offset_right = 1200.0
+offset_bottom = 617.0
+mouse_filter = 2
+
+[node name="ResultPortrait" type="TextureRect" parent="UI/Root/ResultOverlay/ResultPanel" unique_id=1941647829]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 28.0
+offset_top = 230.0
+offset_right = 448.0
+offset_bottom = 540.0
+mouse_filter = 2
+texture = ExtResource("12_cl")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBox" type="VBoxContainer" parent="UI/Root/ResultOverlay/ResultPanel" unique_id=834360010]
+layout_mode = 0
+offset_left = 515.0
+offset_top = 288.0
+offset_right = 1163.0
+offset_bottom = 453.0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="ResultTitle" type="Label" parent="UI/Root/ResultOverlay/ResultPanel/VBox" unique_id=1791440612]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+theme_override_font_sizes/font_size = 48
+text = "SERAH TERIMA!"
+
+[node name="PaymentLabel" type="Label" parent="UI/Root/ResultOverlay/ResultPanel/VBox" unique_id=523980877]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PriceLabel"
+theme_override_font_sizes/font_size = 36
+text = "+Rp 0"
+
+[node name="SatisfactionLabel" type="Label" parent="UI/Root/ResultOverlay/ResultPanel/VBox" unique_id=155063815]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PinkLabel"
+theme_override_font_sizes/font_size = 32
+text = "Kepuasan 0%"
+
+[node name="ProfitLabel" type="Label" parent="UI/Root/ResultOverlay/ResultPanel/VBox" unique_id=1332412646]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Margin: Rp 0"
+
+[node name="CaughtLabel" type="Label" parent="UI/Root/ResultOverlay/ResultPanel/VBox" unique_id=1309286316]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Ketahuan"
+
+[node name="ResultBubble" type="PanelContainer" parent="UI/Root/ResultOverlay/ResultPanel" unique_id=1105295413]
+layout_mode = 0
+offset_left = 377.0
+offset_top = 71.0
+offset_right = 1137.0
+offset_bottom = 281.0
+theme_type_variation = &"BubblePanel"
+
+[node name="ReactionLabel" type="Label" parent="UI/Root/ResultOverlay/ResultPanel/ResultBubble" unique_id=1673063819]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(640, 0)
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 28
+text = "\"Mantap!\""
+autowrap_mode = 3
+
+[node name="ContinueButton" type="Button" parent="UI/Root/ResultOverlay/ResultPanel" unique_id=1772668855]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 80)
+layout_mode = 0
+offset_left = 838.0
+offset_top = 465.0
+offset_right = 1197.0
+offset_bottom = 590.0
+text = "LANJUT"
+script = ExtResource("21_btn")

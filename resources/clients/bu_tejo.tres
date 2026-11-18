@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ClientProfile" format=3 uid="uid://bd6530ps5elh7"]
+
+[ext_resource type="Script" uid="uid://qstfoikk3f2a" path="res://scripts/resources/client_profile.gd" id="1_s"]
+
+[ext_resource type="Texture2D" path="res://assets/baked_processed/char_emak_idle.png" id="t_idle"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/char_emak_happy.png" id="t_happy"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/char_emak_angry.png" id="t_angry"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/char_emak_panic.png" id="t_panic"]
+
+[resource]
+script = ExtResource("1_s")
+client_id = &"bu_tejo"
+client_name = "Bu Tejo"
+persona = "Juragan arisan yang ngotot"
+texture_idle = ExtResource("t_idle")
+texture_happy = ExtResource("t_happy")
+texture_angry = ExtResource("t_angry")
+texture_panic = ExtResource("t_panic")
+scooter_tint = Color(1, 0.62, 0.25, 1)
+budget_tolerance_max = 0.1
+request_lines = PackedStringArray("Mas, motor saya mau dipamerin ke ibu-ibu arisan. Ganti {parts}! Budget {budget}, jangan mahal-mahal lho!", "Halo Mas montir! Saya pengen {parts} yang bagus. Uangnya {budget}, pas ya, nggak pakai lebih!")
+twist_lines = PackedStringArray("Aduh Mas! Barusan ditagih uang kas arisan! Uang saya sisa {budget}, tapi {slot}-nya harus tetap keliatan mewah ya!", "Mas, mas! Suami saya telpon, katanya hemat! Cuma ada {budget}. Tapi {slot} jangan murahan!")
+happy_lines = PackedStringArray("Wah cantik sekali! Nanti saya promosiin di grup arisan!", "Bagus Mas! Ibu-ibu pasti iri!")
+neutral_lines = PackedStringArray("Ya sudah lah, lumayan.", "Hmm, biasa aja sih, tapi oke.")
+angry_lines = PackedStringArray("Ya ampun Mas! Ini barang apa?! Saya laporin ke Pak RT!", "Kok begini sih?! Nggak sesuai omongan!")

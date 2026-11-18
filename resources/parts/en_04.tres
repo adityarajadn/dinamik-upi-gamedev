@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PartData" format=3 uid="uid://beg1v2u2u76ik"]
+
+[ext_resource type="Script" uid="uid://bja8dag6ig2b3" path="res://scripts/resources/part_data.gd" id="1_s"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/part_en_04.png" id="2_t"]
+
+[resource]
+script = ExtResource("1_s")
+part_id = &"EN-04"
+slot = 2
+display_name = "Mesin DOHC 150cc Gold"
+tier = 4
+cost_price = 800000
+selling_price = 1150000
+value_score = 75
+texture = ExtResource("2_t")

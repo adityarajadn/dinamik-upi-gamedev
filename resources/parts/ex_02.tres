@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PartData" format=3 uid="uid://od13l82lob61"]
+
+[ext_resource type="Script" uid="uid://bja8dag6ig2b3" path="res://scripts/resources/part_data.gd" id="1_s"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/part_ex_02.png" id="2_t"]
+
+[resource]
+script = ExtResource("1_s")
+part_id = &"EX-02"
+slot = 1
+display_name = "Knalpot Bobokan Chrome"
+tier = 2
+cost_price = 75000
+selling_price = 120000
+value_score = 25
+texture = ExtResource("2_t")

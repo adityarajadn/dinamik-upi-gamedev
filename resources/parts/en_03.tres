@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PartData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/part_data.gd" id="1_s"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/part_en_03.png" id="2_t"]
+
+[resource]
+script = ExtResource("1_s")
+part_id = &"EN-03"
+slot = 2
+display_name = "Mesin Injeksi 125cc Custom"
+tier = 3
+cost_price = 500000
+selling_price = 720000
+value_score = 50
+texture = ExtResource("2_t")

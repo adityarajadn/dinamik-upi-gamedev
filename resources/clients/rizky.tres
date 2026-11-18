@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ClientProfile" format=3 uid="uid://dt6elnhncareu"]
+
+[ext_resource type="Script" uid="uid://qstfoikk3f2a" path="res://scripts/resources/client_profile.gd" id="1_s"]
+
+[ext_resource type="Texture2D" path="res://assets/baked_processed/char_racing_idle.png" id="t_idle"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/char_racing_happy.png" id="t_happy"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/char_racing_angry.png" id="t_angry"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/char_racing_panic.png" id="t_panic"]
+
+[resource]
+script = ExtResource("1_s")
+client_id = &"rizky"
+client_name = "Rizky Joki"
+persona = "Joki balap liar ambisius"
+texture_idle = ExtResource("t_idle")
+texture_happy = ExtResource("t_happy")
+texture_angry = ExtResource("t_angry")
+texture_panic = ExtResource("t_panic")
+scooter_tint = Color(0.95, 0.95, 0.2, 1)
+request_lines = PackedStringArray("Bro, nanti malem gue ada trek-trekan. Pasang {parts} yang paling ngacir! Nih {budget}, gas!", "Cepetan Bro! Gue butuh {parts}. Budget {budget}, jangan lelet!")
+twist_lines = PackedStringArray("Woi Bro! Taruhan gue kalah! Duit tinggal {budget}, tapi {slot} harus tetep kayak motor racing! Akalin dong!", "Bro sori, duit gue dipake bayar tilang. Sisa {budget}. {slot} jangan keliatan cupu ya!")
+happy_lines = PackedStringArray("Wuih ngacir parah! Malam ini gue juara!", "Mantul Bro, lu emang montir sakti!")
+neutral_lines = PackedStringArray("Oke lah, bisa buat ngebut dikit.", "Lumayan, nggak jelek-jelek amat.")
+angry_lines = PackedStringArray("Ini mah lebih lambat dari gerobak! Bengkel abal-abal!", "Lu nipu gue ya Bro?! Awas lu!")

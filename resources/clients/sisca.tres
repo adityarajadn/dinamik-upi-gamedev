@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ClientProfile" format=3 uid="uid://2ocyknedscdu"]
+
+[ext_resource type="Script" uid="uid://qstfoikk3f2a" path="res://scripts/resources/client_profile.gd" id="1_s"]
+
+[ext_resource type="Texture2D" path="res://assets/baked_processed/char_mahasiswa_idle.png" id="t_idle"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/char_mahasiswa_happy.png" id="t_happy"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/char_mahasiswa_angry.png" id="t_angry"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/char_mahasiswa_panic.png" id="t_panic"]
+
+[resource]
+script = ExtResource("1_s")
+client_id = &"sisca"
+client_name = "Sisca"
+persona = "Mahasiswi budget mepet"
+texture_idle = ExtResource("t_idle")
+texture_happy = ExtResource("t_happy")
+texture_angry = ExtResource("t_angry")
+texture_panic = ExtResource("t_panic")
+scooter_tint = Color(0.65, 0.6, 1, 1)
+budget_tolerance_max = 0.05
+request_lines = PackedStringArray("Kak, aku mau ganti {parts} biar aman ke kampus. Tapi uangku cuma {budget} ya Kak...", "Permisi Kak, bisa pasang {parts}? Budget aku {budget}, itu udah sisa uang makan...")
+twist_lines = PackedStringArray("Kak! Maaf banget, uang UKT-ku kurang! Sisa {budget}... tapi {slot}-nya pengen tetep lucu. Gimana Kak?", "Kak, transferan ortu belum masuk. Aku cuma ada {budget}. {slot} jangan jelek ya Kak...")
+happy_lines = PackedStringArray("Makasih banyak Kak! Aku rekomendasiin ke temen-temen kampus!", "Yeay, motornya jadi gemes banget!")
+neutral_lines = PackedStringArray("Oke Kak, makasih ya.", "Lumayan lah Kak, yang penting jalan.")
+angry_lines = PackedStringArray("Kak, ini kok rusak sih?! Aku spill di medsos ya!", "Huhu, uangku habis buat barang jelek...")

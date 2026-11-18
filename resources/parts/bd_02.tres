@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PartData" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/part_data.gd" id="1_s"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/part_bd_02.png" id="2_t"]
+
+[resource]
+script = ExtResource("1_s")
+part_id = &"BD-02"
+slot = 0
+display_name = "Body Retro Classic Mint"
+tier = 2
+cost_price = 100000
+selling_price = 150000
+value_score = 25
+texture = ExtResource("2_t")
+headlight_pos = Vector2(723, 302)
+frame_type = 1

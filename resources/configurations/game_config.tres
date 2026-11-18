@@ -1,0 +1,82 @@
+[gd_resource type="Resource" script_class="GameConfig" format=3 uid="uid://bb7vq1uhcxcwk"]
+
+[ext_resource type="Script" uid="uid://drl13ca2wcjm" path="res://scripts/resources/game_config.gd" id="1_gc"]
+[ext_resource type="Script" uid="uid://dh4mhp6xxqn3w" path="res://scripts/resources/day_config.gd" id="2_dc"]
+[ext_resource type="Script" uid="uid://qstfoikk3f2a" path="res://scripts/resources/client_profile.gd" id="3_cp"]
+[ext_resource type="Resource" uid="uid://cfqcyq73j8v6i" path="res://resources/clients/doni.tres" id="c1"]
+[ext_resource type="Resource" uid="uid://bd6530ps5elh7" path="res://resources/clients/bu_tejo.tres" id="c2"]
+[ext_resource type="Resource" uid="uid://dt6elnhncareu" path="res://resources/clients/rizky.tres" id="c3"]
+[ext_resource type="Resource" uid="uid://cxbpgcmd1crta" path="res://resources/clients/pak_rt.tres" id="c4"]
+[ext_resource type="Resource" uid="uid://2ocyknedscdu" path="res://resources/clients/sisca.tres" id="c5"]
+
+[sub_resource type="Resource" id="Day_1"]
+script = ExtResource("2_dc")
+tier_weights = PackedFloat32Array(1, 0.8, 0.2, 0, 0)
+
+[sub_resource type="Resource" id="Day_2"]
+script = ExtResource("2_dc")
+day = 2
+max_clients = 5
+tier_weights = PackedFloat32Array(0.8, 1, 0.5, 0, 0)
+max_order_slots = 2
+max_order_value = 450000
+plot_twist_chance = 0.35
+
+[sub_resource type="Resource" id="Day_3"]
+script = ExtResource("2_dc")
+day = 3
+max_clients = 6
+tier_weights = PackedFloat32Array(0, 0.7, 1, 0.4, 0)
+max_order_slots = 2
+max_order_value = 800000
+plot_twist_chance = 0.5
+
+[sub_resource type="Resource" id="Day_4"]
+script = ExtResource("2_dc")
+day = 4
+max_clients = 7
+tier_weights = PackedFloat32Array(0, 0, 0.8, 1, 0.3)
+max_order_slots = 3
+max_order_value = 1500000
+plot_twist_chance = 0.6
+
+[sub_resource type="Resource" id="Day_5"]
+script = ExtResource("2_dc")
+day = 5
+max_clients = 8
+tier_weights = PackedFloat32Array(0.3, 0.5, 0.8, 0.8, 0.6)
+max_order_slots = 3
+max_order_value = 3000000
+plot_twist_chance = 0.75
+
+[resource]
+script = ExtResource("1_gc")
+starter_inventory = {
+&"BD-01": 3,
+&"BD-02": 3,
+&"BD-03": 3,
+&"BD-04": 3,
+&"BD-05": 3,
+&"EN-01": 3,
+&"EN-02": 3,
+&"EN-03": 3,
+&"EN-04": 3,
+&"EN-05": 3,
+&"EX-01": 3,
+&"EX-02": 3,
+&"EX-03": 3,
+&"EX-04": 3,
+&"EX-05": 3,
+&"LT-01": 3,
+&"LT-02": 3,
+&"LT-03": 3,
+&"LT-04": 3,
+&"LT-05": 3,
+&"WH-01": 3,
+&"WH-02": 3,
+&"WH-03": 3,
+&"WH-04": 3,
+&"WH-05": 3
+}
+days = Array[ExtResource("2_dc")]([SubResource("Day_1"), SubResource("Day_2"), SubResource("Day_3"), SubResource("Day_4"), SubResource("Day_5")])
+clients = Array[ExtResource("3_cp")]([ExtResource("c1"), ExtResource("c2"), ExtResource("c3"), ExtResource("c4"), ExtResource("c5")])

@@ -1,0 +1,146 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/day_summary.gd" id="1_ds"]
+[ext_resource type="Theme" path="res://themes/game_theme.tres" id="2_th"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/bg_workshop_interior.png" id="3_bg"]
+[ext_resource type="Script" path="res://scripts/components/ui_button_animation.gd" id="4_btn"]
+[ext_resource type="Script" path="res://scripts/components/popup_animator.gd" id="5_pop"]
+
+[node name="DaySummary" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_th")
+script = ExtResource("1_ds")
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(0.45, 0.4, 0.55, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Center"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1300, 860)
+layout_mode = 2
+theme_type_variation = &"LedgerPanel"
+
+[node name="PopupAnimator" type="Node" parent="Center/Panel"]
+script = ExtResource("5_pop")
+
+[node name="VBox" type="VBoxContainer" parent="Center/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TitleLabel" type="Label" parent="Center/Panel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_colors/font_color = Color(1, 0.0784, 0.5765, 1)
+theme_override_font_sizes/font_size = 48
+text = "TUTUP BENGKEL - HARI 1"
+horizontal_alignment = 1
+
+[node name="Stars" type="HBoxContainer" parent="Center/Panel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+
+[node name="Star1" type="Label" parent="Center/Panel/VBox/Stars"]
+layout_mode = 2
+theme_type_variation = &"PriceLabel"
+theme_override_font_sizes/font_size = 64
+text = "★"
+
+[node name="Star2" type="Label" parent="Center/Panel/VBox/Stars"]
+layout_mode = 2
+theme_type_variation = &"PriceLabel"
+theme_override_font_sizes/font_size = 64
+text = "★"
+
+[node name="Star3" type="Label" parent="Center/Panel/VBox/Stars"]
+layout_mode = 2
+theme_type_variation = &"PriceLabel"
+theme_override_font_sizes/font_size = 64
+text = "★"
+
+[node name="Star4" type="Label" parent="Center/Panel/VBox/Stars"]
+layout_mode = 2
+theme_type_variation = &"PriceLabel"
+theme_override_font_sizes/font_size = 64
+text = "★"
+
+[node name="Star5" type="Label" parent="Center/Panel/VBox/Stars"]
+layout_mode = 2
+theme_type_variation = &"PriceLabel"
+theme_override_font_sizes/font_size = 64
+text = "★"
+
+[node name="IncomeLabel" type="Label" parent="Center/Panel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 30
+text = "Pendapatan Kotor:"
+
+[node name="ExpenseLabel" type="Label" parent="Center/Panel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 30
+text = "Modal Suku Cadang:"
+
+[node name="NetLabel" type="Label" parent="Center/Panel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 34
+text = "Laba Bersih:"
+
+[node name="CashLabel" type="Label" parent="Center/Panel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 30
+text = "Saldo Celengan:"
+
+[node name="ServedLabel" type="Label" parent="Center/Panel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+text = "Klien dilayani:"
+
+[node name="SatLabel" type="Label" parent="Center/Panel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+text = "Kepuasan:"
+
+[node name="Spacer" type="Control" parent="Center/Panel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NextButton" type="Button" parent="Center/Panel/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(460, 88)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "MULAI HARI BARU"
+script = ExtResource("4_btn")

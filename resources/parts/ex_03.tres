@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PartData" format=3 uid="uid://bulgpdu2bt1gv"]
+
+[ext_resource type="Script" uid="uid://bja8dag6ig2b3" path="res://scripts/resources/part_data.gd" id="1_s"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/part_ex_03.png" id="2_t"]
+
+[resource]
+script = ExtResource("1_s")
+part_id = &"EX-03"
+slot = 1
+display_name = "Knalpot Carbon Hexagonal"
+tier = 3
+cost_price = 180000
+selling_price = 270000
+value_score = 50
+texture = ExtResource("2_t")

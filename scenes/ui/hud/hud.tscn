@@ -1,0 +1,932 @@
+[gd_scene format=3 uid="uid://i3xf8p2mjf8v"]
+
+[ext_resource type="Script" uid="uid://btlfiwh4lqee3" path="res://scripts/systems/game_hud.gd" id="1_hud"]
+[ext_resource type="Theme" uid="uid://cc8al127ss4fa" path="res://themes/game_theme.tres" id="2_th"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/prop_jar_full.png" id="3_pig"]
+[ext_resource type="Texture2D" uid="uid://vrxqnpkmdnfr" path="res://assets/generated/ui_satisfaction_frame.png" id="4_sat"]
+[ext_resource type="Texture2D" uid="uid://c22uyrftrjurp" path="res://assets/generated/ui_clock_icon.png" id="5_clk"]
+[ext_resource type="Texture2D" uid="uid://b5gsk6yvvxwox" path="res://assets/generated/ui_helmet_icon.png" id="6_hel"]
+[ext_resource type="Script" uid="uid://botktt15830n" path="res://scripts/components/ui_button_animation.gd" id="7_btn"]
+[ext_resource type="Script" uid="uid://7ttfm2yi5jp2" path="res://scripts/components/popup_animator.gd" id="8_pop"]
+[ext_resource type="Texture2D" uid="uid://xrwcunmg3mt2" path="res://assets/generated/ui_ledger_panel.png" id="8_swth0"]
+[ext_resource type="Script" path="res://scripts/components/confirm_dialog.gd" id="9_cfm"]
+
+[ext_resource type="Texture2D" path="res://assets/baked_processed/icon_coins.png" id="20_coin"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/icon_banknotes.png" id="21_note"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/icon_smiley.png" id="22_smile"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/icon_lightning.png" id="23_bolt"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/icon_flower.png" id="24_flower"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/icon_screwdriver.png" id="25_tool"]
+[ext_resource type="Texture2D" path="res://assets/generated/ui_ledger_book.png" id="26_book"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m7evv"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a660p"]
+content_margin_left = 112.0
+content_margin_top = 64.0
+content_margin_right = 100.0
+content_margin_bottom = 125.0
+texture = ExtResource("26_book")
+
+[sub_resource type="StyleBoxFlat" id="Page_btn"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 0.0784, 0.5765, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.0941, 0.0941, 0.1216, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="Page_btn_hover"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 0.35, 0.7, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.0941, 0.0941, 0.1216, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="Page_btn_disabled"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.55, 0.5, 0.5, 0.6)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.0941, 0.0941, 0.1216, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxLine" id="Rule_line"]
+color = Color(0.0941, 0.0941, 0.1216, 0.35)
+thickness = 2
+
+[node name="HUD" type="CanvasLayer" unique_id=347172624]
+process_mode = 3
+layer = 10
+script = ExtResource("1_hud")
+
+[node name="Root" type="Control" parent="." unique_id=739180080]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_th")
+
+[node name="CashBox" type="PanelContainer" parent="Root" unique_id=1313777138]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 460.0
+offset_bottom = 116.0
+mouse_filter = 2
+theme_type_variation = &"HudBox"
+
+[node name="HBox" type="HBoxContainer" parent="Root/CashBox" unique_id=1752221314]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="PiggyIcon" type="TextureRect" parent="Root/CashBox/HBox" unique_id=665397714]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(68, 68)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_pig")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CashLabel" type="Label" parent="Root/CashBox/HBox" unique_id=1815997188]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"PriceLabel"
+theme_override_font_sizes/font_size = 36
+text = "Rp 400.000"
+vertical_alignment = 1
+
+[node name="SatisfactionBox" type="Control" parent="Root" unique_id=1965274011]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -260.0
+offset_top = 2.0
+offset_right = 260.0
+offset_bottom = 170.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="Frame" type="TextureRect" parent="Root/SatisfactionBox" unique_id=566441009]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 162.0
+grow_horizontal = 2
+mouse_filter = 2
+texture = ExtResource("4_sat")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SatLabel" type="Label" parent="Root/SatisfactionBox" unique_id=1725290676]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 50.0
+offset_bottom = 100.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "KEPUASAN: 100%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SatBar" type="ProgressBar" parent="Root/SatisfactionBox" unique_id=1446116032]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 132.0
+offset_right = 150.0
+offset_bottom = 156.0
+grow_horizontal = 2
+mouse_filter = 2
+value = 100.0
+show_percentage = false
+
+[node name="ClockBox" type="PanelContainer" parent="Root" unique_id=1101323686]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1901.0
+offset_top = 134.0
+offset_right = -1437.0
+offset_bottom = 246.0
+grow_horizontal = 0
+mouse_filter = 2
+theme_type_variation = &"HudBox"
+theme_override_styles/panel = SubResource("StyleBoxEmpty_m7evv")
+
+[node name="HBox" type="HBoxContainer" parent="Root/ClockBox" unique_id=1327173709]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+alignment = 2
+
+[node name="ClockIcon" type="TextureRect" parent="Root/ClockBox/HBox" unique_id=1356865558]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("5_clk")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBox" type="VBoxContainer" parent="Root/ClockBox/HBox" unique_id=92544463]
+layout_mode = 2
+size_flags_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="DayLabel" type="Label" parent="Root/ClockBox/HBox/VBox" unique_id=1709088123]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "HARI 1 - 08:00"
+
+[node name="RestockLabel" type="Label" parent="Root/ClockBox/HBox/VBox" unique_id=376758809]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"SmallLabel"
+theme_override_colors/font_color = Color(1, 0.902, 0, 1)
+text = "Restock toko: 03:45"
+
+[node name="PauseButton" type="Button" parent="Root" unique_id=1238130728]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -361.0
+offset_top = 25.0
+offset_right = -32.0
+offset_bottom = 140.0
+grow_horizontal = 0
+theme_type_variation = &"DarkButton"
+theme_override_font_sizes/font_size = 22
+text = "PAUSE"
+script = ExtResource("7_btn")
+
+[node name="QueueTracker" type="VBoxContainer" parent="Root" unique_id=1219082578]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -132.0
+offset_right = 420.0
+offset_bottom = -16.0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="QueueTitle" type="Label" parent="Root/QueueTracker" unique_id=1717500903]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Antrean: 0/5"
+
+[node name="Helmets" type="HBoxContainer" parent="Root/QueueTracker" unique_id=804528286]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Helmet1" type="TextureRect" parent="Root/QueueTracker/Helmets" unique_id=843478883]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_hel")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Helmet2" type="TextureRect" parent="Root/QueueTracker/Helmets" unique_id=2017146373]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_hel")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Helmet3" type="TextureRect" parent="Root/QueueTracker/Helmets" unique_id=1267924191]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_hel")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Helmet4" type="TextureRect" parent="Root/QueueTracker/Helmets" unique_id=334833408]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_hel")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Helmet5" type="TextureRect" parent="Root/QueueTracker/Helmets" unique_id=32216079]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_hel")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ExitButton" type="Button" parent="Root" unique_id=839216293]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = -112.0
+offset_right = -20.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_type_variation = &"OrangeButton"
+text = "KELUAR - ESC"
+script = ExtResource("7_btn")
+
+[node name="Toast" type="PanelContainer" parent="Root" unique_id=207985798]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -460.0
+offset_top = -190.0
+offset_right = 460.0
+offset_bottom = -110.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="ToastLabel" type="Label" parent="Root/Toast" unique_id=1147745284]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Pesan"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="LedgerDim" type="ColorRect" parent="Root"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.25)
+
+[node name="LedgerPanel" type="PanelContainer" parent="Root" unique_id=1194999658]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -600.0
+offset_top = -375.0
+offset_right = 600.0
+offset_bottom = 375.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"LedgerPanel"
+theme_override_styles/panel = SubResource("StyleBoxTexture_a660p")
+
+[node name="PopupAnimator" type="Node" parent="Root/LedgerPanel" unique_id=1885927068]
+script = ExtResource("8_pop")
+
+[node name="Book" type="VBoxContainer" parent="Root/LedgerPanel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Spreads" type="VBoxContainer" parent="Root/LedgerPanel/Book"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SpreadKas" type="HBoxContainer" parent="Root/LedgerPanel/Book/Spreads"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 130
+
+[node name="KasPage" type="VBoxContainer" parent="Root/LedgerPanel/Book/Spreads/SpreadKas"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage"]
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_colors/font_color = Color(1, 0.0784, 0.5765, 1)
+theme_override_font_sizes/font_size = 34
+text = "BUKU KAS"
+
+[node name="DayLine" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_colors/font_color = Color(0.35, 0.33, 0.4, 1)
+theme_override_font_sizes/font_size = 18
+text = "Hari 1 - 08:00"
+
+[node name="Rule1" type="HSeparator" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("Rule_line")
+
+[node name="IncomeRow" type="HBoxContainer" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage/IncomeRow"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("20_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage/IncomeRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 22
+text = "Pendapatan"
+
+[node name="IncomeValue" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage/IncomeRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_colors/font_color = Color(0.15, 0.55, 0.25, 1)
+theme_override_font_sizes/font_size = 22
+text = "Rp 0"
+horizontal_alignment = 2
+
+[node name="ExpenseRow" type="HBoxContainer" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage/ExpenseRow"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("25_tool")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage/ExpenseRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 22
+text = "Modal Part"
+
+[node name="ExpenseValue" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage/ExpenseRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_colors/font_color = Color(0.8, 0.15, 0.2, 1)
+theme_override_font_sizes/font_size = 22
+text = "Rp 0"
+horizontal_alignment = 2
+
+[node name="Rule2" type="HSeparator" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("Rule_line")
+
+[node name="NetRow" type="HBoxContainer" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage/NetRow"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("21_note")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage/NetRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 22
+text = "Laba Bersih"
+
+[node name="NetValue" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage/NetRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_colors/font_color = Color(0.15, 0.55, 0.25, 1)
+theme_override_font_sizes/font_size = 24
+text = "Rp 0"
+horizontal_alignment = 2
+
+[node name="CashRow" type="HBoxContainer" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage/CashRow"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_pig")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage/CashRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 22
+text = "Saldo Celengan"
+
+[node name="CashValue" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage/CashRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_colors/font_color = Color(0.85, 0.35, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Rp 0"
+horizontal_alignment = 2
+
+[node name="RepPage" type="VBoxContainer" parent="Root/LedgerPanel/Book/Spreads/SpreadKas"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage"]
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_colors/font_color = Color(1, 0.0784, 0.5765, 1)
+theme_override_font_sizes/font_size = 34
+text = "REPUTASI"
+
+[node name="SatRow" type="HBoxContainer" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage/SatRow"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("22_smile")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SatBox" type="VBoxContainer" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage/SatRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="SatTitle" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage/SatRow/SatBox"]
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 18
+text = "Kepuasan Rata-rata"
+
+[node name="SatLedgerBar" type="ProgressBar" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage/SatRow/SatBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+mouse_filter = 2
+show_percentage = false
+value = 100.0
+
+[node name="SatValue" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage/SatRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_colors/font_color = Color(0.15, 0.55, 0.25, 1)
+theme_override_font_sizes/font_size = 30
+text = "100%"
+horizontal_alignment = 2
+
+[node name="Rule1" type="HSeparator" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("Rule_line")
+
+[node name="ServedTodayRow" type="HBoxContainer" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage/ServedTodayRow"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("24_flower")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage/ServedTodayRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 22
+text = "Klien hari ini"
+
+[node name="ServedTodayValue" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage/ServedTodayRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 22
+text = "Rp 0"
+horizontal_alignment = 2
+
+[node name="ServedTotalRow" type="HBoxContainer" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage/ServedTotalRow"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("24_flower")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage/ServedTotalRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 22
+text = "Total klien"
+
+[node name="ServedTotalValue" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage/ServedTotalRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 22
+text = "Rp 0"
+horizontal_alignment = 2
+
+[node name="QueueRow" type="HBoxContainer" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage/QueueRow"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("6_hel")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage/QueueRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 22
+text = "Antrean menunggu"
+
+[node name="QueueValue" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage/QueueRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 22
+text = "Rp 0"
+horizontal_alignment = 2
+
+[node name="CaughtRow" type="HBoxContainer" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Icon" type="TextureRect" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage/CaughtRow"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("23_bolt")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage/CaughtRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 22
+text = "Ketahuan nipu"
+
+[node name="CaughtValue" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage/CaughtRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_colors/font_color = Color(0.8, 0.15, 0.2, 1)
+theme_override_font_sizes/font_size = 22
+text = "Rp 0"
+horizontal_alignment = 2
+
+[node name="SpreadStock" type="HBoxContainer" parent="Root/LedgerPanel/Book/Spreads"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 130
+
+[node name="StockLeft" type="VBoxContainer" parent="Root/LedgerPanel/Book/Spreads/SpreadStock"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadStock/StockLeft"]
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_colors/font_color = Color(1, 0.0784, 0.5765, 1)
+theme_override_font_sizes/font_size = 34
+text = "STOK BENGKEL"
+
+[node name="StockRight" type="VBoxContainer" parent="Root/LedgerPanel/Book/Spreads/SpreadStock"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="StockTotal" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadStock/StockRight"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"DarkLabel"
+theme_override_colors/font_color = Color(0.85, 0.35, 0, 1)
+theme_override_font_sizes/font_size = 22
+text = "Total stok: 0"
+
+[node name="Footer" type="HBoxContainer" parent="Root/LedgerPanel/Book"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="PrevPage" type="Button" parent="Root/LedgerPanel/Book/Footer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 44)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("Page_btn")
+theme_override_styles/hover = SubResource("Page_btn_hover")
+theme_override_styles/pressed = SubResource("Page_btn")
+theme_override_styles/disabled = SubResource("Page_btn_disabled")
+theme_override_styles/focus = SubResource("Page_btn")
+text = "<"
+
+[node name="PageLabel" type="Label" parent="Root/LedgerPanel/Book/Footer"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(80, 0)
+theme_type_variation = &"DarkLabel"
+theme_override_font_sizes/font_size = 22
+text = "1 / 2"
+horizontal_alignment = 1
+
+[node name="NextPage" type="Button" parent="Root/LedgerPanel/Book/Footer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 44)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("Page_btn")
+theme_override_styles/hover = SubResource("Page_btn_hover")
+theme_override_styles/pressed = SubResource("Page_btn")
+theme_override_styles/disabled = SubResource("Page_btn_disabled")
+theme_override_styles/focus = SubResource("Page_btn")
+text = ">"
+
+[node name="Spacer" type="Control" parent="Root/LedgerPanel/Book/Footer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="LedgerClose" type="Button" parent="Root/LedgerPanel/Book/Footer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "TUTUP (TAB)"
+script = ExtResource("7_btn")
+
+[node name="PauseOverlay" type="Control" parent="Root" unique_id=1151185792]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="Root/PauseOverlay" unique_id=1664733086]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.25)
+
+[node name="PausePanel" type="PanelContainer" parent="Root/PauseOverlay" unique_id=251555022]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -250.0
+offset_right = 280.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Root/PauseOverlay/PausePanel" unique_id=1855448953]
+layout_mode = 2
+theme_override_constants/separation = 22
+alignment = 1
+
+[node name="PauseTitle" type="Label" parent="Root/PauseOverlay/PausePanel/VBox" unique_id=109413281]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+text = "PAUSE"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="Root/PauseOverlay/PausePanel/VBox" unique_id=93908223]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(380, 84)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "LANJUT"
+script = ExtResource("7_btn")
+
+[node name="MenuButton" type="Button" parent="Root/PauseOverlay/PausePanel/VBox" unique_id=593803619]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(380, 84)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"DarkButton"
+text = "MENU UTAMA"
+script = ExtResource("7_btn")
+
+[node name="QuitButton" type="Button" parent="Root/PauseOverlay/PausePanel/VBox" unique_id=51059836]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(380, 84)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"RedButton"
+text = "KELUAR GAME"
+script = ExtResource("7_btn")
+
+[node name="ConfirmDialog" type="Control" parent="Root"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_cfm")
+
+[node name="Dim" type="ColorRect" parent="Root/ConfirmDialog"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.25)
+
+[node name="ConfirmPanel" type="PanelContainer" parent="Root/ConfirmDialog"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -170.0
+offset_right = 320.0
+offset_bottom = 170.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PopupAnimator" type="Node" parent="Root/ConfirmDialog/ConfirmPanel"]
+script = ExtResource("8_pop")
+
+[node name="VBox" type="VBoxContainer" parent="Root/ConfirmDialog/ConfirmPanel"]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="ConfirmTitle" type="Label" parent="Root/ConfirmDialog/ConfirmPanel/VBox"]
+layout_mode = 2
+theme_type_variation = &"PinkLabel"
+text = "YAKIN?"
+horizontal_alignment = 1
+
+[node name="ConfirmMessage" type="Label" parent="Root/ConfirmDialog/ConfirmPanel/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(560, 0)
+layout_mode = 2
+text = "Lanjutkan aksi ini?"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Buttons" type="HBoxContainer" parent="Root/ConfirmDialog/ConfirmPanel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="ConfirmNo" type="Button" parent="Root/ConfirmDialog/ConfirmPanel/VBox/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"DarkButton"
+text = "BATAL"
+script = ExtResource("7_btn")
+
+[node name="ConfirmYes" type="Button" parent="Root/ConfirmDialog/ConfirmPanel/VBox/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"GreenButton"
+text = "YAKIN"
+script = ExtResource("7_btn")

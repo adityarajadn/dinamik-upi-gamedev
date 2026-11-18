@@ -1,0 +1,101 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/game_over.gd" id="1_go"]
+[ext_resource type="Theme" path="res://themes/game_theme.tres" id="2_th"]
+[ext_resource type="Texture2D" path="res://assets/generated/bg_game_over.png" id="3_bg"]
+[ext_resource type="Script" path="res://scripts/components/ui_button_animation.gd" id="4_btn"]
+[ext_resource type="Script" path="res://scripts/components/popup_animator.gd" id="5_pop"]
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_th")
+script = ExtResource("1_go")
+
+[node name="Background" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Center"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1100, 0)
+layout_mode = 2
+
+[node name="PopupAnimator" type="Node" parent="Center/Panel"]
+script = ExtResource("5_pop")
+
+[node name="VBox" type="VBoxContainer" parent="Center/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="TitleLabel" type="Label" parent="Center/Panel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+theme_override_font_sizes/font_size = 72
+text = "BENGKEL GULUNG TIKAR!"
+horizontal_alignment = 1
+
+[node name="ReasonLabel" type="Label" parent="Center/Panel/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Alasan"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="StatsLabel" type="Label" parent="Center/Panel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PriceLabel"
+text = "Statistik"
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="Center/Panel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="RestartDayButton" type="Button" parent="Center/Panel/VBox/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 84)
+layout_mode = 2
+theme_type_variation = &"OrangeButton"
+text = "ULANG HARI"
+script = ExtResource("4_btn")
+
+[node name="NewGameButton" type="Button" parent="Center/Panel/VBox/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 84)
+layout_mode = 2
+text = "GAME BARU"
+script = ExtResource("4_btn")
+
+[node name="MenuButton" type="Button" parent="Center/Panel/VBox/Buttons"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(320, 84)
+layout_mode = 2
+theme_type_variation = &"DarkButton"
+text = "MENU UTAMA"
+script = ExtResource("4_btn")

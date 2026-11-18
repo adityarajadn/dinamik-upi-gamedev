@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="PartData" format=3 uid="uid://bvhnigcouskof"]
+
+[ext_resource type="Script" uid="uid://bja8dag6ig2b3" path="res://scripts/resources/part_data.gd" id="1_s"]
+[ext_resource type="Texture2D" path="res://assets/baked_processed/part_lt_03.png" id="2_t"]
+
+[resource]
+script = ExtResource("1_s")
+part_id = &"LT-03"
+slot = 4
+display_name = "Lampu Daymaker LED Projector"
+tier = 3
+cost_price = 130000
+selling_price = 200000
+value_score = 50
+texture = ExtResource("2_t")

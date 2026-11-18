@@ -1,0 +1,199 @@
+[gd_scene format=3 uid="uid://bcwufhs7l8pd4"]
+
+[ext_resource type="Script" uid="uid://cdg6l2lv5g004" path="res://scripts/systems/main_menu.gd" id="1_mm"]
+[ext_resource type="Theme" uid="uid://cc8al127ss4fa" path="res://themes/game_theme.tres" id="2_th"]
+[ext_resource type="Texture2D" uid="uid://cue5fcc5b5u42" path="res://assets/generated/bg_main_menu.png" id="3_bg"]
+[ext_resource type="Texture2D" uid="uid://2gosgjtrx6pf" path="res://assets/generated/ui_logo.png" id="4_logo"]
+[ext_resource type="Script" uid="uid://botktt15830n" path="res://scripts/components/ui_button_animation.gd" id="5_btn"]
+[ext_resource type="Script" uid="uid://7ttfm2yi5jp2" path="res://scripts/components/popup_animator.gd" id="6_pop"]
+
+[node name="MainMenu" type="Control" unique_id=2008004994]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_th")
+script = ExtResource("1_mm")
+
+[node name="Background" type="TextureRect" parent="." unique_id=142200366]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Shade" type="ColorRect" parent="." unique_id=1100086532]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 900.0
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.0941, 0.0941, 0.1216, 0.45)
+
+[node name="SafeArea" type="MarginContainer" parent="." unique_id=54356081]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 1019.0
+offset_top = 2.0
+offset_right = 1919.0
+offset_bottom = 2.0
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 50
+
+[node name="MainLayout" type="VBoxContainer" parent="SafeArea" unique_id=1546755957]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Logo" type="TextureRect" parent="SafeArea/MainLayout" unique_id=1405889834]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(780, 340)
+layout_mode = 2
+texture = ExtResource("4_logo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Tagline" type="Label" parent="SafeArea/MainLayout" unique_id=1887842398]
+visible = false
+layout_mode = 2
+theme_type_variation = &"PriceLabel"
+text = "Simulasi bengkel modifikasi jalanan: jujur atau culas, kamu yang pilih!"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Spacer" type="Control" parent="SafeArea/MainLayout" unique_id=629178988]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MenuButtons" type="VBoxContainer" parent="SafeArea/MainLayout" unique_id=272744365]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="PlayButton" type="Button" parent="SafeArea/MainLayout/MenuButtons" unique_id=589410111]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(440, 92)
+layout_mode = 2
+theme_override_font_sizes/font_size = 38
+text = "MULAI NGEBENGKEL"
+script = ExtResource("5_btn")
+
+[node name="HowToButton" type="Button" parent="SafeArea/MainLayout/MenuButtons" unique_id=1049177281]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(440, 80)
+layout_mode = 2
+theme_type_variation = &"OrangeButton"
+text = "CARA MAIN"
+script = ExtResource("5_btn")
+
+[node name="CreditsButton" type="Button" parent="SafeArea/MainLayout/MenuButtons" unique_id=2090258430]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(440, 80)
+layout_mode = 2
+theme_type_variation = &"DarkButton"
+text = "KREDIT"
+script = ExtResource("5_btn")
+
+[node name="QuitButton" type="Button" parent="SafeArea/MainLayout/MenuButtons" unique_id=189488869]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(440, 80)
+layout_mode = 2
+theme_type_variation = &"RedButton"
+text = "KELUAR"
+script = ExtResource("5_btn")
+
+[node name="InfoPanel" type="PanelContainer" parent="." unique_id=490960724]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -620.0
+offset_top = -420.0
+offset_right = 620.0
+offset_bottom = 420.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PopupAnimator" type="Node" parent="InfoPanel" unique_id=776256541]
+script = ExtResource("6_pop")
+
+[node name="VBox" type="VBoxContainer" parent="InfoPanel" unique_id=799930030]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="InfoTitle" type="Label" parent="InfoPanel/VBox" unique_id=576422265]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+text = "CARA MAIN"
+horizontal_alignment = 1
+
+[node name="Scroll" type="ScrollContainer" parent="InfoPanel/VBox" unique_id=688340244]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="InfoBody" type="Label" parent="InfoPanel/VBox/Scroll" unique_id=2064344529]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1140, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+autowrap_mode = 3
+
+[node name="InfoClose" type="Button" parent="InfoPanel/VBox" unique_id=1652064769]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 76)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "OKE!"
+script = ExtResource("5_btn")
+
+[node name="TextData" type="Control" parent="." unique_id=274968941]
+visible = false
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="HowToText" type="Label" parent="TextData" unique_id=779007317]
+unique_name_in_owner = true
+layout_mode = 0
+text = "TUJUAN: Bertahan 5 hari, layani minimal 15 klien, jaga kepuasan rata-rata minimal 75%.
+
+JALANAN: A/D atau panah untuk jalan. E/W/Space di depan pintu untuk masuk. Kiri: Toko Sparepart Jaya. Kanan: Bengkel. Pelanggan antre di trotoar (maks 5).
+
+BENGKEL: Baca pesanan dan budget klien. Klik bagian motor bertanda * untuk zoom. Tahan klik kartu part di tray atas, seret ke bagian motor yang berpendar, lalu lepas (atau klik kartu lalu klik motor). Pasang semua pesanan lalu SERAHKAN MOTOR.
+
+REVISI DADAKAN: Klien bisa plin-plan saat motor 100% beres. Pilih: Terima dan turunkan tier, Tetap pasang dan rugi, Tolak mentah-mentah, atau Akal-akalan (pasang part murah, untung besar tapi bisa ketahuan!).
+
+TOKO: Klik kartu untuk masuk keranjang, lalu BELI. Stok toko berganti jam 17:00 dan tiap hari baru, tier makin tinggi.
+
+TIPS: Tier sesuai pesanan bikin puas. Tier lebih tinggi bikin sangat puas tapi modal bisa tekor. Part Tier 1 bekas untuk pesanan tinggi bikin klien curiga!
+TAB atau klik Celengan Ayam: buku kas. ESC atau klik kanan: batal/keluar.
+
+KALAH: kepuasan rata-rata 10% ke bawah, atau saldo habis tanpa stok."
+
+[node name="CreditsText" type="Label" parent="TextData" unique_id=751184635]
+unique_name_in_owner = true
+layout_mode = 0
+text = "NGEBENGKEL: Custom Street Chronicles (v0.1 Prototype)
+
+Game design: GDD v0.1 tim proyek.
+Engine: Godot 4.
+Art dan audio: dibuat dengan Ziva AI image dan sound generation, arahan visual funky hand-drawn graffiti (Neon Pink, Electric Orange, Sun Yellow).
+Programming: data-driven Resources dan component-based scenes sesuai standar proyek.
+
+Terima kasih sudah main!"
