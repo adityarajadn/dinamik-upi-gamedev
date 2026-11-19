@@ -1,12 +1,12 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene format=3 uid="uid://cxlrsessdklv"]
 
-[ext_resource type="Script" path="res://scripts/systems/day_summary.gd" id="1_ds"]
-[ext_resource type="Theme" path="res://themes/game_theme.tres" id="2_th"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/bg_workshop_interior.png" id="3_bg"]
-[ext_resource type="Script" path="res://scripts/components/ui_button_animation.gd" id="4_btn"]
-[ext_resource type="Script" path="res://scripts/components/popup_animator.gd" id="5_pop"]
+[ext_resource type="Script" uid="uid://dcgnpphkneph2" path="res://scripts/systems/day_summary.gd" id="1_ds"]
+[ext_resource type="Theme" uid="uid://cc8al127ss4fa" path="res://themes/game_theme.tres" id="2_th"]
+[ext_resource type="Texture2D" uid="uid://7mubeen28ost" path="res://assets/baked_processed/bg_workshop_interior.png" id="3_bg"]
+[ext_resource type="Script" uid="uid://botktt15830n" path="res://scripts/components/ui_button_animation.gd" id="4_btn"]
+[ext_resource type="Script" uid="uid://7ttfm2yi5jp2" path="res://scripts/components/popup_animator.gd" id="5_pop"]
 
-[node name="DaySummary" type="Control"]
+[node name="DaySummary" type="Control" unique_id=1476650509]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,7 +16,7 @@ grow_vertical = 2
 theme = ExtResource("2_th")
 script = ExtResource("1_ds")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=1453405189]
 modulate = Color(0.45, 0.4, 0.55, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -28,7 +28,7 @@ texture = ExtResource("3_bg")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Center" type="CenterContainer" parent="."]
+[node name="Center" type="CenterContainer" parent="." unique_id=1010970225]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,70 +36,70 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="PanelContainer" parent="Center"]
+[node name="Panel" type="PanelContainer" parent="Center" unique_id=1580330031]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(900, 620)
 layout_mode = 2
 
-[node name="PopupAnimator" type="Node" parent="Center/Panel"]
+[node name="PanelPopup" type="Node" parent="Center/Panel" unique_id=812639382]
+unique_name_in_owner = true
 script = ExtResource("5_pop")
 
-[node name="VBox" type="VBoxContainer" parent="Center/Panel"]
+[node name="VBox" type="VBoxContainer" parent="Center/Panel" unique_id=1083580456]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="TitleLabel" type="Label" parent="Center/Panel/VBox"]
+[node name="TitleLabel" type="Label" parent="Center/Panel/VBox" unique_id=1106444538]
 unique_name_in_owner = true
 layout_mode = 2
-theme_type_variation = &"HeaderLabel"
-theme_override_colors/font_color = Color(1, 0.0784, 0.5765, 1)
-theme_override_font_sizes/font_size = 48
-text = "TUTUP BENGKEL - HARI 1"
-horizontal_alignment = 1
 size_flags_horizontal = 4
+theme_type_variation = &"TitleLabel"
+theme_override_font_sizes/font_size = 48
+text = "WORKSHOP CLOSED - DAY 1"
+horizontal_alignment = 1
 
-[node name="IncomeLabel" type="Label" parent="Center/Panel/VBox"]
+[node name="IncomeLabel" type="Label" parent="Center/Panel/VBox" unique_id=542635164]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Pendapatan Kotor:"
+text = "Gross Income:"
 
-[node name="ExpenseLabel" type="Label" parent="Center/Panel/VBox"]
+[node name="ExpenseLabel" type="Label" parent="Center/Panel/VBox" unique_id=495008998]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Modal Suku Cadang:"
+text = "Parts Cost:"
 
-[node name="NetLabel" type="Label" parent="Center/Panel/VBox"]
+[node name="NetLabel" type="Label" parent="Center/Panel/VBox" unique_id=1405116462]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 34
-text = "Laba Bersih:"
+text = "Net Profit:"
 
-[node name="CashLabel" type="Label" parent="Center/Panel/VBox"]
+[node name="CashLabel" type="Label" parent="Center/Panel/VBox" unique_id=1908771670]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Saldo Celengan:"
+text = "Piggy Bank Balance:"
 
-[node name="ServedLabel" type="Label" parent="Center/Panel/VBox"]
+[node name="ServedLabel" type="Label" parent="Center/Panel/VBox" unique_id=622500040]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Klien dilayani:"
+text = "Clients served:"
 
-[node name="SatLabel" type="Label" parent="Center/Panel/VBox"]
+[node name="SatLabel" type="Label" parent="Center/Panel/VBox" unique_id=977776877]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Kepuasan:"
+text = "Satisfaction:"
 
-[node name="Spacer" type="Control" parent="Center/Panel/VBox"]
+[node name="Spacer" type="Control" parent="Center/Panel/VBox" unique_id=1661101605]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="NextButton" type="Button" parent="Center/Panel/VBox"]
+[node name="NextButton" type="Button" parent="Center/Panel/VBox" unique_id=571740079]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(460, 88)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "MULAI HARI BARU"
+text = "START NEW DAY"
 script = ExtResource("4_btn")

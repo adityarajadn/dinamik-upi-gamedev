@@ -3,7 +3,7 @@ extends Resource
 ## Persona klien: nama, sprite ekspresi, dan template dialog (GDD 3.5).
 
 @export var client_id: StringName = &"doni"
-@export var client_name: String = "Klien"
+@export var client_name: String = "Client"
 @export var persona: String = ""
 @export var texture_idle: Texture2D
 @export var texture_happy: Texture2D

@@ -1,13 +1,13 @@
-[gd_resource type="Resource" script_class="PartData" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="PartData" format=3 uid="uid://bv5kraa3mn6bd"]
 
-[ext_resource type="Script" path="res://scripts/resources/part_data.gd" id="1_s"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/part_en_03.png" id="2_t"]
+[ext_resource type="Script" uid="uid://bja8dag6ig2b3" path="res://scripts/resources/part_data.gd" id="1_s"]
+[ext_resource type="Texture2D" uid="uid://ce820pgfc3ic6" path="res://assets/baked_processed/part_en_03.png" id="2_t"]
 
 [resource]
 script = ExtResource("1_s")
 part_id = &"EN-03"
 slot = 2
-display_name = "Mesin Injeksi 125cc Custom"
+display_name = "Custom 125cc Injection Engine"
 tier = 3
 cost_price = 500000
 selling_price = 720000

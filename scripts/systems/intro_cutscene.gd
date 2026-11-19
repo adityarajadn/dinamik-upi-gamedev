@@ -13,10 +13,10 @@ const SCENE_WORKSHOP: String = "res://scenes/levels/workshop.tscn"
 
 var _finished: bool = false
 
-@onready var camera: Camera2D = $Camera2D
-@onready var title: Control = $Title
-@onready var backdrop: Node2D = $StreetBackdrop
-@onready var queue_clients: Array[Node] = $QueueClients.get_children()
+@onready var camera: Camera2D = %Camera2D
+@onready var title: Control = %Title
+@onready var backdrop: Node2D = %StreetBackdrop
+@onready var queue_clients: Array[Node] = %QueueClients.get_children()
 @onready var skip_hint: Label = %SkipHint
 
 

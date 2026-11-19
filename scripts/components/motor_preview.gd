@@ -4,11 +4,11 @@ extends Node2D
 ## sama persis dengan motor yang nanti dikerjakan di bengkel (ClientOrder.current_parts).
 
 @onready var slot_sprites: Dictionary = {
-	PartData.Slot.BODY: [$Body],
-	PartData.Slot.EXHAUST: [$Exhaust],
-	PartData.Slot.ENGINE: [$Engine],
-	PartData.Slot.WHEELS: [$RearWheel, $FrontWheel],
-	PartData.Slot.LIGHT: [$Headlight],
+	PartData.Slot.BODY: [%Body],
+	PartData.Slot.EXHAUST: [%Exhaust],
+	PartData.Slot.ENGINE: [%Engine],
+	PartData.Slot.WHEELS: [%RearWheel, %FrontWheel],
+	PartData.Slot.LIGHT: [%Headlight],
 }
 
 
@@ -24,4 +24,4 @@ func show_order(order: ClientOrder) -> void:
 			sprite.texture = part.texture
 			MotorVisual.apply_facing(sprite)
 		if slot == PartData.Slot.BODY:
-			MotorVisual.apply_body_layout($Frame, $Engine, $Headlight, part)
+			MotorVisual.apply_body_layout(%Frame, %Engine, %Headlight, part)

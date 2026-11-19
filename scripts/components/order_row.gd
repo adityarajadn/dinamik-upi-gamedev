@@ -20,7 +20,7 @@ func setup(order: ClientOrder, slot: int) -> void:
 	slot_label.text = "%s  T%d" % [PartData.slot_to_name(slot), target.tier]
 	var note: String = ""
 	if done and (order.current_parts[slot] as PartData).tier != target.tier:
-		note = "Terpasang T%d" % (order.current_parts[slot] as PartData).tier
+		note = "Installed T%d" % (order.current_parts[slot] as PartData).tier
 	note_label.text = note
 	note_label.visible = not note.is_empty()
 	var box: StyleBoxFlat = (status_box.get_theme_stylebox("panel") as StyleBoxFlat).duplicate() as StyleBoxFlat

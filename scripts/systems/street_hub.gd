@@ -6,10 +6,10 @@ extends Node2D
 
 const StreetBackdrop: GDScript = preload("res://scripts/components/street_backdrop.gd")
 
-@onready var player: PlayerController = $Player
-@onready var backdrop: Node2D = $StreetBackdrop
-@onready var hud: GameHUD = $HUD
-@onready var queue_spots: Array[Node] = $QueueSpots.get_children()
+@onready var player: PlayerController = %Player
+@onready var backdrop: Node2D = %StreetBackdrop
+@onready var hud: GameHUD = %HUD
+@onready var queue_spots: Array[Node] = %QueueSpots.get_children()
 
 
 func _ready() -> void:
@@ -28,7 +28,7 @@ func _ready() -> void:
 	GameState.set_clock_running(true)
 	AudioManager.play_music(&"street")
 	if GameState.day == 1 and GameState.clients_served_total == 0 and GameState.day_time < 5.0:
-		hud.show_toast("A/D untuk jalan, E untuk masuk Bengkel (kiri) atau Toko Sparepart (kanan)")
+		hud.show_toast("A/D to walk, E to enter the Workshop (left) or the Parts Shop (right)")
 
 
 func _on_interact_requested(door: Door) -> void:

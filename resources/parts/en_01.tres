@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="PartData" format=3 uid="uid://bfofr6f2dcg00"]
 
 [ext_resource type="Script" uid="uid://bja8dag6ig2b3" path="res://scripts/resources/part_data.gd" id="1_s"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/part_en_01.png" id="2_t"]
+[ext_resource type="Texture2D" uid="uid://x52mregw1uyg" path="res://assets/baked_processed/part_en_01.png" id="2_t"]
 
 [resource]
 script = ExtResource("1_s")
 part_id = &"EN-01"
 slot = 2
-display_name = "Mesin Karbu 110cc Kotor"
+display_name = "Dirty 110cc Carb Engine"
 cost_price = 120000
 selling_price = 190000
 texture = ExtResource("2_t")

@@ -1,17 +1,16 @@
-[gd_resource type="Resource" script_class="PartData" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="PartData" format=3 uid="uid://dgc3gpmkv3fyf"]
 
-[ext_resource type="Script" path="res://scripts/resources/part_data.gd" id="1_s"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/part_bd_04.png" id="2_t"]
+[ext_resource type="Script" uid="uid://bja8dag6ig2b3" path="res://scripts/resources/part_data.gd" id="1_s"]
+[ext_resource type="Texture2D" uid="uid://dt6vfq1xc4kol" path="res://assets/baked_processed/part_bd_04.png" id="2_t"]
 
 [resource]
 script = ExtResource("1_s")
 part_id = &"BD-04"
-slot = 0
-display_name = "Body Sporty Street Bold"
+display_name = "Bold Sporty Street Body"
 tier = 4
 cost_price = 350000
 selling_price = 500000
 value_score = 75
 texture = ExtResource("2_t")
-headlight_pos = Vector2(584, 342)
 frame_type = 1
+headlight_pos = Vector2(584, 342)

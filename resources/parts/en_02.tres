@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="PartData" format=3 uid="uid://cexridtx2in84"]
 
 [ext_resource type="Script" uid="uid://bja8dag6ig2b3" path="res://scripts/resources/part_data.gd" id="1_s"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/part_en_02.png" id="2_t"]
+[ext_resource type="Texture2D" uid="uid://b3gdrm36wmipk" path="res://assets/baked_processed/part_en_02.png" id="2_t"]
 
 [resource]
 script = ExtResource("1_s")
 part_id = &"EN-02"
 slot = 2
-display_name = "Mesin Injeksi 125cc Bersih"
+display_name = "Clean 125cc Injection Engine"
 tier = 2
 cost_price = 250000
 selling_price = 380000

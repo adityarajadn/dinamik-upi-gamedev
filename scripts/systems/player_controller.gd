@@ -2,9 +2,9 @@ class_name PlayerController
 extends CharacterBody2D
 ## Root player jalanan: koordinasi movement, animasi, interaksi.
 
-@onready var movement: SideScrollMovement = $PlayerMovement
-@onready var animation: PlayerAnimation = $PlayerAnimation
-@onready var interaction: PlayerInteraction = $PlayerInteraction
+@onready var movement: SideScrollMovement = %PlayerMovement
+@onready var animation: PlayerAnimation = %PlayerAnimation
+@onready var interaction: PlayerInteraction = %PlayerInteraction
 
 
 func _ready() -> void:

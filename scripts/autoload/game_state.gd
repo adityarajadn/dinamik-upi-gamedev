@@ -129,14 +129,14 @@ func advance_after_summary() -> void:
 	if check_bankrupt():
 		return
 	if clients_spawned_today == 0 and cash < CATALOG.get_cheapest_cost() * 3:
-		trigger_game_over(false, "Kepuasan anjlok, tak ada lagi pelanggan yang datang. Bengkel sepi, celengan kosong.")
+		trigger_game_over(false, "Satisfaction tanked and no more customers came. The workshop is empty and so is the piggy bank.")
 		return
 	if day >= CONFIG.total_days:
 		var average: float = get_average_satisfaction()
 		if clients_served_total >= CONFIG.win_min_clients and average >= CONFIG.win_min_satisfaction:
-			trigger_game_over(true, "Kamu bertahan 5 hari, melayani %d klien dengan kepuasan %d%%. Lisensi Distrik Modifikasi Balap terbuka!" % [clients_served_total, roundi(average)])
+			trigger_game_over(true, "You survived 5 days, served %d clients with %d%% satisfaction. The Racing Mod District license is unlocked!" % [clients_served_total, roundi(average)])
 		else:
-			trigger_game_over(false, "Target tidak tercapai: butuh min. %d klien & kepuasan %d%% (kamu: %d klien, %d%%)." % [CONFIG.win_min_clients, roundi(CONFIG.win_min_satisfaction), clients_served_total, roundi(average)])
+			trigger_game_over(false, "Goal not reached: need at least %d clients & %d%% satisfaction (you: %d clients, %d%%)." % [CONFIG.win_min_clients, roundi(CONFIG.win_min_satisfaction), clients_served_total, roundi(average)])
 		return
 	day += 1
 	_take_snapshot()
@@ -222,7 +222,7 @@ func _try_spawn_client() -> void:
 	clients_spawned_today += 1
 	queue_changed.emit(queue.size())
 	if is_clock_running:
-		toast_requested.emit("%s datang dan ikut antre!" % profile.client_name, &"info")
+		toast_requested.emit("%s arrived and joined the queue!" % profile.client_name, &"info")
 
 
 ## Kepuasan rendah = pelanggan makin sedikit (bisa nol), jadi pemasukan seret.
@@ -260,7 +260,7 @@ func complete_active_order() -> Dictionary:
 	cash += payment
 	income_today += payment
 	if payment > 0:
-		toast_requested.emit("+%s diterima!" % Money.format(payment), &"money")
+		toast_requested.emit("+%s received!" % Money.format(payment), &"money")
 	satisfaction_history.append(satisfaction)
 	clients_served_total += 1
 	clients_served_today += 1
@@ -296,7 +296,7 @@ func is_reputation_bankrupt() -> bool:
 func check_bankrupt() -> bool:
 	if not is_bankrupt():
 		return false
-	trigger_game_over(false, "BANGKRUT! Uang celengan habis dan tak ada stok part untuk dikerjakan.")
+	trigger_game_over(false, "BANKRUPT! The piggy bank is empty and there are no parts left to work with.")
 	return true
 
 
@@ -336,13 +336,13 @@ func purchase(items: Array[Dictionary]) -> bool:
 	for item: Dictionary in items:
 		var offer: Dictionary = shop_offers[item.offer_index]
 		if int(offer.stock) < int(item.quantity):
-			toast_requested.emit("Stok toko tidak cukup!", &"error")
+			toast_requested.emit("Not enough stock in the shop!", &"error")
 			return false
 		total += (offer.part as PartData).cost_price * int(item.quantity)
 	if total <= 0:
 		return false
 	if total > cash:
-		toast_requested.emit("Duit celengan kurang! Butuh %s" % Money.format(total), &"error")
+		toast_requested.emit("Not enough in the piggy bank! Need %s" % Money.format(total), &"error")
 		return false
 	cash -= total
 	expense_today += total
@@ -378,7 +378,7 @@ func restock_shop(announce: bool) -> void:
 	shop_restocked.emit()
 	if announce:
 		AudioManager.play_sfx(&"restock")
-		toast_requested.emit("Ding-dong! Toko Sparepart Jaya restock barang baru!", &"success")
+		toast_requested.emit("Ding-dong! Jaya Parts Shop just restocked!", &"success")
 
 
 # ---------------------------------------------------------------- helpers

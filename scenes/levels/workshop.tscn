@@ -98,6 +98,7 @@ scale = Vector2(6.6, 0.75)
 texture = SubResource("Shadow_tex")
 
 [node name="ClientShadow" type="Sprite2D" parent="Shadows" unique_id=1284769639]
+unique_name_in_owner = true
 position = Vector2(357, 1012)
 scale = Vector2(2.4, 0.45)
 texture = SubResource("Shadow_tex")
@@ -119,43 +120,51 @@ scale = Vector2(0.85, 0.85)
 texture = ExtResource("3_lift")
 
 [node name="Motor" type="Node2D" parent="." unique_id=1621009481]
+unique_name_in_owner = true
 position = Vector2(960, 786)
 scale = Vector2(-1, 1)
 script = ExtResource("4_mv")
 
 [node name="RearWheel" type="Sprite2D" parent="Motor" unique_id=1996766619]
+unique_name_in_owner = true
 position = Vector2(-230, 113)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("6_wh")
 flip_h = true
 
 [node name="FrontWheel" type="Sprite2D" parent="Motor" unique_id=1517125861]
+unique_name_in_owner = true
 position = Vector2(302, 113)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("6_wh")
 flip_h = true
 
 [node name="Frame" type="Sprite2D" parent="Motor" unique_id=2132994648]
+unique_name_in_owner = true
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("5_frame")
 flip_h = true
 
 [node name="Engine" type="Sprite2D" parent="Motor" unique_id=1211035813]
+unique_name_in_owner = true
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("8_en")
 flip_h = true
 
 [node name="Body" type="Sprite2D" parent="Motor" unique_id=1843187569]
+unique_name_in_owner = true
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("7_bd")
 flip_h = true
 
 [node name="Exhaust" type="Sprite2D" parent="Motor" unique_id=1677586462]
+unique_name_in_owner = true
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("9_ex")
 flip_h = true
 
 [node name="Headlight" type="Sprite2D" parent="Motor" unique_id=426681669]
+unique_name_in_owner = true
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("10_lt")
 flip_h = true
@@ -163,6 +172,7 @@ flip_h = true
 [node name="Hotspots" type="Node2D" parent="Motor" unique_id=1310474033]
 
 [node name="BodyHotspot" type="Area2D" parent="Motor/Hotspots" unique_id=922107342]
+unique_name_in_owner = true
 position = Vector2(42, -45)
 collision_layer = 4
 collision_mask = 0
@@ -172,6 +182,7 @@ monitoring = false
 shape = SubResource("Circle_hot")
 
 [node name="ExhaustHotspot" type="Area2D" parent="Motor/Hotspots" unique_id=1004952040]
+unique_name_in_owner = true
 position = Vector2(-181, 90)
 collision_layer = 4
 collision_mask = 0
@@ -181,6 +192,7 @@ monitoring = false
 shape = SubResource("Circle_hot")
 
 [node name="EngineHotspot" type="Area2D" parent="Motor/Hotspots" unique_id=628857325]
+unique_name_in_owner = true
 position = Vector2(0, 69)
 collision_layer = 4
 collision_mask = 0
@@ -190,6 +202,7 @@ monitoring = false
 shape = SubResource("Circle_hot")
 
 [node name="WheelsHotspot" type="Area2D" parent="Motor/Hotspots" unique_id=803240023]
+unique_name_in_owner = true
 position = Vector2(302, 113)
 collision_layer = 4
 collision_mask = 0
@@ -199,6 +212,7 @@ monitoring = false
 shape = SubResource("Circle_hot")
 
 [node name="LightHotspot" type="Area2D" parent="Motor/Hotspots" unique_id=1505096463]
+unique_name_in_owner = true
 position = Vector2(168, -171)
 collision_layer = 4
 collision_mask = 0
@@ -210,6 +224,7 @@ shape = SubResource("Circle_hot")
 [node name="Tags" type="Node2D" parent="Motor" unique_id=188461824]
 
 [node name="BodyTag" type="Label" parent="Motor/Tags" unique_id=1497430875]
+unique_name_in_owner = true
 offset_left = -10.0
 offset_top = -250.0
 offset_right = 170.0
@@ -220,46 +235,51 @@ text = "BODY"
 horizontal_alignment = 1
 
 [node name="ExhaustTag" type="Label" parent="Motor/Tags" unique_id=98142161]
+unique_name_in_owner = true
 offset_left = -460.0
 offset_top = 260.0
 offset_right = -240.0
 offset_bottom = 300.0
 pivot_offset = Vector2(110, 20)
 theme = ExtResource("11_th")
-text = "KNALPOT"
+text = "EXHAUST"
 horizontal_alignment = 1
 
 [node name="EngineTag" type="Label" parent="Motor/Tags" unique_id=622369198]
+unique_name_in_owner = true
 offset_left = -200.0
 offset_top = -30.0
 offset_right = -40.0
 offset_bottom = 10.0
 pivot_offset = Vector2(80, 20)
 theme = ExtResource("11_th")
-text = "MESIN"
+text = "ENGINE"
 horizontal_alignment = 1
 
 [node name="WheelsTag" type="Label" parent="Motor/Tags" unique_id=698722808]
+unique_name_in_owner = true
 offset_left = 290.0
 offset_top = 260.0
 offset_right = 420.0
 offset_bottom = 300.0
 pivot_offset = Vector2(65, 20)
 theme = ExtResource("11_th")
-text = "RODA"
+text = "WHEELS"
 horizontal_alignment = 1
 
 [node name="LightTag" type="Label" parent="Motor/Tags" unique_id=419767992]
+unique_name_in_owner = true
 offset_left = 360.0
 offset_top = -280.0
 offset_right = 500.0
 offset_bottom = -240.0
 pivot_offset = Vector2(70, 20)
 theme = ExtResource("11_th")
-text = "LAMPU"
+text = "LIGHT"
 horizontal_alignment = 1
 
 [node name="Client" type="Sprite2D" parent="." unique_id=1433735030]
+unique_name_in_owner = true
 position = Vector2(357, 1012)
 scale = Vector2(0.92800033, 0.92800033)
 texture = ExtResource("12_cl")
@@ -272,6 +292,7 @@ texture = ExtResource("13_e7k1j")
 flip_h = true
 
 [node name="PiggyBank" type="Area2D" parent="." unique_id=1126148645]
+unique_name_in_owner = true
 position = Vector2(209.00003, 795)
 scale = Vector2(1.6000006, 1.6000006)
 collision_layer = 4
@@ -286,6 +307,7 @@ texture = ExtResource("14_pig")
 shape = SubResource("Circle_pig")
 
 [node name="PlayerAvatar" type="AnimatedSprite2D" parent="." unique_id=1029832631]
+unique_name_in_owner = true
 position = Vector2(1567, 1045)
 scale = Vector2(1.0436363, 1.0436363)
 sprite_frames = ExtResource("15_fr")
@@ -296,6 +318,7 @@ offset = Vector2(0, -320)
 [node name="Fx" type="Node2D" parent="." unique_id=1099866605]
 
 [node name="Sparks" type="CPUParticles2D" parent="Fx" unique_id=1391452773]
+unique_name_in_owner = true
 emitting = false
 amount = 28
 texture = ExtResource("17_spark")
@@ -311,15 +334,18 @@ scale_amount_min = 0.4
 scale_amount_curve = SubResource("Curve_spark")
 
 [node name="Clang" type="Sprite2D" parent="Fx" unique_id=1585310936]
+unique_name_in_owner = true
 visible = false
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("16_clang")
 
 [node name="Smoke" type="Node2D" parent="Fx" unique_id=729296617]
+unique_name_in_owner = true
 visible = false
 z_index = 5
 
 [node name="Cloud" type="Sprite2D" parent="Fx/Smoke" unique_id=89678182]
+unique_name_in_owner = true
 texture = ExtResource("30_smk")
 
 [node name="Screwdriver1" type="Sprite2D" parent="Fx/Smoke" unique_id=1856786129]
@@ -335,11 +361,8 @@ texture = ExtResource("33_smk")
 texture = ExtResource("34_smk")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1618854]
+unique_name_in_owner = true
 position = Vector2(960, 540)
-
-[node name="HUD" parent="." unique_id=950551765 instance=ExtResource("18_hud")]
-show_exit_button = true
-esc_pauses = false
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1497284252]
 layer = 5
@@ -372,7 +395,7 @@ layout_mode = 2
 theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 24
 text = "Doni Skater:
-\"Gue pengen roda racing oranye! Budget: Rp 350rb\""
+\"I want orange racing wheels! Budget: Rp 350k\""
 autowrap_mode = 3
 
 [node name="OrderPanel" type="PanelContainer" parent="UI/Root" unique_id=1516078139]
@@ -388,25 +411,27 @@ offset_bottom = 640.0
 grow_horizontal = 0
 mouse_filter = 2
 
-[node name="VBox" type="VBoxContainer" parent="UI/Root/OrderPanel" unique_id=739593612]
+[node name="VBox" type="Control" parent="UI/Root/OrderPanel" unique_id=739593612]
+custom_minimum_size = Vector2(440, 424)
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 8
 
 [node name="Header" type="HBoxContainer" parent="UI/Root/OrderPanel/VBox" unique_id=2075342649]
-layout_mode = 2
+layout_mode = 0
+offset_right = 440.0
+offset_bottom = 44.0
 
 [node name="OrderTitle" type="Label" parent="UI/Root/OrderPanel/VBox/Header" unique_id=1584058198]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"PinkLabel"
-text = "PESANAN KLIEN"
+text = "CLIENT ORDER"
 
 [node name="CloseOrderButton" type="Button" parent="UI/Root/OrderPanel/VBox/Header" unique_id=429288613]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(44, 44)
 layout_mode = 2
-tooltip_text = "Tutup panel (Tab)"
+tooltip_text = "Close panel (Tab)"
 focus_mode = 0
 theme_override_font_sizes/font_size = 26
 theme_override_styles/normal = SubResource("Tab_box")
@@ -417,47 +442,65 @@ text = ">"
 
 [node name="ClientNameLabel" type="Label" parent="UI/Root/OrderPanel/VBox" unique_id=1723227815]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 0
+offset_top = 52.0
+offset_right = 440.0
+offset_bottom = 78.0
 theme_type_variation = &"SmallLabel"
-text = "Doni Skater (Anak tongkrongan)"
+text = "Doni Skater (Hangout kid)"
 autowrap_mode = 3
 
 [node name="OrderLines" type="VBoxContainer" parent="UI/Root/OrderPanel/VBox" unique_id=1492778965]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(440, 0)
-layout_mode = 2
-size_flags_vertical = 3
+layout_mode = 0
+offset_top = 86.0
+offset_right = 440.0
+offset_bottom = 150.0
 mouse_filter = 2
 theme_override_constants/separation = 6
 
 [node name="BudgetLabel" type="Label" parent="UI/Root/OrderPanel/VBox" unique_id=1430384916]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 0
+offset_top = 158.0
+offset_right = 440.0
+offset_bottom = 196.0
 theme_type_variation = &"PriceLabel"
 text = "Budget: Rp 350.000"
 
 [node name="EstimateLabel" type="Label" parent="UI/Root/OrderPanel/VBox" unique_id=1189058183]
 unique_name_in_owner = true
 visible = false
-layout_mode = 2
+layout_mode = 0
+offset_top = 204.0
+offset_right = 440.0
+offset_bottom = 227.0
 theme_type_variation = &"SmallLabel"
 theme_override_font_sizes/font_size = 18
-text = "Estimasi bayar: Rp 0 | Modal part: Rp 0"
+text = "Est. payment: Rp 0 | Parts cost: Rp 0"
 autowrap_mode = 3
 
 [node name="ProgressBar" type="ProgressBar" parent="UI/Root/OrderPanel/VBox" unique_id=2080968459]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
+layout_mode = 0
+offset_top = 235.0
+offset_right = 440.0
+offset_bottom = 315.0
 mouse_filter = 2
+value = 50.0
 
 [node name="DeliverButton" type="Button" parent="UI/Root/OrderPanel/VBox" unique_id=1865366293]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 76)
-layout_mode = 2
+layout_mode = 0
+offset_top = 323.0
+offset_right = 440.0
+offset_bottom = 424.0
 theme_type_variation = &"GreenButton"
 theme_override_font_sizes/font_size = 26
-text = "SERAHKAN MOTOR"
+text = "HAND OVER"
 script = ExtResource("21_btn")
 
 [node name="OpenOrderButton" type="Button" parent="UI/Root" unique_id=1486885383]
@@ -476,7 +519,7 @@ offset_right = -8.0
 offset_bottom = 55.0
 grow_horizontal = 0
 grow_vertical = 2
-tooltip_text = "Buka pesanan klien (Tab)"
+tooltip_text = "Open client order (Tab)"
 focus_mode = 0
 theme_override_font_sizes/font_size = 26
 theme_override_styles/normal = SubResource("Tab_box")
@@ -497,17 +540,20 @@ offset_right = 620.0
 offset_bottom = 1060.0
 grow_horizontal = 2
 
-[node name="PopupAnimator" type="Node" parent="UI/Root/Tray" unique_id=407450097]
+[node name="TrayPopup" type="Node" parent="UI/Root/Tray" unique_id=407450097]
+unique_name_in_owner = true
 script = ExtResource("20_pop")
 duration = 0.2
 
-[node name="VBox" type="VBoxContainer" parent="UI/Root/Tray" unique_id=307530769]
+[node name="VBox" type="Control" parent="UI/Root/Tray" unique_id=307530769]
+custom_minimum_size = Vector2(1164, 224)
 layout_mode = 2
-theme_override_constants/separation = 10
 
 [node name="TrayCards" type="HBoxContainer" parent="UI/Root/Tray/VBox" unique_id=1355329034]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 0
+offset_right = 1164.0
+offset_bottom = 214.0
 theme_override_constants/separation = 16
 alignment = 1
 
@@ -527,7 +573,10 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Header" type="HBoxContainer" parent="UI/Root/Tray/VBox" unique_id=1828327968]
-layout_mode = 2
+layout_mode = 0
+offset_top = 224.0
+offset_right = 1164.0
+offset_bottom = 224.0
 alignment = 1
 
 [node name="TrayTitle" type="Label" parent="UI/Root/Tray/VBox/Header" unique_id=667376459]
@@ -535,17 +584,17 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_type_variation = &"PriceLabel"
-text = "TRAY PART: RODA"
+text = "PART TRAY: WHEELS"
 
 [node name="TrayClose" type="Button" parent="UI/Root/Tray/VBox/Header" unique_id=1157195548]
 unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(56, 56)
+custom_minimum_size = Vector2(200, 56)
 layout_mode = 2
-theme_type_variation = &"CloseButton"
-text = ""
+theme_type_variation = &"DarkButton"
+theme_override_font_sizes/font_size = 22
+text = "CANCEL"
 script = ExtResource("21_btn")
-tooltip_text = "Batal"
 
 [node name="DragGhost" type="TextureRect" parent="UI/Root" unique_id=1426244224]
 unique_name_in_owner = true
@@ -585,14 +634,15 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -760.0
-offset_top = -290.0
+offset_top = -420.0
 offset_right = 760.0
-offset_bottom = 290.0
+offset_bottom = 420.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"TwistPanel"
 
-[node name="PopupAnimator" type="Node" parent="UI/Root/TwistOverlay/TwistPanel" unique_id=854341693]
+[node name="TwistPanelPopupAnimator" type="Node" parent="UI/Root/TwistOverlay/TwistPanel" unique_id=854341693]
+unique_name_in_owner = true
 script = ExtResource("20_pop")
 duration = 0.3
 
@@ -602,25 +652,30 @@ theme_override_constants/separation = 24
 
 [node name="TwistPortrait" type="TextureRect" parent="UI/Root/TwistOverlay/TwistPanel/HBox" unique_id=543481300]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(280, 390)
+custom_minimum_size = Vector2(250, 420)
 layout_mode = 2
 texture = ExtResource("22_panic")
 expand_mode = 1
-stretch_mode = 6
+stretch_mode = 5
 
-[node name="VBox" type="VBoxContainer" parent="UI/Root/TwistOverlay/TwistPanel/HBox" unique_id=2040523609]
+[node name="VBox" type="Control" parent="UI/Root/TwistOverlay/TwistPanel/HBox" unique_id=2040523609]
+custom_minimum_size = Vector2(1095, 670)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 12
 
 [node name="TwistTitle" type="Label" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox" unique_id=2124007305]
-layout_mode = 2
-theme_type_variation = &"TitleTabLabel"
-text = "REVISI DADAKAN!"
-size_flags_horizontal = 0
+layout_mode = 0
+offset_right = 1095.0
+offset_bottom = 69.0
+theme_type_variation = &"TitleLabel"
+theme_override_colors/font_color = Color(1, 0.0784, 0.5765, 1)
+text = "SUDDEN CHANGE!"
 
 [node name="TwistBubble" type="PanelContainer" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox" unique_id=1493529497]
-layout_mode = 2
+layout_mode = 0
+offset_top = 81.0
+offset_right = 1095.0
+offset_bottom = 218.0
 theme_type_variation = &"BubblePanel"
 
 [node name="TwistDialog" type="Label" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox/TwistBubble" unique_id=1493529496]
@@ -629,12 +684,14 @@ custom_minimum_size = Vector2(700, 0)
 layout_mode = 2
 theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 24
-text = "\"Duh Bang, sorry banget!\""
+text = "Ugh man, so sorry!"
 autowrap_mode = 3
 
 [node name="Choices" type="GridContainer" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox" unique_id=866992128]
-layout_mode = 2
-size_flags_vertical = 3
+layout_mode = 0
+offset_top = 230.0
+offset_right = 1095.0
+offset_bottom = 670.0
 theme_override_constants/h_separation = 24
 theme_override_constants/v_separation = 10
 columns = 3
@@ -647,9 +704,9 @@ size_flags_horizontal = 3
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
-theme_type_variation = &"GreenButton"
+theme_type_variation = &"OrangeButton"
 theme_override_font_sizes/font_size = 22
-text = "TURUNKAN"
+text = "DOWNGRADE"
 script = ExtResource("21_btn")
 
 [node name="AcceptDesc" type="Label" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox/Choices/Accept" unique_id=1744670872]
@@ -657,10 +714,10 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 theme_type_variation = &"DarkLabel"
-theme_override_font_sizes/font_size = 18
-text = "Ganti sesuai budget."
-autowrap_mode = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Swap to fit the budget."
+autowrap_mode = 3
 
 [node name="Absorb" type="VBoxContainer" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox/Choices" unique_id=1895609987]
 layout_mode = 2
@@ -672,7 +729,7 @@ custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
 theme_type_variation = &"YellowButton"
 theme_override_font_sizes/font_size = 22
-text = "PASANG"
+text = "INSTALL"
 script = ExtResource("21_btn")
 
 [node name="AbsorbDesc" type="Label" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox/Choices/Absorb" unique_id=2058316249]
@@ -680,10 +737,10 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 theme_type_variation = &"DarkLabel"
-theme_override_font_sizes/font_size = 18
-text = "Tanggung rugi."
-autowrap_mode = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Take the loss."
+autowrap_mode = 3
 
 [node name="Reject" type="VBoxContainer" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox/Choices" unique_id=580641789]
 layout_mode = 2
@@ -695,7 +752,7 @@ custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
 theme_type_variation = &"RedButton"
 theme_override_font_sizes/font_size = 22
-text = "TOLAK"
+text = "REFUSE"
 script = ExtResource("21_btn")
 
 [node name="RejectDesc" type="Label" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox/Choices/Reject" unique_id=980473306]
@@ -703,10 +760,10 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 theme_type_variation = &"DarkLabel"
-theme_override_font_sizes/font_size = 18
-text = "Tolak."
-autowrap_mode = 3
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Refuse."
+autowrap_mode = 3
 
 [node name="ResultOverlay" type="Control" parent="UI/Root" unique_id=227114275]
 unique_name_in_owner = true
@@ -743,7 +800,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="PopupAnimator" type="Node" parent="UI/Root/ResultOverlay/ResultPanel" unique_id=2141146922]
+[node name="ResultPanelPopupAnimator" type="Node" parent="UI/Root/ResultOverlay/ResultPanel" unique_id=2141146922]
+unique_name_in_owner = true
 script = ExtResource("20_pop")
 
 [node name="ResultBox" type="PanelContainer" parent="UI/Root/ResultOverlay/ResultPanel" unique_id=258658079]
@@ -765,47 +823,60 @@ texture = ExtResource("12_cl")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="VBox" type="VBoxContainer" parent="UI/Root/ResultOverlay/ResultPanel" unique_id=834360010]
-layout_mode = 0
+[node name="VBox" type="Control" parent="UI/Root/ResultOverlay/ResultPanel" unique_id=834360010]
+custom_minimum_size = Vector2(648, 251)
+anchors_preset = 0
 offset_left = 515.0
 offset_top = 288.0
 offset_right = 1163.0
 offset_bottom = 453.0
-theme_override_constants/separation = 10
-alignment = 1
 
 [node name="ResultTitle" type="Label" parent="UI/Root/ResultOverlay/ResultPanel/VBox" unique_id=1791440612]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 0
+offset_right = 648.0
+offset_bottom = 60.0
 theme_type_variation = &"TitleLabel"
 theme_override_font_sizes/font_size = 48
-text = "SERAH TERIMA!"
+text = "HANDOVER!"
 
 [node name="PaymentLabel" type="Label" parent="UI/Root/ResultOverlay/ResultPanel/VBox" unique_id=523980877]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 0
+offset_top = 70.0
+offset_right = 648.0
+offset_bottom = 115.0
 theme_type_variation = &"PriceLabel"
 theme_override_font_sizes/font_size = 36
 text = "+Rp 0"
 
 [node name="SatisfactionLabel" type="Label" parent="UI/Root/ResultOverlay/ResultPanel/VBox" unique_id=155063815]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 0
+offset_top = 125.0
+offset_right = 648.0
+offset_bottom = 165.0
 theme_type_variation = &"PinkLabel"
 theme_override_font_sizes/font_size = 32
-text = "Kepuasan 0%"
+text = "Satisfaction 0%"
 
 [node name="ProfitLabel" type="Label" parent="UI/Root/ResultOverlay/ResultPanel/VBox" unique_id=1332412646]
 unique_name_in_owner = true
 visible = false
-layout_mode = 2
+layout_mode = 0
+offset_top = 175.0
+offset_right = 648.0
+offset_bottom = 208.0
 text = "Margin: Rp 0"
 
 [node name="CaughtLabel" type="Label" parent="UI/Root/ResultOverlay/ResultPanel/VBox" unique_id=1309286316]
 unique_name_in_owner = true
 visible = false
-layout_mode = 2
-text = "Ketahuan"
+layout_mode = 0
+offset_top = 218.0
+offset_right = 648.0
+offset_bottom = 251.0
+text = "Caught"
 
 [node name="ResultBubble" type="PanelContainer" parent="UI/Root/ResultOverlay/ResultPanel" unique_id=1105295413]
 layout_mode = 0
@@ -821,7 +892,7 @@ custom_minimum_size = Vector2(640, 0)
 layout_mode = 2
 theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 28
-text = "\"Mantap!\""
+text = "Awesome!"
 autowrap_mode = 3
 
 [node name="ContinueButton" type="Button" parent="UI/Root/ResultOverlay/ResultPanel" unique_id=1772668855]
@@ -832,5 +903,10 @@ offset_left = 838.0
 offset_top = 465.0
 offset_right = 1197.0
 offset_bottom = 590.0
-text = "LANJUT"
+text = "CONTINUE"
 script = ExtResource("21_btn")
+
+[node name="HUD" parent="." unique_id=950551765 instance=ExtResource("18_hud")]
+unique_name_in_owner = true
+show_exit_button = true
+esc_pauses = false

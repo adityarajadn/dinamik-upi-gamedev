@@ -17,6 +17,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="TransitionRect" type="ColorRect" parent="TransitionRoot"]
+unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15

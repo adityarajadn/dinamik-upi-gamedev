@@ -13,42 +13,49 @@ scale = Vector2(-1, 1)
 script = ExtResource("1_mp")
 
 [node name="RearWheel" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(-230, 113)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("3_wh")
 flip_h = true
 
 [node name="FrontWheel" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(302, 113)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("3_wh")
 flip_h = true
 
 [node name="Frame" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(0, 0)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("2_frame")
 flip_h = true
 
 [node name="Engine" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(5.54, 114.3)
 scale = Vector2(0.4441, 0.4441)
 texture = ExtResource("5_en")
 flip_h = true
 
 [node name="Body" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(0, 0)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("4_bd")
 flip_h = true
 
 [node name="Exhaust" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(0, 0)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("6_ex")
 flip_h = true
 
 [node name="Headlight" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(0, 0)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("7_lt")

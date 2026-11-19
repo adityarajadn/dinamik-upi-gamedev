@@ -1,25 +1,24 @@
 [gd_resource type="Resource" script_class="ClientProfile" format=3 uid="uid://2ocyknedscdu"]
 
 [ext_resource type="Script" uid="uid://qstfoikk3f2a" path="res://scripts/resources/client_profile.gd" id="1_s"]
-
-[ext_resource type="Texture2D" path="res://assets/baked_processed/char_mahasiswa_idle.png" id="t_idle"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/char_mahasiswa_happy.png" id="t_happy"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/char_mahasiswa_angry.png" id="t_angry"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/char_mahasiswa_panic.png" id="t_panic"]
+[ext_resource type="Texture2D" uid="uid://6crb3aiprju4" path="res://assets/baked_processed/char_mahasiswa_angry.png" id="t_angry"]
+[ext_resource type="Texture2D" uid="uid://buegn4oejmlgw" path="res://assets/baked_processed/char_mahasiswa_happy.png" id="t_happy"]
+[ext_resource type="Texture2D" uid="uid://b6koj32opgll8" path="res://assets/baked_processed/char_mahasiswa_idle.png" id="t_idle"]
+[ext_resource type="Texture2D" uid="uid://s21nx1f80ebo" path="res://assets/baked_processed/char_mahasiswa_panic.png" id="t_panic"]
 
 [resource]
 script = ExtResource("1_s")
 client_id = &"sisca"
 client_name = "Sisca"
-persona = "Mahasiswi budget mepet"
+persona = "Broke college student"
 texture_idle = ExtResource("t_idle")
 texture_happy = ExtResource("t_happy")
 texture_angry = ExtResource("t_angry")
 texture_panic = ExtResource("t_panic")
 scooter_tint = Color(0.65, 0.6, 1, 1)
 budget_tolerance_max = 0.05
-request_lines = PackedStringArray("Kak, aku mau ganti {parts} biar aman ke kampus. Tapi uangku cuma {budget} ya Kak...", "Permisi Kak, bisa pasang {parts}? Budget aku {budget}, itu udah sisa uang makan...")
-twist_lines = PackedStringArray("Kak! Maaf banget, uang UKT-ku kurang! Sisa {budget}... tapi {slot}-nya pengen tetep lucu. Gimana Kak?", "Kak, transferan ortu belum masuk. Aku cuma ada {budget}. {slot} jangan jelek ya Kak...")
-happy_lines = PackedStringArray("Makasih banyak Kak! Aku rekomendasiin ke temen-temen kampus!", "Yeay, motornya jadi gemes banget!")
-neutral_lines = PackedStringArray("Oke Kak, makasih ya.", "Lumayan lah Kak, yang penting jalan.")
-angry_lines = PackedStringArray("Kak, ini kok rusak sih?! Aku spill di medsos ya!", "Huhu, uangku habis buat barang jelek...")
+request_lines = PackedStringArray("Hi, I want to replace the {parts} so it\'s safe for campus. But I only have {budget}...", "Excuse me, can you install {parts}? My budget is {budget}, that\'s what\'s left of my food money...")
+twist_lines = PackedStringArray("So sorry! My tuition money fell short! Only {budget} left... but I still want the {slot} to be cute. What do we do?", "My parents\' transfer hasn\'t come in yet. I only have {budget}. Please don\'t make the {slot} ugly...")
+happy_lines = PackedStringArray("Thank you so much! I\'ll recommend you to my campus friends!", "Yay, the bike looks so cute now!")
+neutral_lines = PackedStringArray("Okay, thanks.", "Not bad, at least it runs.")
+angry_lines = PackedStringArray("Why is this broken?! I\'m posting this on social media!", "Boohoo, I spent all my money on junk...")

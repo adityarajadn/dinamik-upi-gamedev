@@ -10,7 +10,7 @@ const EFFECTS: PackedStringArray = ["fade", "swipe_left", "swipe_right", "instan
 
 var is_transitioning: bool = false
 
-@onready var transition_rect: ColorRect = $TransitionRoot/TransitionRect
+@onready var transition_rect: ColorRect = %TransitionRect
 
 
 func _ready() -> void:
@@ -22,10 +22,10 @@ func change_scene(scene_path: String, effect: String = "fade") -> void:
 	if is_transitioning:
 		return
 	if not EFFECTS.has(effect):
-		push_warning("SceneTransitionManager: efek '%s' tidak dikenal, pakai fade" % effect)
+		push_warning("SceneTransitionManager: unknown effect '%s', using fade" % effect)
 		effect = "fade"
 	if not ResourceLoader.exists(scene_path):
-		push_error("SceneTransitionManager: scene '%s' tidak ditemukan" % scene_path)
+		push_error("SceneTransitionManager: scene '%s' not found" % scene_path)
 		return
 	is_transitioning = true
 	transition_rect.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -33,7 +33,7 @@ func change_scene(scene_path: String, effect: String = "fade") -> void:
 	get_tree().paused = false
 	var error: Error = get_tree().change_scene_to_file(scene_path)
 	if error != OK:
-		push_error("SceneTransitionManager: gagal ganti scene (%s)" % error_string(error))
+		push_error("SceneTransitionManager: failed to change scene (%s)" % error_string(error))
 	await get_tree().process_frame
 	await _reveal(effect)
 	transition_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE

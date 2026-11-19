@@ -1,5 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://cc8al127ss4fa"]
 
+[ext_resource type="FontFile" uid="uid://bfh2gfbacfupn" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="f_luckiest"]
 [ext_resource type="Texture2D" uid="uid://hiql4nppcgby" path="res://assets/ui_kit/btn_arrow_left.png" id="k_arrow_l"]
 [ext_resource type="Texture2D" uid="uid://dk381m5yxbd4c" path="res://assets/ui_kit/btn_arrow_left_pressed.png" id="k_arrow_lp"]
 [ext_resource type="Texture2D" uid="uid://caujjou1piril" path="res://assets/ui_kit/btn_arrow_right.png" id="k_arrow_r"]
@@ -14,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://bqs0ou1hyjheh" path="res://assets/ui_kit/btn_close_pressed.png" id="k_close_big_p"]
 [ext_resource type="Texture2D" uid="uid://c4w5b8dc5n2m" path="res://assets/ui_kit/btn_dark.png" id="k_dark"]
 [ext_resource type="Texture2D" uid="uid://crvtjqdb1ingc" path="res://assets/ui_kit/plot_twist_frame.png" id="k_frame"]
+[ext_resource type="Texture2D" uid="uid://bkdevtd5jx15s" path="res://assets/ui_kit/slider_grabber.png" id="k_grab"]
+[ext_resource type="Texture2D" uid="uid://lt305wpkuovf" path="res://assets/ui_kit/slider_grabber_hover.png" id="k_grab_h"]
 [ext_resource type="Texture2D" uid="uid://d3u0c862j1x06" path="res://assets/ui_kit/panel_header.png" id="k_header"]
 [ext_resource type="Texture2D" uid="uid://cyoxooyddt6uo" path="res://assets/ui_kit/ledger_open.png" id="k_ledger"]
 [ext_resource type="Texture2D" uid="uid://btdw5r380tq6o" path="res://assets/ui_kit/ledger_closed.png" id="k_ledger_icon"]
@@ -36,8 +39,6 @@
 [ext_resource type="Texture2D" uid="uid://xw7o41p1yu2r" path="res://assets/ui_kit/shop_card.png" id="t_card"]
 [ext_resource type="Texture2D" uid="uid://ck8b3ruk6pd27" path="res://assets/ui_kit/shop_card_selected.png" id="t_card_sel"]
 
-[ext_resource type="Texture2D" path="res://assets/ui_kit/slider_grabber.png" id="k_grab"]
-[ext_resource type="Texture2D" path="res://assets/ui_kit/slider_grabber_hover.png" id="k_grab_h"]
 [sub_resource type="StyleBoxTexture" id="Bubble_box"]
 content_margin_left = 49.0
 content_margin_top = 30.0
@@ -253,6 +254,35 @@ texture_margin_top = 30.0
 texture_margin_right = 40.0
 texture_margin_bottom = 36.0
 
+[sub_resource type="StyleBoxFlat" id="Slider_fill"]
+bg_color = Color(1, 0.1216, 0.5569, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = -10.0
+expand_margin_top = -11.0
+expand_margin_bottom = -15.0
+
+[sub_resource type="StyleBoxFlat" id="Slider_fill_hi"]
+bg_color = Color(1, 0.8275, 0.102, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = -10.0
+expand_margin_top = -11.0
+expand_margin_bottom = -15.0
+
+[sub_resource type="StyleBoxTexture" id="Slider_track"]
+content_margin_top = 21.0
+content_margin_bottom = 21.0
+texture = ExtResource("k_track")
+texture_margin_left = 26.0
+texture_margin_top = 18.0
+texture_margin_right = 26.0
+texture_margin_bottom = 22.0
+
 [sub_resource type="StyleBoxTexture" id="Header_label"]
 content_margin_left = 44.0
 content_margin_top = 6.0
@@ -443,6 +473,10 @@ corner_radius_top_left = 14
 corner_radius_top_right = 14
 corner_radius_bottom_right = 14
 corner_radius_bottom_left = 14
+expand_margin_left = -12.0
+expand_margin_top = -10.0
+expand_margin_right = -14.0
+expand_margin_bottom = -17.0
 
 [sub_resource type="StyleBoxTexture" id="Btn_red_hover"]
 content_margin_left = 30.0
@@ -478,10 +512,10 @@ corner_radius_top_left = 14
 corner_radius_top_right = 14
 corner_radius_bottom_right = 14
 corner_radius_bottom_left = 14
-expand_margin_left = -20.0
-expand_margin_top = -14.0
-expand_margin_right = -22.0
-expand_margin_bottom = -20.0
+expand_margin_left = -12.0
+expand_margin_top = -10.0
+expand_margin_right = -14.0
+expand_margin_bottom = -17.0
 
 [sub_resource type="StyleBoxTexture" id="Tab_label"]
 content_margin_left = 48.0
@@ -571,42 +605,8 @@ texture_margin_top = 130.0
 texture_margin_right = 95.0
 texture_margin_bottom = 72.0
 
-[sub_resource type="SystemFont" id="Font_main"]
-font_names = PackedStringArray("Impact", "Arial Black", "Sans-Serif")
-font_weight = 700
-subpixel_positioning = 0
-
-[sub_resource type="StyleBoxTexture" id="Slider_track"]
-content_margin_top = 21.0
-content_margin_bottom = 21.0
-texture = ExtResource("k_track")
-texture_margin_left = 26.0
-texture_margin_top = 18.0
-texture_margin_right = 26.0
-texture_margin_bottom = 22.0
-
-[sub_resource type="StyleBoxFlat" id="Slider_fill"]
-bg_color = Color(1, 0.1216, 0.5569, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-expand_margin_left = -10.0
-expand_margin_top = -11.0
-expand_margin_bottom = -15.0
-
-[sub_resource type="StyleBoxFlat" id="Slider_fill_hi"]
-bg_color = Color(1, 0.8275, 0.102, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-expand_margin_left = -10.0
-expand_margin_top = -11.0
-expand_margin_bottom = -15.0
-
 [resource]
-default_font = SubResource("Font_main")
+default_font = ExtResource("f_luckiest")
 default_font_size = 26
 BubblePanel/base_type = &"PanelContainer"
 BubblePanel/styles/panel = SubResource("Bubble_box")
@@ -655,6 +655,12 @@ GreenButton/base_type = &"Button"
 GreenButton/styles/hover = SubResource("Btn_green_hover")
 GreenButton/styles/normal = SubResource("Btn_green")
 GreenButton/styles/pressed = SubResource("Btn_choice_pressed")
+HSlider/icons/grabber = ExtResource("k_grab")
+HSlider/icons/grabber_disabled = ExtResource("k_grab")
+HSlider/icons/grabber_highlight = ExtResource("k_grab_h")
+HSlider/styles/grabber_area = SubResource("Slider_fill")
+HSlider/styles/grabber_area_highlight = SubResource("Slider_fill_hi")
+HSlider/styles/slider = SubResource("Slider_track")
 HeaderLabel/base_type = &"Label"
 HeaderLabel/colors/font_color = Color(1, 1, 1, 1)
 HeaderLabel/colors/font_outline_color = Color(0.0784, 0.0392, 0.149, 1)
@@ -747,9 +753,3 @@ YellowButton/base_type = &"Button"
 YellowButton/styles/hover = SubResource("Btn_orange_hover")
 YellowButton/styles/normal = SubResource("Btn_orange")
 YellowButton/styles/pressed = SubResource("Btn_choice_pressed")
-HSlider/icons/grabber = ExtResource("k_grab")
-HSlider/icons/grabber_highlight = ExtResource("k_grab_h")
-HSlider/icons/grabber_disabled = ExtResource("k_grab")
-HSlider/styles/slider = SubResource("Slider_track")
-HSlider/styles/grabber_area = SubResource("Slider_fill")
-HSlider/styles/grabber_area_highlight = SubResource("Slider_fill_hi")

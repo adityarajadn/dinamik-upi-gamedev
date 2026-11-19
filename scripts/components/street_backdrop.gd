@@ -21,10 +21,11 @@ const DOOR_NODES: Dictionary = {
 var current_time: StringName = &""
 var _fade_tween: Tween
 
-@onready var sets: Dictionary = {&"pagi": $Pagi, &"sore": $Sore, &"malam": $Malam}
+@onready var sets: Dictionary = {&"pagi": %Pagi, &"sore": %Sore, &"malam": %Malam}
 
 
 func _ready() -> void:
+	_share_signs()
 	set_time(time_for_minutes(GameState.get_clock_minutes()) if follow_clock else &"pagi", false)
 	if follow_clock:
 		GameState.clock_changed.connect(_on_clock_changed)
@@ -78,3 +79,27 @@ func set_door_open(door: int, open: bool, animate: bool = true) -> Tween:
 
 func _on_clock_changed(_day: int, minutes: int) -> void:
 	set_time(time_for_minutes(minutes))
+
+
+## Papan nama toko (node berakhiran "Title") cuma ditaruh di satu set di editor.
+## Salin ke set waktu lain supaya tulisannya selalu tampil pagi/sore/malam.
+func _share_signs() -> void:
+	var source: Node2D = null
+	for id: StringName in TIMES:
+		var layer: Node2D = sets[id]
+		for child: Node in layer.get_children():
+			if String(child.name).ends_with("Title"):
+				source = layer
+				break
+		if source:
+			break
+	if source == null:
+		return
+	for child: Node in source.get_children():
+		if not String(child.name).ends_with("Title"):
+			continue
+		for id: StringName in TIMES:
+			var layer: Node2D = sets[id]
+			if layer != source and layer.get_node_or_null(NodePath(child.name)) == null:
+				var copy: Node = child.duplicate()
+				layer.add_child(copy)

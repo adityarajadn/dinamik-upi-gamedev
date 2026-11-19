@@ -11,8 +11,8 @@ const CART_ROW_SCENE: PackedScene = preload("res://scenes/ui/components/cart_row
 
 var cart: Dictionary = {} ## offer_index -> quantity
 
-@onready var hud: GameHUD = $HUD
-@onready var koh_jaya: Sprite2D = $Background/KohJaya
+@onready var hud: GameHUD = %HUD
+@onready var koh_jaya: Sprite2D = %KohJaya
 @onready var grid_cards: Array[Node] = %ShopGrid.get_children()
 @onready var cart_items: VBoxContainer = %CartItems
 @onready var cart_empty: Label = %CartEmpty
@@ -111,7 +111,7 @@ func _on_remove_requested(offer_index: int) -> void:
 func _on_card_pressed(card: PartCard) -> void:
 	if card.stock <= 0:
 		AudioManager.play_sfx(&"install_fail")
-		_koh_say("Waduh, barang itu sudah habis, Nak.")
+		_koh_say("Oops, that one's sold out, kid.")
 		return
 	cart[card.offer_index] = int(cart.get(card.offer_index, 0)) + 1
 	AudioManager.play_sfx(&"click")
@@ -122,7 +122,7 @@ func _on_card_pressed(card: PartCard) -> void:
 func _on_checkout_pressed() -> void:
 	if cart.is_empty():
 		return
-	if not await hud.confirm("Beli semua barang di keranjang seharga %s?" % Money.format(_get_cart_total()), "BELI"):
+	if not await hud.confirm("Buy everything in the cart for %s?" % Money.format(_get_cart_total()), "BUY"):
 		return
 	var items: Array[Dictionary] = []
 	for index: int in cart.keys():
@@ -132,24 +132,24 @@ func _on_checkout_pressed() -> void:
 		cart.clear()
 		_refresh_grid()
 		_refresh_cart()
-		_koh_say("Terima kasih! Barang langsung dikirim ke bengkelmu ya!")
+		_koh_say("Thanks! Your parts are going straight to your workshop!")
 		koh_jaya.texture = KOH_SMILE
 		get_tree().create_timer(smile_duration).timeout.connect(func() -> void: koh_jaya.texture = KOH_IDLE)
 	else:
 		AudioManager.play_sfx(&"install_fail")
-		_koh_say("Hmm, duitnya kurang, Nak. Kurangi belanjaannya dulu.")
+		_koh_say("Hmm, not enough money, kid. Take some items out first.")
 
 
 func _on_restocked() -> void:
 	cart.clear()
 	_refresh_grid()
 	_refresh_cart()
-	_koh_say("Ding-dong! Barang baru datang, silakan dipilih!")
+	_koh_say("Ding-dong! New stock just arrived, take your pick!")
 
 
 func _on_countdown_changed(seconds_left: float) -> void:
 	var total: int = int(ceil(seconds_left))
-	countdown_label.text = "%02d:%02d Hingga Barang Baru!" % [floori(total / 60.0), total % 60]
+	countdown_label.text = "%02d:%02d Until New Stock!" % [floori(total / 60.0), total % 60]
 
 
 func _koh_say(text: String) -> void:

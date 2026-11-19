@@ -109,7 +109,7 @@ custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 theme_type_variation = &"SmallLabel"
 theme_override_font_sizes/font_size = 16
-text = "Nama Part"
+text = "Part Name"
 autowrap_mode = 3
 
 [node name="PriceLabel" type="Label" parent="HBox/Info"]
@@ -163,4 +163,4 @@ size_flags_vertical = 4
 focus_mode = 0
 text = ""
 theme_type_variation = &"CloseButton"
-tooltip_text = "Hapus"
+tooltip_text = "Remove"

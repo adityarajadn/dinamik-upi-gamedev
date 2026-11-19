@@ -26,16 +26,16 @@ var _order_open: bool = true
 var _order_tween: Tween
 var _twist_stats: Dictionary = {} ## TwistChoice -> TwistStats
 
-@onready var camera: Camera2D = $Camera2D
-@onready var motor: MotorVisual = $Motor
-@onready var client_sprite: Sprite2D = $Client
-@onready var player_sprite: AnimatedSprite2D = $PlayerAvatar
-@onready var piggy_bank: Area2D = $PiggyBank
-@onready var clang: Sprite2D = $Fx/Clang
-@onready var smoke: Node2D = $Fx/Smoke
-@onready var smoke_cloud: Sprite2D = $Fx/Smoke/Cloud
-@onready var sparks: CPUParticles2D = $Fx/Sparks
-@onready var hud: GameHUD = $HUD
+@onready var camera: Camera2D = %Camera2D
+@onready var motor: MotorVisual = %Motor
+@onready var client_sprite: Sprite2D = %Client
+@onready var player_sprite: AnimatedSprite2D = %PlayerAvatar
+@onready var piggy_bank: Area2D = %PiggyBank
+@onready var clang: Sprite2D = %Clang
+@onready var smoke: Node2D = %Smoke
+@onready var smoke_cloud: Sprite2D = %Cloud
+@onready var sparks: CPUParticles2D = %Sparks
+@onready var hud: GameHUD = %HUD
 
 @onready var bubble: PanelContainer = %Bubble
 @onready var bubble_label: Label = %BubbleLabel
@@ -49,16 +49,16 @@ var _twist_stats: Dictionary = {} ## TwistChoice -> TwistStats
 @onready var close_order_button: Button = %CloseOrderButton
 @onready var open_order_button: Button = %OpenOrderButton
 @onready var tray: PanelContainer = %Tray
-@onready var tray_popup: PopupAnimator = %Tray/PopupAnimator
+@onready var tray_popup: PopupAnimator = %TrayPopup
 @onready var tray_title: Label = %TrayTitle
 @onready var tray_cards: Array[Node] = %TrayCards.get_children()
 @onready var drag_ghost: TextureRect = %DragGhost
 @onready var twist_overlay: Control = %TwistOverlay
-@onready var twist_popup: PopupAnimator = %TwistPanel/PopupAnimator
+@onready var twist_popup: PopupAnimator = %TwistPanelPopupAnimator
 @onready var twist_portrait: TextureRect = %TwistPortrait
 @onready var twist_dialog: Label = %TwistDialog
 @onready var result_overlay: Control = %ResultOverlay
-@onready var result_popup: PopupAnimator = %ResultPanel/PopupAnimator
+@onready var result_popup: PopupAnimator = %ResultPanelPopupAnimator
 
 
 func _ready() -> void:
@@ -92,7 +92,7 @@ func _ready() -> void:
 	AudioManager.play_music(&"workshop")
 	_load_client()
 	if GameState.tutorial_pending:
-		hud.show_tutorial()
+		hud.show_tutorial(_tutorial_steps())
 
 
 func _process(_delta: float) -> void:
@@ -142,7 +142,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _load_client() -> void:
 	order = GameState.take_next_client()
 	motor.show_order(order)
-	($Shadows/ClientShadow as Sprite2D).visible = order != null
+	(%ClientShadow as Sprite2D).visible = order != null
 	if order == null:
 		client_sprite.visible = false
 		_show_order_panel(false)
@@ -179,10 +179,10 @@ func _refresh_order_panel() -> void:
 		order_lines.add_child(row)
 		row.setup(order, slot)
 	budget_label.text = "Budget: %s" % Money.format(order.budget)
-	estimate_label.text = "Estimasi bayar: %s  |  Modal part: %s" % [Money.format(order.get_payment()), Money.format(order.get_parts_cost())]
+	estimate_label.text = "Est. payment: %s  |  Parts cost: %s" % [Money.format(order.get_payment()), Money.format(order.get_parts_cost())]
 	progress_bar.value = order.get_progress() * 100.0
 	deliver_button.disabled = order.twist_pending
-	deliver_button.text = "SERAHKAN"
+	deliver_button.text = "HAND OVER"
 
 
 # ---------------------------------------------------------------- order panel slide
@@ -222,7 +222,7 @@ func _on_slot_clicked(slot: int) -> void:
 	if order == null or not (state == State.IDLE or state == State.ZOOMED):
 		return
 	if not order.is_slot_ordered(slot):
-		hud.show_toast("Klien nggak minta ganti %s. Fokus ke bagian bertanda *" % PartData.slot_to_name(slot), &"warning")
+		hud.show_toast("The client didn't ask to change the %s. Focus on the parts marked *" % PartData.slot_to_name(slot), &"warning")
 		AudioManager.play_sfx(&"install_fail")
 		return
 	if selected_slot >= 0:
@@ -258,7 +258,7 @@ func _refresh_tray() -> void:
 		return
 	var parts: Array[PartData] = GameState.CATALOG.get_parts_for_slot(selected_slot)
 	var target_tier: int = order.target_tiers.get(selected_slot, 0)
-	tray_title.text = "TRAY PART: %s   |   Pesanan: Tier %d" % [PartData.slot_to_name(selected_slot).to_upper(), target_tier]
+	tray_title.text = "PART TRAY: %s   |   Order: Tier %d" % [PartData.slot_to_name(selected_slot).to_upper(), target_tier]
 	for i: int in range(tray_cards.size()):
 		var card: PartCard = tray_cards[i] as PartCard
 		if i < parts.size():
@@ -275,7 +275,7 @@ func _on_card_drag_requested(card: PartCard) -> void:
 		return
 	if card.stock <= 0:
 		AudioManager.play_sfx(&"install_fail")
-		hud.show_toast("Stok %s habis! Beli dulu di Toko Sparepart Jaya." % card.part.part_id, &"error")
+		hud.show_toast("Out of %s! Buy some at Jaya Parts Shop first." % card.part.part_id, &"error")
 		return
 	dragging_card = card
 	drag_ghost.texture = card.part.get_icon()
@@ -311,7 +311,7 @@ func _cancel_drag() -> void:
 
 func _install_part(part: PartData) -> void:
 	if order.current_parts[part.slot] == part:
-		hud.show_toast("Part itu sudah terpasang!", &"mini")
+		hud.show_toast("That part is already installed!", &"mini")
 		AudioManager.play_sfx(&"install_fail")
 		return
 	if not GameState.remove_stock(part.part_id):
@@ -330,7 +330,7 @@ func _install_part(part: PartData) -> void:
 			await get_tree().create_timer(twist_delay).timeout
 			_show_twist()
 		else:
-			hud.show_toast("Pengerjaan 100%! Klik SERAHKAN MOTOR.", &"success")
+			hud.show_toast("Work 100%! Click HAND OVER.", &"success")
 
 
 func _play_install_fx(world_position: Vector2) -> void:
@@ -386,9 +386,9 @@ func _show_twist() -> void:
 	var slot_name: String = PartData.slot_to_name(order.twist_slot)
 	var affordable: PartData = GameState.CATALOG.get_part_by_slot_tier(order.twist_slot, order.get_affordable_twist_tier())
 	var current_cost: int = order.get_parts_cost()
-	%AcceptDesc.text = "Ganti %s ke T%d %s. Untung, kepuasan turun." % [slot_name, affordable.tier, affordable.display_name]
-	%AbsorbDesc.text = "Tetap pasang. Modal %s, kamu rugi. Kepuasan naik!" % Money.format(current_cost)
-	%RejectDesc.text = "Gak bisa Bos! Klien bayar pas modal. Kepuasan anjlok."
+	%AcceptDesc.text = "Swap %s to T%d %s. Profit, but satisfaction drops." % [slot_name, affordable.tier, affordable.display_name]
+	%AbsorbDesc.text = "Install anyway. Parts cost %s, you take a loss. Satisfaction goes up!" % Money.format(current_cost)
+	%RejectDesc.text = "No can do, boss! Client pays only the parts cost. Satisfaction drops hard."
 	_show_twist_stats()
 	twist_overlay.visible = true
 	twist_popup.show_popup()
@@ -415,7 +415,7 @@ func _show_twist_stats() -> void:
 func _on_twist_choice(choice: ClientOrder.TwistChoice) -> void:
 	if state != State.TWIST:
 		return
-	if not await hud.confirm("Yakin pilih opsi ini? Keputusan tidak bisa diubah.", "PILIH"):
+	if not await hud.confirm("Pick this option? You can't undo this decision.", "PILIH"):
 		return
 	if state != State.TWIST:
 		return
@@ -433,11 +433,11 @@ func _on_twist_choice(choice: ClientOrder.TwistChoice) -> void:
 	player_sprite.play(&"idle")
 	match choice:
 		ClientOrder.TwistChoice.ACCEPT:
-			hud.show_toast("Pasang ulang %s Tier %d sesuai budget baru." % [PartData.slot_to_name(slot), order.target_tiers[slot]], &"info")
+			hud.show_toast("Reinstall %s Tier %d to fit the new budget." % [PartData.slot_to_name(slot), order.target_tiers[slot]], &"info")
 		ClientOrder.TwistChoice.ABSORB_LOSS:
-			hud.show_toast("Demi reputasi! Serahkan motornya.", &"success")
+			hud.show_toast("For your reputation! Hand over the bike.", &"success")
 		ClientOrder.TwistChoice.REJECT:
-			hud.show_toast("Klien manyun... Serahkan motornya.", &"warning")
+			hud.show_toast("The client is sulking... Hand over the bike.", &"warning")
 	_refresh_order_panel()
 
 
@@ -446,8 +446,8 @@ func _on_twist_choice(choice: ClientOrder.TwistChoice) -> void:
 func _on_deliver_pressed() -> void:
 	if order == null or order.twist_pending or not (state == State.IDLE or state == State.ZOOMED):
 		return
-	var unfinished: String = "" if order.get_progress() >= 1.0 else "\nPesanan BELUM beres, klien bisa kecewa!"
-	if not await hud.confirm("Serahkan motor ke %s sekarang?%s" % [order.profile.client_name, unfinished], "SERAHKAN"):
+	var unfinished: String = "" if order.get_progress() >= 1.0 else "\nThe order is NOT done yet, the client may be disappointed!"
+	if not await hud.confirm("Hand the bike over to %s now?%s" % [order.profile.client_name, unfinished], "HAND OVER"):
 		return
 	if order == null or state == State.RESULT:
 		return
@@ -478,13 +478,13 @@ func _on_deliver_pressed() -> void:
 	else:
 		Juice.bounce(piggy_sprite)
 	bubble_label.text = line
-	%ResultTitle.text = "SERAH TERIMA!" if not result.caught else "KETAHUAN NIPU!"
+	%ResultTitle.text = "HANDOVER!" if not result.caught else "CAUGHT CHEATING!"
 	Typewriter.play(%ReactionLabel, line)
 	%ResultPortrait.texture = _make_bust(client_sprite.texture)
 	bubble.visible = false
 	# Ringkas: cukup uang masuk + kepuasan, sisanya bikin bingung.
 	%PaymentLabel.text = "+%s" % Money.format(result.payment)
-	%SatisfactionLabel.text = "Kepuasan %d%%" % roundi(satisfaction)
+	%SatisfactionLabel.text = "Satisfaction %d%%" % roundi(satisfaction)
 	%ProfitLabel.visible = false
 	%CaughtLabel.visible = false
 	order = null
@@ -534,3 +534,64 @@ func _exit_to_street() -> void:
 	GameState.street_spawn_x = 1900.0
 	AudioManager.play_sfx(&"door")
 	SceneTransitionManager.change_scene(GameState.SCENE_STREET)
+
+
+# ---------------------------------------------------------------- tutorial
+
+## Langkah tutorial lengkap untuk bengkel. Target dihitung saat langkah tampil.
+func _tutorial_steps() -> Array:
+	var hud_rect := func(element: StringName) -> Callable:
+		return func() -> Rect2: return hud.get_tutorial_rect(element)
+	var ui_rect := func(node: Control) -> Callable:
+		return func() -> Rect2: return node.get_global_rect() if node.is_visible_in_tree() else Rect2()
+	return [
+		{"title": "WELCOME, MECHANIC!",
+			"body": "This is your workshop. Clients bring their bikes, you install the parts they ask for, and they pay you. Let's take a quick tour!"},
+		{"title": "PIGGY BANK", "target": hud_rect.call(&"CashBox"),
+			"body": "Your money. Clients pay here when you hand over a bike, and you spend it on parts at the shop. Hit zero with no stock and it's game over."},
+		{"title": "SATISFACTION", "target": hud_rect.call(&"SatisfactionBox"),
+			"body": "Average happiness of your clients. Matching their order keeps it high. Keep it at 75% or more to win; low satisfaction scares customers away."},
+		{"title": "DAY & CLOCK", "target": hud_rect.call(&"ClockBox"),
+			"body": "Current day and time. You have 5 days. The timer below shows when Jaya Parts Shop restocks."},
+		{"title": "QUEUE", "target": hud_rect.call(&"QueueTracker"),
+			"body": "Clients waiting on the street (max 5). Serve them before the queue fills up."},
+		{"title": "THE CLIENT", "target": _client_rect,
+			"body": "Your current client. Their speech bubble tells you what they want and how much they can pay."},
+		{"title": "CLIENT ORDER", "target": ui_rect.call(order_panel),
+			"body": "The order: parts to replace, the tier they want, and their budget. Press Tab or the arrow button to hide/show this panel."},
+		{"title": "THE BIKE", "target": _motor_rect,
+			"body": "Parts marked * are the ones ordered. Click a part on the bike to open the parts tray."},
+		{"title": "INSTALL PARTS", "target": _motor_rect,
+			"body": "In the tray at the top, hold-click a part card and drag it onto the glowing bike part, then release. Higher tier = happier client, but it costs more."},
+		{"title": "HAND OVER", "target": ui_rect.call(deliver_button),
+			"body": "When the progress bar hits 100%, click HAND OVER to get paid. Watch out: clients may ask for a SUDDEN CHANGE at the last second!"},
+		{"title": "STOCK & SHOPPING", "target": hud_rect.call(&"ExitButton"),
+			"body": "Press Tab anytime to check your stock. Out of parts? Exit (Esc) to the street and buy more at Jaya Parts Shop."},
+		{"title": "PAUSE", "target": hud_rect.call(&"PauseButton"),
+			"body": "Pause the game, change the volume in Settings, or go back to the main menu."},
+		{"title": "YOU'RE READY!",
+			"body": "Goal: survive 5 days, serve at least 15 clients, keep satisfaction at 75%. Good luck, mechanic!"},
+	]
+
+
+func _world_to_screen_rect(world: Rect2) -> Rect2:
+	var xf: Transform2D = get_viewport().get_canvas_transform()
+	var a: Vector2 = xf * world.position
+	var b: Vector2 = xf * world.end
+	return Rect2(Vector2(minf(a.x, b.x), minf(a.y, b.y)), (b - a).abs())
+
+
+func _motor_rect() -> Rect2:
+	var c: Vector2 = motor.global_position
+	return _world_to_screen_rect(Rect2(c + Vector2(-430, -320), Vector2(860, 520)))
+
+
+func _client_rect() -> Rect2:
+	var r: Rect2 = Rect2()
+	if client_sprite.visible and client_sprite.texture:
+		var size: Vector2 = client_sprite.texture.get_size() * client_sprite.global_scale.abs()
+		var top_left: Vector2 = client_sprite.global_position - (size * 0.5 if client_sprite.centered else Vector2.ZERO)
+		r = _world_to_screen_rect(Rect2(top_left, size))
+	if bubble.is_visible_in_tree():
+		r = bubble.get_global_rect() if not r.has_area() else r.merge(bubble.get_global_rect())
+	return r

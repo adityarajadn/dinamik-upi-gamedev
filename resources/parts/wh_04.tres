@@ -1,13 +1,13 @@
-[gd_resource type="Resource" script_class="PartData" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="PartData" format=3 uid="uid://dirfa7db3su8l"]
 
-[ext_resource type="Script" path="res://scripts/resources/part_data.gd" id="1_s"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/part_wh_04.png" id="2_t"]
+[ext_resource type="Script" uid="uid://bja8dag6ig2b3" path="res://scripts/resources/part_data.gd" id="1_s"]
+[ext_resource type="Texture2D" uid="uid://gjhqfn5801bu" path="res://assets/baked_processed/part_wh_04.png" id="2_t"]
 
 [resource]
 script = ExtResource("1_s")
 part_id = &"WH-04"
 slot = 3
-display_name = "Velg Forged Candy Blue"
+display_name = "Candy Blue Forged Wheels"
 tier = 4
 cost_price = 320000
 selling_price = 470000

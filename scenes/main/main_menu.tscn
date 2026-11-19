@@ -28,6 +28,48 @@ texture = ExtResource("3_swlpu")
 expand_mode = 1
 stretch_mode = 6
 
+[node name="PlayButton" type="Button" parent="Background" unique_id=589410111]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(440, 92)
+layout_mode = 0
+offset_left = 136.99997
+offset_top = 480.00006
+offset_right = 577.0
+offset_bottom = 604.00006
+rotation = 0.07330379
+scale = Vector2(1.2452142, 1.2452142)
+theme_override_font_sizes/font_size = 38
+text = "START WRENCHING"
+script = ExtResource("5_btn")
+
+[node name="SettingsButton" type="Button" parent="Background" unique_id=1049177281]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(440, 80)
+layout_mode = 0
+offset_left = 192.0
+offset_top = 651.0
+offset_right = 632.0
+offset_bottom = 757.0
+rotation = 0.07330379
+scale = Vector2(1.2452142, 1.2452142)
+theme_type_variation = &"OrangeButton"
+text = "SETTINGS"
+script = ExtResource("5_btn")
+
+[node name="CreditsButton" type="Button" parent="Background" unique_id=2090258430]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(440, 80)
+layout_mode = 0
+offset_left = 249.0
+offset_top = 796.0
+offset_right = 689.0
+offset_bottom = 910.0
+rotation = 0.07330379
+scale = Vector2(1.2452142, 1.2452142)
+theme_type_variation = &"DarkButton"
+text = "CREDITS"
+script = ExtResource("5_btn")
+
 [node name="SafeArea" type="MarginContainer" parent="." unique_id=54356081]
 layout_mode = 1
 anchors_preset = 9
@@ -37,6 +79,7 @@ offset_top = 2.0
 offset_right = 899.0
 offset_bottom = 2.0
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 60
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 40
@@ -44,12 +87,14 @@ theme_override_constants/margin_bottom = 50
 
 [node name="MainLayout" type="VBoxContainer" parent="SafeArea" unique_id=1546755957]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 18
 
 [node name="Logo" type="TextureRect" parent="SafeArea/MainLayout" unique_id=1405889834]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(780, 340)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("4_nm0l4")
 expand_mode = 1
 stretch_mode = 5
@@ -58,42 +103,14 @@ stretch_mode = 5
 visible = false
 layout_mode = 2
 theme_type_variation = &"PriceLabel"
-text = "Simulasi bengkel modifikasi jalanan: jujur atau culas, kamu yang pilih!"
+text = "A street mod workshop sim: honest or crooked, your call!"
 horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="Spacer" type="Control" parent="SafeArea/MainLayout" unique_id=629178988]
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="MenuButtons" type="VBoxContainer" parent="SafeArea/MainLayout" unique_id=272744365]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 16
-
-[node name="PlayButton" type="Button" parent="SafeArea/MainLayout/MenuButtons" unique_id=589410111]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(440, 92)
-layout_mode = 2
-theme_override_font_sizes/font_size = 38
-text = "MULAI NGEBENGKEL"
-script = ExtResource("5_btn")
-
-[node name="SettingsButton" type="Button" parent="SafeArea/MainLayout/MenuButtons" unique_id=1049177281]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(440, 80)
-layout_mode = 2
-theme_type_variation = &"OrangeButton"
-text = "PENGATURAN"
-script = ExtResource("5_btn")
-
-[node name="CreditsButton" type="Button" parent="SafeArea/MainLayout/MenuButtons" unique_id=2090258430]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(440, 80)
-layout_mode = 2
-theme_type_variation = &"DarkButton"
-text = "KREDIT"
-script = ExtResource("5_btn")
+mouse_filter = 2
 
 [node name="InfoPanel" type="PanelContainer" parent="." unique_id=490960724]
 unique_name_in_owner = true
@@ -111,7 +128,8 @@ offset_bottom = 420.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PopupAnimator" type="Node" parent="InfoPanel" unique_id=776256541]
+[node name="InfoPopup" type="Node" parent="InfoPanel" unique_id=776256541]
+unique_name_in_owner = true
 script = ExtResource("6_pop")
 
 [node name="VBox" type="VBoxContainer" parent="InfoPanel" unique_id=799930030]
@@ -122,7 +140,7 @@ theme_override_constants/separation = 14
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"TitleLabel"
-text = "CARA MAIN"
+text = "HOW TO PLAY"
 horizontal_alignment = 1
 
 [node name="Scroll" type="ScrollContainer" parent="InfoPanel/VBox" unique_id=688340244]
@@ -143,7 +161,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(84, 84)
 layout_mode = 2
 size_flags_horizontal = 8
-tooltip_text = "Tutup"
+tooltip_text = "Close"
 theme_type_variation = &"CloseButtonBig"
 script = ExtResource("5_btn")
 
@@ -164,7 +182,8 @@ offset_bottom = 220.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PopupAnimator" type="Node" parent="SettingsPanel" unique_id=1709027269]
+[node name="SettingsPanelPopupAnimator" type="Node" parent="SettingsPanel" unique_id=1709027269]
+unique_name_in_owner = true
 script = ExtResource("6_pop")
 
 [node name="VBox" type="VBoxContainer" parent="SettingsPanel" unique_id=199576579]
@@ -174,7 +193,7 @@ theme_override_constants/separation = 22
 [node name="Title" type="Label" parent="SettingsPanel/VBox" unique_id=136028682]
 layout_mode = 2
 theme_type_variation = &"TitleLabel"
-text = "PENGATURAN"
+text = "SETTINGS"
 horizontal_alignment = 1
 
 [node name="MusicRow" type="HBoxContainer" parent="SettingsPanel/VBox" unique_id=1144489331]
@@ -184,7 +203,7 @@ theme_override_constants/separation = 20
 [node name="Label" type="Label" parent="SettingsPanel/VBox/MusicRow" unique_id=393971591]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-text = "MUSIK"
+text = "MUSIC"
 
 [node name="MusicSlider" type="HSlider" parent="SettingsPanel/VBox/MusicRow" unique_id=1006694297]
 unique_name_in_owner = true
@@ -202,7 +221,7 @@ theme_override_constants/separation = 20
 [node name="Label" type="Label" parent="SettingsPanel/VBox/SfxRow" unique_id=909450952]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-text = "EFEK SUARA"
+text = "SOUND FX"
 
 [node name="SfxSlider" type="HSlider" parent="SettingsPanel/VBox/SfxRow" unique_id=1168047820]
 unique_name_in_owner = true
@@ -213,17 +232,12 @@ max_value = 1.0
 step = 0.05
 value = 1.0
 
-[node name="FullscreenCheck" type="CheckButton" parent="SettingsPanel/VBox" unique_id=953613031]
-unique_name_in_owner = true
-layout_mode = 2
-text = "LAYAR PENUH"
-
 [node name="SettingsClose" type="Button" parent="SettingsPanel/VBox" unique_id=1948164529]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(84, 84)
 layout_mode = 2
 size_flags_horizontal = 8
-tooltip_text = "Tutup"
+tooltip_text = "Close"
 theme_type_variation = &"CloseButtonBig"
 script = ExtResource("5_btn")
 
@@ -235,29 +249,31 @@ mouse_filter = 2
 [node name="HowToText" type="Label" parent="TextData" unique_id=779007317]
 unique_name_in_owner = true
 layout_mode = 0
-text = "TUJUAN: Bertahan 5 hari, layani minimal 15 klien, jaga kepuasan rata-rata minimal 75%.
+text = "GOAL: Survive 5 days, serve at least 15 clients, keep average satisfaction at 75% or higher.
 
-JALANAN: A/D atau panah untuk jalan. E/W/Space di depan pintu untuk masuk. Kiri: Toko Sparepart Jaya. Kanan: Bengkel. Pelanggan antre di trotoar (maks 5).
+STREET: A/D or arrow keys to walk. E/W/Space in front of a door to enter. Left: Jaya Parts Shop. Right: Workshop. Customers queue on the sidewalk (max 5).
 
-BENGKEL: Baca pesanan dan budget klien. Klik bagian motor bertanda * untuk zoom. Tahan klik kartu part di tray atas, seret ke bagian motor yang berpendar, lalu lepas (atau klik kartu lalu klik motor). Pasang semua pesanan lalu SERAHKAN MOTOR.
+WORKSHOP: Read the client's order and budget. Click a bike part marked * to zoom. Hold-click a part card in the top tray, drag it onto the glowing bike part, then release (or click the card, then click the bike). Install everything ordered, then HAND OVER.
 
-REVISI DADAKAN: Klien bisa plin-plan saat motor 100% beres. Pilih: Terima dan turunkan tier, Tetap pasang dan rugi, Tolak mentah-mentah, atau Akal-akalan (pasang part murah, untung besar tapi bisa ketahuan!).
+SUDDEN CHANGE: Clients may change their mind once the bike is 100% done. Choose: Accept and lower the tier, Install anyway and take the loss, Refuse outright, or Cut corners (install cheap parts for big profit, but you might get caught!).
 
-TOKO: Klik kartu untuk masuk keranjang, lalu BELI. Stok toko berganti jam 17:00 dan tiap hari baru, tier makin tinggi.
+SHOP: Click a card to add it to the cart, then BUY. Shop stock changes at 17:00 and every new day, with higher tiers.
 
-TIPS: Tier sesuai pesanan bikin puas. Tier lebih tinggi bikin sangat puas tapi modal bisa tekor. Part Tier 1 bekas untuk pesanan tinggi bikin klien curiga!
-TAB atau klik Celengan Ayam: buku kas. ESC atau klik kanan: batal/keluar.
+TIPS: Matching the ordered tier keeps clients happy. Higher tiers make them very happy but can eat your profit. Used Tier 1 parts on high-tier orders make clients suspicious!
+TAB: check stock. ESC or right-click: cancel/exit.
 
-KALAH: kepuasan rata-rata 10% ke bawah, atau saldo habis tanpa stok."
+LOSE: average satisfaction 10% or lower, or out of money with no stock."
 
 [node name="CreditsText" type="Label" parent="TextData" unique_id=751184635]
 unique_name_in_owner = true
 layout_mode = 0
-text = "NGEBENGKEL: Custom Street Chronicles (v0.1 Prototype)
+text = "Game Engineers
+Aditya Rajadana Hernadi
 
-Game design: GDD v0.1 tim proyek.
-Engine: Godot 4.
-Art dan audio: dibuat dengan Ziva AI image dan sound generation, arahan visual funky hand-drawn graffiti (Neon Pink, Electric Orange, Sun Yellow).
-Programming: data-driven Resources dan component-based scenes sesuai standar proyek.
+Game Designers
+Amalia Siti Khansa
 
-Terima kasih sudah main!"
+Game Artists
+Stefanie Catherine Imanuella
+Angelique Ezra Joan
+Nadlira Arava"

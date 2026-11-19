@@ -48,6 +48,7 @@ z_index = -10
 script = ExtResource("1_sb")
 
 [node name="Pagi" type="Node2D" parent="." unique_id=129594749]
+unique_name_in_owner = true
 
 [node name="Sky" type="Sprite2D" parent="Pagi" unique_id=1147175185]
 texture = ExtResource("2_pa")
@@ -117,6 +118,7 @@ texture = ExtResource("10_pa")
 centered = false
 
 [node name="Sore" type="Node2D" parent="." unique_id=1941405605]
+unique_name_in_owner = true
 
 [node name="Sky" type="Sprite2D" parent="Sore" unique_id=1969711813]
 texture = ExtResource("15_so")
@@ -186,6 +188,7 @@ texture = ExtResource("23_so")
 centered = false
 
 [node name="Malam" type="Node2D" parent="." unique_id=1721583238]
+unique_name_in_owner = true
 
 [node name="Sky" type="Sprite2D" parent="Malam" unique_id=1684847657]
 texture = ExtResource("28_ma")

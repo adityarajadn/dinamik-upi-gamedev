@@ -7,7 +7,7 @@ signal answered(confirmed: bool)
 @onready var message_label: Label = %ConfirmMessage
 @onready var confirm_button: Button = %ConfirmYes
 @onready var cancel_button: Button = %ConfirmNo
-@onready var popup: PopupAnimator = %ConfirmPanel/PopupAnimator
+@onready var popup: PopupAnimator = %ConfirmPanelPopupAnimator
 
 
 func _ready() -> void:
@@ -24,7 +24,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_answer(false)
 
 
-func ask(message: String, confirm_text: String = "YAKIN", cancel_text: String = "BATAL") -> bool:
+func ask(message: String, confirm_text: String = "CONFIRM", cancel_text: String = "CANCEL") -> bool:
 	message_label.text = message
 	confirm_button.text = confirm_text
 	cancel_button.text = cancel_text

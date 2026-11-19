@@ -1,17 +1,13 @@
-[gd_resource type="Resource" script_class="PartData" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="PartData" format=3 uid="uid://b4bq1ijegba0m"]
 
-[ext_resource type="Script" path="res://scripts/resources/part_data.gd" id="1_s"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/part_bd_01.png" id="2_t"]
+[ext_resource type="Script" uid="uid://bja8dag6ig2b3" path="res://scripts/resources/part_data.gd" id="1_s"]
+[ext_resource type="Texture2D" uid="uid://dbm2bc1kevo8x" path="res://assets/baked_processed/part_bd_01.png" id="2_t"]
 
 [resource]
 script = ExtResource("1_s")
-part_id = &"BD-01"
-slot = 0
-display_name = "Body Bebek Harian Kusam"
-tier = 1
+display_name = "Dull Daily Moped Body"
 cost_price = 50000
 selling_price = 80000
-value_score = 10
 texture = ExtResource("2_t")
-headlight_pos = Vector2(569, 301)
 frame_type = 1
+headlight_pos = Vector2(569, 301)

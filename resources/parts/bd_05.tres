@@ -1,13 +1,12 @@
-[gd_resource type="Resource" script_class="PartData" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="PartData" format=3 uid="uid://jgk68225dwbr"]
 
-[ext_resource type="Script" path="res://scripts/resources/part_data.gd" id="1_s"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/part_bd_05.png" id="2_t"]
+[ext_resource type="Script" uid="uid://bja8dag6ig2b3" path="res://scripts/resources/part_data.gd" id="1_s"]
+[ext_resource type="Texture2D" uid="uid://wfhrf2hv8lyn" path="res://assets/baked_processed/part_bd_05.png" id="2_t"]
 
 [resource]
 script = ExtResource("1_s")
 part_id = &"BD-05"
-slot = 0
-display_name = "Body Aerokit Full Carbon"
+display_name = "Full Carbon Aerokit Body"
 tier = 5
 cost_price = 700000
 selling_price = 1050000

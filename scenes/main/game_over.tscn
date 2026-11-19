@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://xrycetfb32q3" path="res://scripts/systems/game_over.gd" id="1_go"]
 [ext_resource type="Theme" uid="uid://cc8al127ss4fa" path="res://themes/game_theme.tres" id="2_th"]
-[ext_resource type="Texture2D" uid="uid://byifx1ca3abqn" path="res://assets/generated/bg_game_over.png" id="3_bg"]
+[ext_resource type="Texture2D" uid="uid://7mubeen28ost" path="res://assets/baked_processed/bg_workshop_interior.png" id="3_povlp"]
 [ext_resource type="Script" uid="uid://botktt15830n" path="res://scripts/components/ui_button_animation.gd" id="4_btn"]
 [ext_resource type="Script" uid="uid://7ttfm2yi5jp2" path="res://scripts/components/popup_animator.gd" id="5_pop"]
 
@@ -16,15 +16,16 @@ grow_vertical = 2
 theme = ExtResource("2_th")
 script = ExtResource("1_go")
 
-[node name="Background" type="TextureRect" parent="." unique_id=1774211951]
+[node name="Background" type="TextureRect" parent="." unique_id=317671559]
 unique_name_in_owner = true
+modulate = Color(0.45, 0.4, 0.55, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_bg")
+texture = ExtResource("3_povlp")
 expand_mode = 1
 stretch_mode = 6
 
@@ -41,7 +42,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(1100, 0)
 layout_mode = 2
 
-[node name="PopupAnimator" type="Node" parent="Center/Panel" unique_id=1467921833]
+[node name="PanelPopup" type="Node" parent="Center/Panel" unique_id=1467921833]
+unique_name_in_owner = true
 script = ExtResource("5_pop")
 
 [node name="VBox" type="VBoxContainer" parent="Center/Panel" unique_id=1963155184]
@@ -53,7 +55,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"TitleLabel"
 theme_override_font_sizes/font_size = 72
-text = "BENGKEL GULUNG TIKAR!"
+text = "WORKSHOP SHUT DOWN!"
 horizontal_alignment = 1
 
 [node name="ReasonLabel" type="Label" parent="Center/Panel/VBox" unique_id=1618811376]
@@ -61,7 +63,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 28
-text = "Alasan"
+text = "Reason"
 horizontal_alignment = 1
 autowrap_mode = 3
 
@@ -69,7 +71,7 @@ autowrap_mode = 3
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"PriceLabel"
-text = "Statistik"
+text = "Stats"
 horizontal_alignment = 1
 
 [node name="Buttons" type="VBoxContainer" parent="Center/Panel/VBox" unique_id=1726831347]
@@ -82,14 +84,14 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(320, 84)
 layout_mode = 2
 theme_type_variation = &"OrangeButton"
-text = "ULANG HARI"
+text = "RETRY DAY"
 script = ExtResource("4_btn")
 
 [node name="NewGameButton" type="Button" parent="Center/Panel/VBox/Buttons" unique_id=1337573649]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(320, 84)
 layout_mode = 2
-text = "GAME BARU"
+text = "NEW GAME"
 script = ExtResource("4_btn")
 
 [node name="MenuButton" type="Button" parent="Center/Panel/VBox/Buttons" unique_id=321575921]
@@ -97,5 +99,5 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(320, 84)
 layout_mode = 2
 theme_type_variation = &"DarkButton"
-text = "MENU UTAMA"
+text = "MAIN MENU"
 script = ExtResource("4_btn")

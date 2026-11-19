@@ -6,12 +6,12 @@ const COLOR_GOOD: Color = Color(0.2, 0.75, 0.35, 1)
 const COLOR_MID: Color = Color(1, 0.75, 0.1, 1)
 const COLOR_BAD: Color = Color(0.9, 0.2, 0.25, 1)
 
-@onready var money_value: Label = $Money/Value
-@onready var satisfaction_bar: ProgressBar = $Satisfaction/Bar
-@onready var satisfaction_value: Label = $Satisfaction/Value
-@onready var risk_row: HBoxContainer = $Risk
-@onready var risk_bar: ProgressBar = $Risk/Bar
-@onready var risk_value: Label = $Risk/Value
+@onready var money_value: Label = %Value
+@onready var satisfaction_bar: ProgressBar = %Bar
+@onready var satisfaction_value: Label = %SatisfactionValue
+@onready var risk_row: HBoxContainer = %Risk
+@onready var risk_bar: ProgressBar = %RiskBar
+@onready var risk_value: Label = %RiskValue
 
 
 func setup(preview: Dictionary) -> void:

@@ -1,23 +1,22 @@
 [gd_resource type="Resource" script_class="ClientProfile" format=3 uid="uid://cfqcyq73j8v6i"]
 
 [ext_resource type="Script" uid="uid://qstfoikk3f2a" path="res://scripts/resources/client_profile.gd" id="1_s"]
-
-[ext_resource type="Texture2D" path="res://assets/baked_processed/char_sport_idle.png" id="t_idle"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/char_sport_happy.png" id="t_happy"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/char_sport_angry.png" id="t_angry"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/char_sport_panic.png" id="t_panic"]
+[ext_resource type="Texture2D" uid="uid://co2xea3virjdt" path="res://assets/baked_processed/char_sport_angry.png" id="t_angry"]
+[ext_resource type="Texture2D" uid="uid://ch6i48fx3y6dt" path="res://assets/baked_processed/char_sport_happy.png" id="t_happy"]
+[ext_resource type="Texture2D" uid="uid://dh0cju8hfhc8q" path="res://assets/baked_processed/char_sport_idle.png" id="t_idle"]
+[ext_resource type="Texture2D" uid="uid://ny8xvbfdg0uw" path="res://assets/baked_processed/char_sport_panic.png" id="t_panic"]
 
 [resource]
 script = ExtResource("1_s")
 client_name = "Doni Skater"
-persona = "Anak tongkrongan eksentrik"
+persona = "Eccentric hangout kid"
 texture_idle = ExtResource("t_idle")
 texture_happy = ExtResource("t_happy")
 texture_angry = ExtResource("t_angry")
 texture_panic = ExtResource("t_panic")
 scooter_tint = Color(1, 0.45, 0.75, 1)
-request_lines = PackedStringArray("Bang! Motor gue harus paling kece di tongkrongan. Ganti {parts} ya! Budget gue {budget}.", "Yo Bang, gue mau tampil beda pas skate jam! Pasangin {parts}. Duit ada {budget}, santuy.")
-twist_lines = PackedStringArray("Duh Bang, sorry banget! Barusan duit gue kepake beli papan skate baru. Sisa {budget} doang, tapi {slot} pengen tetep keliatan gaya! Gimana dong?!", "Bang bang, stop dulu! Nyokap telpon suruh bayar kos. Duit gue tinggal {budget}, tapi {slot} jangan sampe norak ya!")
-happy_lines = PackedStringArray("Gila Bang, motor gue jadi paling sangar! Respect!", "Mantap jiwa! Besok gue bawa anak-anak ke sini!")
-neutral_lines = PackedStringArray("Hmm oke lah, lumayan Bang.", "Ya udah, cukup buat nongkrong.")
-angry_lines = PackedStringArray("Apaan nih Bang?! Bunyinya aneh, catnya lecet! Gue viralin lu!", "Parah Bang, ini mah barang rongsok!")
+request_lines = PackedStringArray("Yo! My bike\'s gotta be the coolest at the hangout. Swap the {parts}! My budget\'s {budget}.", "Yo, I wanna stand out at the skate jam! Hook me up with {parts}. Got {budget}, no stress.")
+twist_lines = PackedStringArray("Ugh man, so sorry! I just spent my cash on a new skateboard. Only {budget} left, but I still want the {slot} to look stylish! What now?!", "Wait wait, hold up! My mom called, I gotta pay rent. I only have {budget} left, but don\'t make the {slot} look tacky!")
+happy_lines = PackedStringArray("Insane, my bike\'s the meanest one now! Respect!", "Awesome! Tomorrow I\'m bringing the whole crew here!")
+neutral_lines = PackedStringArray("Hmm okay, not bad.", "Fine, good enough for hanging out.")
+angry_lines = PackedStringArray("What is this?! It sounds weird and the paint\'s scratched! I\'m putting you on blast!", "Dude, this is total junk!")

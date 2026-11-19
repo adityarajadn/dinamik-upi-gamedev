@@ -17,9 +17,10 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 17
-text = "UANG"
+text = "MONEY"
 
 [node name="Value" type="Label" parent="Money"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(52, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -36,9 +37,10 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 17
-text = "KEPUASAN"
+text = "SATISFACTION"
 
 [node name="Bar" type="ProgressBar" parent="Satisfaction"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 18)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -46,7 +48,8 @@ size_flags_vertical = 4
 mouse_filter = 2
 show_percentage = false
 
-[node name="Value" type="Label" parent="Satisfaction"]
+[node name="SatisfactionValue" type="Label" parent="Satisfaction"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(52, 0)
 layout_mode = 2
 theme_type_variation = &"DarkLabel"
@@ -54,6 +57,7 @@ theme_override_font_sizes/font_size = 18
 text = "0"
 
 [node name="Risk" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 8
 
@@ -62,9 +66,10 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 17
-text = "KETAHUAN"
+text = "CAUGHT"
 
-[node name="Bar" type="ProgressBar" parent="Risk"]
+[node name="RiskBar" type="ProgressBar" parent="Risk"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 18)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -72,7 +77,8 @@ size_flags_vertical = 4
 mouse_filter = 2
 show_percentage = false
 
-[node name="Value" type="Label" parent="Risk"]
+[node name="RiskValue" type="Label" parent="Risk"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(52, 0)
 layout_mode = 2
 theme_type_variation = &"DarkLabel"

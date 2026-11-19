@@ -6,7 +6,7 @@ signal exit_requested
 
 @export var show_exit_button: bool = false
 @export var esc_pauses: bool = true
-@export var exit_text: String = "KELUAR - ESC"
+@export var exit_text: String = "EXIT - ESC"
 @export var toast_duration: float = 2.4
 
 const STOCK_CELL_SCENE: PackedScene = preload("res://scenes/ui/components/stock_cell.tscn")
@@ -47,7 +47,7 @@ var _last_cash: int = -1
 @onready var prev_page_button: Button = %PrevPage
 @onready var next_page_button: Button = %NextPage
 @onready var page_label: Label = %PageLabel
-@onready var ledger_popup: PopupAnimator = %LedgerPanel/PopupAnimator
+@onready var ledger_popup: PopupAnimator = %LedgerPopup
 @onready var pause_overlay: Control = %PauseOverlay
 @onready var confirm_dialog: ConfirmDialog = %ConfirmDialog
 @onready var tutorial: Control = %TutorialOverlay
@@ -60,13 +60,26 @@ func _ready() -> void:
 	pause_button.pressed.connect(toggle_pause)
 	%ResumeButton.pressed.connect(toggle_pause)
 	%MenuButton.pressed.connect(_on_menu_pressed)
-	%QuitButton.pressed.connect(_on_quit_pressed)
+	%PauseSettingsButton.pressed.connect(_set_pause_settings.bind(true))
+	%PauseSettingsClose.pressed.connect(_set_pause_settings.bind(false))
+	%PauseMusicSlider.value = AudioManager.music_volume
+	%PauseSfxSlider.value = AudioManager.sfx_volume
+	%PauseMusicSlider.value_changed.connect(AudioManager.set_music_volume)
+	%PauseSfxSlider.value_changed.connect(func(value: float) -> void:
+		AudioManager.set_sfx_volume(value)
+		AudioManager.play_sfx(&"click"))
 	%LedgerClose.pressed.connect(close_ledger)
+	OverlayUtil.pin_close_button(ledger_panel, %LedgerClose)
+	OverlayUtil.pin_close_button(%PauseSettingsPanel, %PauseSettingsClose)
+	ledger_dim.color = OverlayUtil.DIM_COLOR
 	#%LedgerButton.pressed.connect(func() -> void: close_ledger() if ledger_panel.visible else open_ledger())
 	prev_page_button.pressed.connect(_turn_ledger_page.bind(-1))
 	next_page_button.pressed.connect(_turn_ledger_page.bind(1))
 	_build_stock_cells()
 	ledger_panel.visible = false
+	prev_page_button.visible = false
+	next_page_button.visible = false
+	page_label.visible = false
 	pause_overlay.visible = false
 	toast_panel.visible = false
 	GameState.cash_changed.connect(_on_cash_changed)
@@ -83,15 +96,6 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if ledger_panel.visible and not get_tree().paused:
-		if event.is_action_pressed("ui_left") or event.is_action_pressed("move_left"):
-			_turn_ledger_page(-1)
-			get_viewport().set_input_as_handled()
-			return
-		if event.is_action_pressed("ui_right") or event.is_action_pressed("move_right"):
-			_turn_ledger_page(1)
-			get_viewport().set_input_as_handled()
-			return
 	if event.is_action_pressed("open_ledger"):
 		if ledger_panel.visible:
 			close_ledger()
@@ -113,17 +117,17 @@ func is_modal_open() -> bool:
 
 
 ## Tutorial tiap kali mulai main. Jam berhenti selama tutorial terbuka.
-func show_tutorial() -> void:
+func show_tutorial(steps: Array = []) -> void:
 	GameState.tutorial_pending = false
 	GameState.set_clock_running(false)
-	tutorial.start()
+	tutorial.start(steps)
 	await tutorial.finished
 	GameState.set_clock_running(true)
 
 
 ## Modal "Yakin?" untuk semua aksi penting supaya tidak salah pencet.
 ## Tetap bekerja walau HUD disembunyikan di scene (mis. Toko): elemen HUD lain disembunyikan sementara.
-func confirm(message: String, confirm_text: String = "YAKIN") -> bool:
+func confirm(message: String, confirm_text: String = "CONFIRM") -> bool:
 	var hidden_nodes: Array[CanvasItem] = []
 	var was_visible: bool = visible
 	if not was_visible:
@@ -141,7 +145,18 @@ func confirm(message: String, confirm_text: String = "YAKIN") -> bool:
 	return confirmed
 
 
+## Panel pengaturan di dalam pause: gantikan panel pause selama terbuka.
+func _set_pause_settings(open: bool) -> void:
+	%PauseSettingsPanel.visible = open
+	%PausePanel.visible = not open
+	if not open:
+		%PauseSettingsButton.grab_focus()
+
+
 func toggle_pause() -> void:
+	if %PauseSettingsPanel.visible:
+		_set_pause_settings(false)
+		return
 	var paused: bool = not get_tree().paused
 	get_tree().paused = paused
 	pause_overlay.visible = paused
@@ -151,7 +166,8 @@ func toggle_pause() -> void:
 
 func open_ledger() -> void:
 	_refresh_ledger()
-	_show_ledger_page(0, false)
+	# Buku kas hanya untuk lihat stok: langsung ke spread stok, tanpa navigasi halaman.
+	_show_ledger_page(ledger_spreads.size() - 1, false)
 	ledger_dim.visible = true
 	ledger_popup.show_popup()
 	AudioManager.play_sfx(&"coin")
@@ -183,6 +199,10 @@ func show_toast(text: String, kind: StringName = &"info") -> void:
 		_toast_tween.kill()
 	toast_panel.visible = true
 	toast_panel.modulate.a = 1.0
+	# Taruh toast tepat di bawah jam supaya tidak menutupi info HUD.
+	var clock: Control = find_child("ClockBox", true, false) as Control
+	if clock:
+		toast_panel.global_position.y = clock.get_global_rect().end.y + 16.0
 	var hidden_x: float = -toast_panel.size.x - 40.0
 	toast_panel.position.x = hidden_x
 	# Slide in dari kiri, tahan, lalu slide out lagi ke kiri.
@@ -195,7 +215,7 @@ func show_toast(text: String, kind: StringName = &"info") -> void:
 
 func _refresh_ledger() -> void:
 	var net: int = GameState.income_today - GameState.expense_today
-	%DayLine.text = "Hari %d  -  %s" % [GameState.day, GameState.format_clock(GameState.get_clock_minutes())]
+	%DayLine.text = "Day %d  -  %s" % [GameState.day, GameState.format_clock(GameState.get_clock_minutes())]
 	%IncomeValue.text = Money.format(GameState.income_today)
 	%ExpenseValue.text = "-" + Money.format(GameState.expense_today)
 	%NetValue.text = ("" if net >= 0 else "-") + Money.format(absi(net))
@@ -217,7 +237,7 @@ func _refresh_ledger() -> void:
 	for part: PartData in GameState.CATALOG.parts:
 		if _stock_cells.has(part.part_id):
 			(_stock_cells[part.part_id] as StockCell).setup(part, GameState.get_stock(part.part_id))
-	%StockTotal.text = "Total stok: %d part" % GameState.get_total_stock()
+	%StockTotal.text = "Total stock: %d parts" % GameState.get_total_stock()
 
 
 ## Sel stok disusun per slot (baris) x tier (kolom): 3 slot di halaman kiri, sisanya di kanan.
@@ -259,12 +279,12 @@ func _show_ledger_page(page: int, animate: bool) -> void:
 		Juice.bounce(ledger_spreads[page] as CanvasItem, 0.12)
 
 func _on_quit_pressed() -> void:
-	if await confirm("Keluar dari game? Progres hari ini tidak tersimpan.", "KELUAR"):
+	if await confirm("Quit the game? Today's progress won't be saved.", "KELUAR"):
 		get_tree().quit()
 
 
 func _on_menu_pressed() -> void:
-	if not await confirm("Kembali ke menu utama? Progres hari ini tidak tersimpan.", "KE MENU"):
+	if not await confirm("Back to the main menu? Today's progress won't be saved.", "TO MENU"):
 		return
 	get_tree().paused = false
 	pause_overlay.visible = false
@@ -293,16 +313,23 @@ func _on_satisfaction_changed(average: float) -> void:
 
 
 func _on_clock_changed(day: int, minutes: int) -> void:
-	day_label.text = "HARI %d - %s" % [day, GameState.format_clock(minutes)]
+	day_label.text = "DAY %d - %s" % [day, GameState.format_clock(minutes)]
 
 
 func _on_restock_changed(seconds_left: float) -> void:
 	var total: int = int(ceil(seconds_left))
-	restock_label.text = "Restock toko: %02d:%02d" % [floori(total / 60.0), total % 60]
+	restock_label.text = "Shop restock: %02d:%02d" % [floori(total / 60.0), total % 60]
 
 
 func _on_queue_changed(waiting_count: int) -> void:
-	queue_title.text = "Antrean: %d/%d" % [waiting_count, GameState.CONFIG.queue_capacity]
+	queue_title.text = "Queue: %d/%d" % [waiting_count, GameState.CONFIG.queue_capacity]
 	for i: int in range(helmets.size()):
 		var helmet: TextureRect = helmets[i] as TextureRect
 		helmet.modulate = Color(1, 1, 1, 1) if i < waiting_count else Color(0.25, 0.25, 0.3, 0.6)
+
+
+## Rect layar elemen HUD untuk spotlight tutorial.
+func get_tutorial_rect(element: StringName) -> Rect2:
+	# Cari berdasarkan nama (bukan path) supaya tetap ketemu walau node dipindah.
+	var node: Control = find_child(String(element), true, false) as Control
+	return node.get_global_rect() if node and node.is_visible_in_tree() else Rect2()

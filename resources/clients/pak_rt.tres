@@ -1,24 +1,23 @@
 [gd_resource type="Resource" script_class="ClientProfile" format=3 uid="uid://cxbpgcmd1crta"]
 
 [ext_resource type="Script" uid="uid://qstfoikk3f2a" path="res://scripts/resources/client_profile.gd" id="1_s"]
-
-[ext_resource type="Texture2D" path="res://assets/baked_processed/char_bapak_idle.png" id="t_idle"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/char_bapak_happy.png" id="t_happy"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/char_bapak_angry.png" id="t_angry"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/char_bapak_panic.png" id="t_panic"]
+[ext_resource type="Texture2D" uid="uid://bvv0tsruqc2bv" path="res://assets/baked_processed/char_bapak_angry.png" id="t_angry"]
+[ext_resource type="Texture2D" uid="uid://nu0r2xnatm6r" path="res://assets/baked_processed/char_bapak_happy.png" id="t_happy"]
+[ext_resource type="Texture2D" uid="uid://b86tc44c50ct4" path="res://assets/baked_processed/char_bapak_idle.png" id="t_idle"]
+[ext_resource type="Texture2D" uid="uid://ck0kfqo722dbu" path="res://assets/baked_processed/char_bapak_panic.png" id="t_panic"]
 
 [resource]
 script = ExtResource("1_s")
 client_id = &"pak_rt"
 client_name = "Pak RT"
-persona = "Bapak-bapak santai"
+persona = "Laid-back old man"
 texture_idle = ExtResource("t_idle")
 texture_happy = ExtResource("t_happy")
 texture_angry = ExtResource("t_angry")
 texture_panic = ExtResource("t_panic")
 scooter_tint = Color(0.4, 0.85, 0.75, 1)
-request_lines = PackedStringArray("Dik, motor Bapak buat keliling kampung. Tolong ganti {parts} ya. Ini {budget}, santai saja.", "Assalamualaikum Dik. Bapak mau {parts}. Uangnya {budget}, ngopi dulu sambil nunggu.")
-twist_lines = PackedStringArray("Waduh Dik, barusan ditelpon Ibu, uang belanja dipakai. Bapak cuma pegang {budget}. {slot}-nya diakali yang penting tetap gagah ya!", "Dik, maaf, iuran kampung belum lunas. Tinggal {budget}. {slot} yang penting kelihatan bagus.")
-happy_lines = PackedStringArray("Hahaha mantap Dik! Nanti Bapak umumkan di pengajian!", "Bagus sekali! Kamu memang montir kebanggaan kampung!")
-neutral_lines = PackedStringArray("Ya sudah, terima kasih Dik.", "Cukup lah buat ke pasar.")
-angry_lines = PackedStringArray("Lho Dik, kok begini? Bapak kecewa sekali.", "Ini nggak bener Dik! Nanti Bapak rapatkan!")
+request_lines = PackedStringArray("Son, I ride this bike around the neighborhood. Please replace the {parts}. Here\'s {budget}, no rush.", "Hello there, son. I\'d like {parts}. I\'ve got {budget}, I\'ll have a coffee while I wait.")
+twist_lines = PackedStringArray("Oh dear son, the wife just called, she used the grocery money. I only have {budget}. Work some magic on the {slot}, as long as it still looks sharp!", "Sorry son, the neighborhood dues aren\'t paid yet. I\'ve got {budget} left. The {slot} just needs to look nice.")
+happy_lines = PackedStringArray("Hahaha great job son! I\'ll tell everyone at the community meeting!", "Excellent! You really are the pride of the neighborhood!")
+neutral_lines = PackedStringArray("Alright, thank you son.", "Good enough for trips to the market.")
+angry_lines = PackedStringArray("Hey son, why is it like this? I\'m very disappointed.", "This isn\'t right, son! I\'m bringing this up at the meeting!")

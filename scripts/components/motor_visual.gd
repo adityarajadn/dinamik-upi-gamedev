@@ -10,29 +10,40 @@ signal slot_clicked(slot: int)
 var _pulse_tweens: Dictionary = {}
 
 @onready var slot_sprites: Dictionary = {
-	PartData.Slot.BODY: [$Body],
-	PartData.Slot.EXHAUST: [$Exhaust],
-	PartData.Slot.ENGINE: [$Engine],
-	PartData.Slot.WHEELS: [$RearWheel, $FrontWheel],
-	PartData.Slot.LIGHT: [$Headlight],
+	PartData.Slot.BODY: [%Body],
+	PartData.Slot.EXHAUST: [%Exhaust],
+	PartData.Slot.ENGINE: [%Engine],
+	PartData.Slot.WHEELS: [%RearWheel, %FrontWheel],
+	PartData.Slot.LIGHT: [%Headlight],
 }
 @onready var hotspots: Dictionary = {
-	PartData.Slot.BODY: $Hotspots/BodyHotspot,
-	PartData.Slot.EXHAUST: $Hotspots/ExhaustHotspot,
-	PartData.Slot.ENGINE: $Hotspots/EngineHotspot,
-	PartData.Slot.WHEELS: $Hotspots/WheelsHotspot,
-	PartData.Slot.LIGHT: $Hotspots/LightHotspot,
+	PartData.Slot.BODY: %BodyHotspot,
+	PartData.Slot.EXHAUST: %ExhaustHotspot,
+	PartData.Slot.ENGINE: %EngineHotspot,
+	PartData.Slot.WHEELS: %WheelsHotspot,
+	PartData.Slot.LIGHT: %LightHotspot,
 }
 @onready var tags: Dictionary = {
-	PartData.Slot.BODY: $Tags/BodyTag,
-	PartData.Slot.EXHAUST: $Tags/ExhaustTag,
-	PartData.Slot.ENGINE: $Tags/EngineTag,
-	PartData.Slot.WHEELS: $Tags/WheelsTag,
-	PartData.Slot.LIGHT: $Tags/LightTag,
+	PartData.Slot.BODY: %BodyTag,
+	PartData.Slot.EXHAUST: %ExhaustTag,
+	PartData.Slot.ENGINE: %EngineTag,
+	PartData.Slot.WHEELS: %WheelsTag,
+	PartData.Slot.LIGHT: %LightTag,
+}
+
+
+## Posisi label slot relatif terhadap hotspot-nya (koordinat lokal motor, sebelum mirror).
+const TAG_OFFSETS: Dictionary = {
+	PartData.Slot.BODY: Vector2(0, -70),
+	PartData.Slot.EXHAUST: Vector2(0, -70),
+	PartData.Slot.ENGINE: Vector2(0, 0),
+	PartData.Slot.WHEELS: Vector2(0, 125),
+	PartData.Slot.LIGHT: Vector2(0, -75),
 }
 
 
 func _ready() -> void:
+	%Headlight.visible = false ## preview lampu disembunyikan
 	_fix_mirrored_tags()
 	for slot: int in hotspots.keys():
 		var area: Area2D = hotspots[slot]
@@ -51,6 +62,18 @@ func show_order(order: ClientOrder) -> void:
 		var ordered: bool = order.is_slot_ordered(slot)
 		tag.text = ("* %s *" if ordered else "%s") % PartData.slot_to_name(slot).to_upper()
 		tag.add_theme_color_override("font_color", Color(1, 0.902, 0) if ordered else Color(0.85, 0.85, 0.9))
+	_layout_tags()
+
+
+## Label slot ditaruh di tengah-atas/bawah hotspot masing-masing, ikut layout body.
+func _layout_tags() -> void:
+	for slot: int in tags.keys():
+		var tag: Label = tags[slot]
+		tag.reset_size()
+		tag.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		tag.pivot_offset = Vector2(tag.size.x * 0.5, 0.0)
+		var anchor: Vector2 = (hotspots[slot] as Area2D).position + TAG_OFFSETS[slot]
+		tag.position = anchor - Vector2(tag.size.x * 0.5, tag.size.y * 0.5)
 
 
 func set_part(slot: int, part: PartData) -> void:
@@ -58,8 +81,8 @@ func set_part(slot: int, part: PartData) -> void:
 		sprite.texture = part.texture
 		apply_facing(sprite)
 	if slot == PartData.Slot.BODY:
-		apply_body_layout($Frame, $Engine, $Headlight, part)
-		(hotspots[PartData.Slot.LIGHT] as Area2D).position = $Headlight.position
+		apply_body_layout(%Frame, %Engine, %Headlight, part)
+		(hotspots[PartData.Slot.LIGHT] as Area2D).position = %Headlight.position
 
 
 ## Rangka & mesin mengikuti tipe body (diukur dari gambar referensi di tools/motor_refs).

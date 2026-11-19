@@ -1,13 +1,13 @@
-[gd_resource type="Resource" script_class="PartData" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="PartData" format=3 uid="uid://cyyqfa6gcmmki"]
 
-[ext_resource type="Script" path="res://scripts/resources/part_data.gd" id="1_s"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/part_wh_05.png" id="2_t"]
+[ext_resource type="Script" uid="uid://bja8dag6ig2b3" path="res://scripts/resources/part_data.gd" id="1_s"]
+[ext_resource type="Texture2D" uid="uid://b1oiu8p0lvnl2" path="res://assets/baked_processed/part_wh_05.png" id="2_t"]
 
 [resource]
 script = ExtResource("1_s")
 part_id = &"WH-05"
 slot = 3
-display_name = "Velg Forged Candy Pink"
+display_name = "Candy Pink Forged Wheels"
 tier = 5
 cost_price = 650000
 selling_price = 980000

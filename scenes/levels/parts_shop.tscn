@@ -17,6 +17,7 @@ texture = ExtResource("2_bg")
 centered = false
 
 [node name="KohJaya" type="Sprite2D" parent="Background" unique_id=1128442969]
+unique_name_in_owner = true
 position = Vector2(1652, 484)
 scale = Vector2(0.68, 0.68)
 texture = ExtResource("4_koh")
@@ -50,7 +51,7 @@ offset_right = 1156.0
 offset_bottom = 54.0
 theme_type_variation = &"TitleLabel"
 theme_override_font_sizes/font_size = 48
-text = "TOKO SPAREPART JAYA"
+text = "JAYA PARTS SHOP"
 horizontal_alignment = 1
 
 [node name="CountdownLabel" type="Label" parent="UI/Root" unique_id=1742128124]
@@ -62,7 +63,7 @@ offset_top = 48.0
 offset_right = 1156.0
 offset_bottom = 88.0
 theme_type_variation = &"PinkLabel"
-text = "04:12 Hingga Barang Baru!"
+text = "04:12 Until New Stock!"
 horizontal_alignment = 1
 
 [node name="ShopBackdrop" type="ColorRect" parent="UI/Root" unique_id=1990026772]
@@ -140,7 +141,7 @@ custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 22
-text = "Selamat datang! Mau cari part apa hari ini?"
+text = "Welcome! What part are you looking for today?"
 autowrap_mode = 3
 
 [node name="CartPanel" type="PanelContainer" parent="UI/Root" unique_id=425465018]
@@ -157,18 +158,25 @@ offset_bottom = -42.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="VBox" type="VBoxContainer" parent="UI/Root/CartPanel" unique_id=440466667]
+[node name="VBox" type="Control" parent="UI/Root/CartPanel" unique_id=440466667]
+custom_minimum_size = Vector2(624, 306)
 layout_mode = 2
-theme_override_constants/separation = 10
 
 [node name="CartTitle" type="Label" parent="UI/Root/CartPanel/VBox" unique_id=1702105167]
-layout_mode = 2
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 624.0
+offset_bottom = 38.0
 theme_type_variation = &"PinkLabel"
-text = "KERANJANG BELANJA"
+text = "SHOPPING CART"
 
 [node name="Scroll" type="ScrollContainer" parent="UI/Root/CartPanel/VBox" unique_id=1695895353]
-layout_mode = 2
-size_flags_vertical = 3
+layout_mode = 0
+offset_left = 0.0
+offset_top = 48.0
+offset_right = 624.0
+offset_bottom = 141.0
 horizontal_scroll_mode = 0
 
 [node name="CartItems" type="VBoxContainer" parent="UI/Root/CartPanel/VBox/Scroll" unique_id=366767547]
@@ -183,27 +191,39 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(360, 0)
 layout_mode = 2
 theme_type_variation = &"SmallLabel"
-text = "Keranjang kosong.
-Klik kartu part di rak untuk menambah."
+text = "Cart is empty.
+Click a part card on the shelf to add it."
 autowrap_mode = 3
 
 [node name="CartTotal" type="Label" parent="UI/Root/CartPanel/VBox" unique_id=1229008474]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 0
+offset_left = 0.0
+offset_top = 151.0
+offset_right = 624.0
+offset_bottom = 189.0
 theme_type_variation = &"PriceLabel"
 text = "TOTAL: Rp 0"
 
-[node name="Buttons" type="VBoxContainer" parent="UI/Root/CartPanel/VBox" unique_id=618413004]
-layout_mode = 2
-theme_override_constants/separation = 12
+[node name="Buttons" type="Control" parent="UI/Root/CartPanel/VBox" unique_id=618413004]
+custom_minimum_size = Vector2(624, 107)
+layout_mode = 0
+offset_left = 0.0
+offset_top = 199.0
+offset_right = 624.0
+offset_bottom = 306.0
 
 [node name="CheckoutButton" type="Button" parent="UI/Root/CartPanel/VBox/Buttons" unique_id=1104134500]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 72)
-layout_mode = 2
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 624.0
+offset_bottom = 107.0
 theme_type_variation = &"GreenButton"
 theme_override_font_sizes/font_size = 24
-text = "BELI"
+text = "BUY"
 script = ExtResource("7_btn")
 
 [node name="LeaveButton" type="Button" parent="UI/Root" unique_id=1056674465]
@@ -218,9 +238,10 @@ offset_right = 489.0
 offset_bottom = -33.0
 grow_vertical = 0
 theme_type_variation = &"OrangeButton"
-text = "KELUAR TOKO"
+text = "LEAVE SHOP"
 script = ExtResource("7_btn")
 
 [node name="HUD" parent="." unique_id=2080801728 instance=ExtResource("8_hud")]
+unique_name_in_owner = true
 visible = false
 esc_pauses = false

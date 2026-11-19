@@ -58,7 +58,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"SmallLabel"
 theme_override_font_sizes/font_size = 22
-text = "Knalpot  T3"
+text = "Exhaust  T3"
 
 [node name="NoteLabel" type="Label" parent="HBox/Info"]
 unique_name_in_owner = true
@@ -67,7 +67,7 @@ layout_mode = 2
 theme_type_variation = &"SmallLabel"
 theme_override_colors/font_color = Color(1, 0.6, 0.3, 1)
 theme_override_font_sizes/font_size = 15
-text = "Catatan"
+text = "Notes"
 
 [node name="StatusBox" type="Panel" parent="HBox"]
 unique_name_in_owner = true

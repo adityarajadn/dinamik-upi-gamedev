@@ -45,10 +45,10 @@ func setup(new_part: PartData, new_stock: int, new_offer_index: int = -1) -> voi
 	name_label.text = part.display_name
 	if mode == Mode.SHOP:
 		price_label.text = Money.format(part.cost_price)
-		stock_label.text = "Sisa: %d" % stock
+		stock_label.text = "Left: %d" % stock
 	else:
-		price_label.text = "Jual %s" % Money.short(part.selling_price)
-		stock_label.text = "[Stok: %d]" % stock
+		price_label.text = "Sell %s" % Money.short(part.selling_price)
+		stock_label.text = "[Stock: %d]" % stock
 	modulate = Color(1, 1, 1, 1) if stock > 0 else Color(0.55, 0.55, 0.6, 0.85)
 
 

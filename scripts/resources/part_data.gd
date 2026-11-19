@@ -7,18 +7,18 @@ enum Slot { BODY, EXHAUST, ENGINE, WHEELS, LIGHT }
 
 const SLOT_NAMES: Dictionary = {
 	Slot.BODY: "Body",
-	Slot.EXHAUST: "Knalpot",
-	Slot.ENGINE: "Mesin",
-	Slot.WHEELS: "Roda",
-	Slot.LIGHT: "Lampu",
+	Slot.EXHAUST: "Exhaust",
+	Slot.ENGINE: "Engine",
+	Slot.WHEELS: "Wheels",
+	Slot.LIGHT: "Light",
 }
 
 const TIER_NAMES: Dictionary = {
-	1: "Murah A",
-	2: "Murah B",
-	3: "Sedang A",
-	4: "Sedang B",
-	5: "Mahal",
+	1: "Cheap A",
+	2: "Cheap B",
+	3: "Mid A",
+	4: "Mid B",
+	5: "Premium",
 }
 
 @export var part_id: StringName = &"BD-01"

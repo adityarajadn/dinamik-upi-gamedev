@@ -36,15 +36,15 @@ var current_music: StringName = &""
 var _music_tween: Tween
 var _next_sfx_index: int = 0
 
-@onready var music_player: AudioStreamPlayer = $MusicPlayer
-@onready var sfx_players: Array[Node] = $SfxPlayers.get_children()
+@onready var music_player: AudioStreamPlayer = %MusicPlayer
+@onready var sfx_players: Array[Node] = %SfxPlayers.get_children()
 
 
 func play_music(music_id: StringName) -> void:
 	if music_id == current_music and music_player.playing:
 		return
 	if not MUSIC.has(music_id):
-		push_warning("AudioManager: musik '%s' tidak terdaftar" % music_id)
+		push_warning("AudioManager: music '%s' is not registered" % music_id)
 		return
 	current_music = music_id
 	if _music_tween and _music_tween.is_running():
@@ -66,7 +66,7 @@ func stop_music() -> void:
 
 func play_sfx(sfx_id: StringName, pitch_variance: float = 0.06) -> void:
 	if not SFX.has(sfx_id):
-		push_warning("AudioManager: SFX '%s' tidak terdaftar" % sfx_id)
+		push_warning("AudioManager: SFX '%s' is not registered" % sfx_id)
 		return
 	var player: AudioStreamPlayer = sfx_players[_next_sfx_index] as AudioStreamPlayer
 	_next_sfx_index = (_next_sfx_index + 1) % sfx_players.size()

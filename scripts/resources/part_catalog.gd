@@ -9,7 +9,7 @@ func get_part(part_id: StringName) -> PartData:
 	for part: PartData in parts:
 		if part.part_id == part_id:
 			return part
-	push_error("PartCatalog: part '%s' tidak ditemukan" % part_id)
+	push_error("PartCatalog: part '%s' not found" % part_id)
 	return null
 
 

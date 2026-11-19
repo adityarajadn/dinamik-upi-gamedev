@@ -1,13 +1,13 @@
-[gd_resource type="Resource" script_class="PartData" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="PartData" format=3 uid="uid://w6nvlb011516"]
 
-[ext_resource type="Script" path="res://scripts/resources/part_data.gd" id="1_s"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/part_wh_02.png" id="2_t"]
+[ext_resource type="Script" uid="uid://bja8dag6ig2b3" path="res://scripts/resources/part_data.gd" id="1_s"]
+[ext_resource type="Texture2D" uid="uid://d4dg4xtn7ifli" path="res://assets/baked_processed/part_wh_02.png" id="2_t"]
 
 [resource]
 script = ExtResource("1_s")
 part_id = &"WH-02"
 slot = 3
-display_name = "Velg Racing Palang 5 Putih"
+display_name = "White 5-Spoke Racing Wheels"
 tier = 2
 cost_price = 90000
 selling_price = 140000

@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://0lxuh4nf0spk" path="res://assets/ui_kit/satisfaction_bar.png" id="4_sat"]
 [ext_resource type="Texture2D" uid="uid://c22uyrftrjurp" path="res://assets/generated/ui_clock_icon.png" id="5_clk"]
 [ext_resource type="Texture2D" uid="uid://bkg2vd8p3q62w" path="res://assets/ui_kit/icon_helmet.png" id="6_hel"]
-[ext_resource type="Texture2D" path="res://assets/ui_kit/satisfaction_hex.png" id="6_hex"]
 [ext_resource type="Script" uid="uid://botktt15830n" path="res://scripts/components/ui_button_animation.gd" id="7_btn"]
 [ext_resource type="Script" uid="uid://7ttfm2yi5jp2" path="res://scripts/components/popup_animator.gd" id="8_pop"]
 [ext_resource type="Script" uid="uid://btwubawe45ep4" path="res://scripts/components/confirm_dialog.gd" id="9_cfm"]
@@ -135,10 +134,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -280.0
-offset_top = 8.0
-offset_right = 280.0
-offset_bottom = 138.0
+offset_left = 358.0
+offset_top = -26.0
+offset_right = 878.0
+offset_bottom = 142.0
 grow_horizontal = 2
 mouse_filter = 2
 
@@ -154,43 +153,33 @@ texture = ExtResource("4_sat")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="SatLabel" type="Label" parent="Root/SatisfactionBox" unique_id=1725290676]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 50.0
+offset_bottom = 100.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "SATISFACTION: 100%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="SatBar" type="ProgressBar" parent="Root/SatisfactionBox" unique_id=1446116032]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 0
-anchor_left = 0.0
-anchor_right = 0.0
-offset_left = 84.0
-offset_top = 30.0
-offset_right = 554.0
-offset_bottom = 100.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 95.0
+offset_right = 150.0
+offset_bottom = 169.0
 grow_horizontal = 2
 mouse_filter = 2
-value = 100.0
+value = 50.0
 show_percentage = false
-theme_type_variation = &"SatBarBig"
-
-[node name="SatHex" type="TextureRect" parent="Root/SatisfactionBox"]
-layout_mode = 0
-offset_right = 130.0
-offset_bottom = 130.0
-mouse_filter = 2
-texture = ExtResource("6_hex")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="SatLabel" type="Label" parent="Root/SatisfactionBox"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 4.0
-offset_top = 18.0
-offset_right = 118.0
-offset_bottom = 108.0
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 32
-text = "100%"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="ClockBox" type="PanelContainer" parent="Root" unique_id=1101323686]
 layout_mode = 1
@@ -231,14 +220,14 @@ alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "HARI 1 - 08:00"
+text = "DAY 1 - 08:00"
 
 [node name="RestockLabel" type="Label" parent="Root/ClockBox/HBox/VBox" unique_id=376758809]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"SmallLabel"
 theme_override_colors/font_color = Color(1, 0.902, 0, 1)
-text = "Restock toko: 03:45"
+text = "Shop restock: 03:45"
 
 [node name="PauseButton" type="Button" parent="Root" unique_id=1238130728]
 unique_name_in_owner = true
@@ -253,18 +242,6 @@ offset_bottom = 140.0
 grow_horizontal = 0
 tooltip_text = "Pause (Esc)"
 theme_type_variation = &"PauseButton"
-script = ExtResource("7_btn")
-
-[node name="LedgerButton" type="Button" parent="Root"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 20.0
-offset_top = 400.0
-offset_right = 130.0
-offset_bottom = 540.0
-focus_mode = 0
-tooltip_text = "Buku Kas (Tab)"
-theme_type_variation = &"LedgerIconButton"
 script = ExtResource("7_btn")
 
 [node name="QueueTracker" type="VBoxContainer" parent="Root" unique_id=1219082578]
@@ -283,7 +260,7 @@ theme_override_constants/separation = 4
 [node name="QueueTitle" type="Label" parent="Root/QueueTracker" unique_id=1717500903]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Antrean: 0/5"
+text = "Queue: 0/5"
 
 [node name="Helmets" type="HBoxContainer" parent="Root/QueueTracker" unique_id=804528286]
 unique_name_in_owner = true
@@ -346,33 +323,30 @@ offset_bottom = -24.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_type_variation = &"OrangeButton"
-text = "KELUAR - ESC"
+text = "EXIT - ESC"
 script = ExtResource("7_btn")
 
 [node name="Toast" type="PanelContainer" parent="Root" unique_id=207985798]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 20.0
-offset_top = 250.0
-offset_right = 580.0
-offset_bottom = 370.0
-grow_horizontal = 1
-grow_vertical = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -460.0
+offset_top = -240.0
+offset_right = 460.0
+offset_bottom = -110.0
+grow_horizontal = 2
+grow_vertical = 0
 mouse_filter = 2
 theme_type_variation = &"ToastPanel"
 
 [node name="ToastLabel" type="Label" parent="Root/Toast" unique_id=1147745284]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
-text = "Pesan"
-vertical_alignment = 1
+text = "Message"
 horizontal_alignment = 1
 autowrap_mode = 3
 
@@ -405,7 +379,8 @@ grow_vertical = 2
 theme_type_variation = &"LedgerPanel"
 theme_override_styles/panel = SubResource("StyleBoxTexture_a660p")
 
-[node name="PopupAnimator" type="Node" parent="Root/LedgerPanel" unique_id=1885927068]
+[node name="LedgerPopup" type="Node" parent="Root/LedgerPanel" unique_id=1885927068]
+unique_name_in_owner = true
 script = ExtResource("8_pop")
 
 [node name="Book" type="VBoxContainer" parent="Root/LedgerPanel" unique_id=873813979]
@@ -432,7 +407,7 @@ layout_mode = 2
 theme_type_variation = &"DarkLabel"
 theme_override_colors/font_color = Color(1, 0.0784, 0.5765, 1)
 theme_override_font_sizes/font_size = 34
-text = "BUKU KAS"
+text = "CASH BOOK"
 
 [node name="DayLine" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage" unique_id=121478073]
 unique_name_in_owner = true
@@ -440,7 +415,7 @@ layout_mode = 2
 theme_type_variation = &"DarkLabel"
 theme_override_colors/font_color = Color(0.35, 0.33, 0.4, 1)
 theme_override_font_sizes/font_size = 18
-text = "Hari 1 - 08:00"
+text = "Day 1 - 08:00"
 
 [node name="Rule1" type="HSeparator" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage" unique_id=480417318]
 layout_mode = 2
@@ -463,7 +438,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 22
-text = "Pendapatan"
+text = "Income"
 
 [node name="IncomeValue" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage/IncomeRow" unique_id=751436216]
 unique_name_in_owner = true
@@ -491,7 +466,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 22
-text = "Modal Part"
+text = "Parts Cost"
 
 [node name="ExpenseValue" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage/ExpenseRow" unique_id=1023949419]
 unique_name_in_owner = true
@@ -523,7 +498,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 22
-text = "Laba Bersih"
+text = "Net Profit"
 
 [node name="NetValue" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage/NetRow" unique_id=15128445]
 unique_name_in_owner = true
@@ -551,7 +526,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 22
-text = "Saldo Celengan"
+text = "Piggy Bank Balance"
 
 [node name="CashValue" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/KasPage/CashRow" unique_id=1409319404]
 unique_name_in_owner = true
@@ -572,7 +547,7 @@ layout_mode = 2
 theme_type_variation = &"DarkLabel"
 theme_override_colors/font_color = Color(1, 0.0784, 0.5765, 1)
 theme_override_font_sizes/font_size = 34
-text = "REPUTASI"
+text = "REPUTATION"
 
 [node name="SatRow" type="HBoxContainer" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage" unique_id=1595737330]
 layout_mode = 2
@@ -595,7 +570,7 @@ theme_override_constants/separation = 2
 layout_mode = 2
 theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 18
-text = "Kepuasan Rata-rata"
+text = "Average Satisfaction"
 
 [node name="SatLedgerBar" type="ProgressBar" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage/SatRow/SatBox" unique_id=877032662]
 unique_name_in_owner = true
@@ -635,7 +610,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 22
-text = "Klien hari ini"
+text = "Clients today"
 
 [node name="ServedTodayValue" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage/ServedTodayRow" unique_id=479453631]
 unique_name_in_owner = true
@@ -662,7 +637,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 22
-text = "Total klien"
+text = "Total clients"
 
 [node name="ServedTotalValue" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage/ServedTotalRow" unique_id=1179807138]
 unique_name_in_owner = true
@@ -689,7 +664,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 22
-text = "Antrean menunggu"
+text = "Waiting in queue"
 
 [node name="QueueValue" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage/QueueRow" unique_id=199514518]
 unique_name_in_owner = true
@@ -716,7 +691,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 22
-text = "Ketahuan nipu"
+text = "Caught cheating"
 
 [node name="CaughtValue" type="Label" parent="Root/LedgerPanel/Book/Spreads/SpreadKas/RepPage/CaughtRow" unique_id=2088413297]
 unique_name_in_owner = true
@@ -744,7 +719,7 @@ layout_mode = 2
 theme_type_variation = &"DarkLabel"
 theme_override_colors/font_color = Color(1, 0.0784, 0.5765, 1)
 theme_override_font_sizes/font_size = 34
-text = "STOK BENGKEL"
+text = "WORKSHOP STOCK"
 
 [node name="StockRight" type="VBoxContainer" parent="Root/LedgerPanel/Book/Spreads/SpreadStock" unique_id=542911498]
 unique_name_in_owner = true
@@ -758,7 +733,7 @@ layout_mode = 2
 theme_type_variation = &"DarkLabel"
 theme_override_colors/font_color = Color(0.85, 0.35, 0, 1)
 theme_override_font_sizes/font_size = 22
-text = "Total stok: 0"
+text = "Total stock: 0"
 
 [node name="Footer" type="HBoxContainer" parent="Root/LedgerPanel/Book" unique_id=775888647]
 layout_mode = 2
@@ -766,12 +741,17 @@ theme_override_constants/separation = 12
 
 [node name="PrevPage" type="Button" parent="Root/LedgerPanel/Book/Footer" unique_id=2017093563]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(48, 44)
 layout_mode = 2
 size_flags_vertical = 4
 focus_mode = 0
-text = ""
-theme_type_variation = &"PageLeftButton"
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("Page_btn")
+theme_override_styles/pressed = SubResource("Page_btn")
+theme_override_styles/hover = SubResource("Page_btn_hover")
+theme_override_styles/disabled = SubResource("Page_btn_disabled")
+theme_override_styles/focus = SubResource("Page_btn")
+text = "<"
 
 [node name="PageLabel" type="Label" parent="Root/LedgerPanel/Book/Footer" unique_id=1791837255]
 unique_name_in_owner = true
@@ -784,12 +764,17 @@ horizontal_alignment = 1
 
 [node name="NextPage" type="Button" parent="Root/LedgerPanel/Book/Footer" unique_id=548024671]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(48, 44)
 layout_mode = 2
 size_flags_vertical = 4
 focus_mode = 0
-text = ""
-theme_type_variation = &"PageRightButton"
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("Page_btn")
+theme_override_styles/pressed = SubResource("Page_btn")
+theme_override_styles/hover = SubResource("Page_btn_hover")
+theme_override_styles/disabled = SubResource("Page_btn_disabled")
+theme_override_styles/focus = SubResource("Page_btn")
+text = ">"
 
 [node name="Spacer" type="Control" parent="Root/LedgerPanel/Book/Footer" unique_id=1206901133]
 layout_mode = 2
@@ -799,12 +784,9 @@ mouse_filter = 2
 [node name="LedgerClose" type="Button" parent="Root/LedgerPanel/Book/Footer" unique_id=388550002]
 unique_name_in_owner = true
 layout_mode = 2
-text = ""
+theme_override_font_sizes/font_size = 22
+text = "CLOSE (TAB)"
 script = ExtResource("7_btn")
-custom_minimum_size = Vector2(84, 84)
-theme_type_variation = &"CloseButtonBig"
-tooltip_text = "Tutup (Tab)"
-size_flags_vertical = 4
 
 [node name="PauseOverlay" type="Control" parent="Root" unique_id=1151185792]
 unique_name_in_owner = true
@@ -826,19 +808,19 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.25)
 
 [node name="PausePanel" type="PanelContainer" parent="Root/PauseOverlay" unique_id=251555022]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -320.0
-offset_top = -280.0
-offset_right = 320.0
-offset_bottom = 280.0
+offset_left = -280.0
+offset_top = -250.0
+offset_right = 280.0
+offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_type_variation = &"FramePanel"
 
 [node name="VBox" type="VBoxContainer" parent="Root/PauseOverlay/PausePanel" unique_id=1855448953]
 layout_mode = 2
@@ -847,17 +829,25 @@ alignment = 1
 
 [node name="PauseTitle" type="Label" parent="Root/PauseOverlay/PausePanel/VBox" unique_id=109413281]
 layout_mode = 2
-theme_type_variation = &"HeaderLabel"
+theme_type_variation = &"TitleLabel"
 text = "PAUSE"
 horizontal_alignment = 1
-size_flags_horizontal = 4
 
 [node name="ResumeButton" type="Button" parent="Root/PauseOverlay/PausePanel/VBox" unique_id=93908223]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(380, 84)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "LANJUT"
+text = "RESUME"
+script = ExtResource("7_btn")
+
+[node name="PauseSettingsButton" type="Button" parent="Root/PauseOverlay/PausePanel/VBox" unique_id=1068104207]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(380, 84)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"OrangeButton"
+text = "SETTINGS"
 script = ExtResource("7_btn")
 
 [node name="MenuButton" type="Button" parent="Root/PauseOverlay/PausePanel/VBox" unique_id=593803619]
@@ -866,16 +856,90 @@ custom_minimum_size = Vector2(380, 84)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_type_variation = &"DarkButton"
-text = "MENU UTAMA"
+text = "MAIN MENU"
 script = ExtResource("7_btn")
 
-[node name="QuitButton" type="Button" parent="Root/PauseOverlay/PausePanel/VBox" unique_id=51059836]
+[node name="PauseSettingsPanel" type="PanelContainer" parent="Root/PauseOverlay" unique_id=986380018]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(380, 84)
+visible = false
+custom_minimum_size = Vector2(760, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -380.0
+offset_top = -170.0
+offset_right = 380.0
+offset_bottom = 170.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Root/PauseOverlay/PauseSettingsPanel" unique_id=765413247]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_type_variation = &"RedButton"
-text = "KELUAR GAME"
+theme_override_constants/separation = 22
+
+[node name="Title" type="Label" parent="Root/PauseOverlay/PauseSettingsPanel/VBox" unique_id=11558039]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+text = "SETTINGS"
+horizontal_alignment = 1
+
+[node name="MusicRow" type="HBoxContainer" parent="Root/PauseOverlay/PauseSettingsPanel/VBox" unique_id=184482241]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Root/PauseOverlay/PauseSettingsPanel/VBox/MusicRow" unique_id=400786365]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "MUSIC"
+
+[node name="PauseMusicSlider" type="HSlider" parent="Root/PauseOverlay/PauseSettingsPanel/VBox/MusicRow" unique_id=1024438605]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SfxRow" type="HBoxContainer" parent="Root/PauseOverlay/PauseSettingsPanel/VBox" unique_id=2141530318]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Root/PauseOverlay/PauseSettingsPanel/VBox/SfxRow" unique_id=197313142]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "SOUND FX"
+
+[node name="PauseSfxSlider" type="HSlider" parent="Root/PauseOverlay/PauseSettingsPanel/VBox/SfxRow" unique_id=1404274710]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Corner" type="Control" parent="Root/PauseOverlay/PauseSettingsPanel" unique_id=865194804]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="PauseSettingsClose" type="Button" parent="Root/PauseOverlay/PauseSettingsPanel/Corner" unique_id=288978542]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(84, 84)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_top = -70.0
+offset_right = 44.0
+offset_bottom = 14.0
+grow_horizontal = 0
+tooltip_text = "Close"
+theme_type_variation = &"CloseButtonBig"
 script = ExtResource("7_btn")
 
 [node name="ConfirmDialog" type="Control" parent="Root" unique_id=1096843339]
@@ -906,15 +970,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -360.0
-offset_top = -200.0
-offset_right = 360.0
-offset_bottom = 200.0
+offset_left = -320.0
+offset_top = -170.0
+offset_right = 320.0
+offset_bottom = 170.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_type_variation = &"ConfirmPanel"
 
-[node name="PopupAnimator" type="Node" parent="Root/ConfirmDialog/ConfirmPanel" unique_id=2081315554]
+[node name="ConfirmPanelPopupAnimator" type="Node" parent="Root/ConfirmDialog/ConfirmPanel" unique_id=2081315554]
+unique_name_in_owner = true
 script = ExtResource("8_pop")
 
 [node name="VBox" type="VBoxContainer" parent="Root/ConfirmDialog/ConfirmPanel" unique_id=1774399580]
@@ -925,14 +989,14 @@ alignment = 1
 [node name="ConfirmTitle" type="Label" parent="Root/ConfirmDialog/ConfirmPanel/VBox" unique_id=306527537]
 layout_mode = 2
 theme_type_variation = &"PinkLabel"
-text = "YAKIN?"
+text = "SURE?"
 horizontal_alignment = 1
 
 [node name="ConfirmMessage" type="Label" parent="Root/ConfirmDialog/ConfirmPanel/VBox" unique_id=1263230241]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(560, 0)
 layout_mode = 2
-text = "Lanjutkan aksi ini?"
+text = "Continue with this action?"
 horizontal_alignment = 1
 autowrap_mode = 3
 
@@ -945,14 +1009,14 @@ alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"DarkButton"
-text = "BATAL"
+text = "CANCEL"
 script = ExtResource("7_btn")
 
 [node name="ConfirmYes" type="Button" parent="Root/ConfirmDialog/ConfirmPanel/VBox/Buttons" unique_id=1762466745]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"GreenButton"
-text = "YAKIN"
+text = "CONFIRM"
 script = ExtResource("7_btn")
 
 [node name="TutorialOverlay" type="Control" parent="Root" unique_id=1856710339]
@@ -990,7 +1054,8 @@ offset_bottom = 210.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PopupAnimator" type="Node" parent="Root/TutorialOverlay/TutorialPanel" unique_id=266381456]
+[node name="TutorialPanelPopupAnimator" type="Node" parent="Root/TutorialOverlay/TutorialPanel" unique_id=266381456]
+unique_name_in_owner = true
 script = ExtResource("8_pop")
 
 [node name="VBox" type="VBoxContainer" parent="Root/TutorialOverlay/TutorialPanel" unique_id=845159559]
@@ -1009,7 +1074,7 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(760, 120)
 layout_mode = 2
-text = "Isi"
+text = "Contents"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
@@ -1030,12 +1095,12 @@ alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"DarkButton"
-text = "LEWATI"
+text = "SKIP"
 script = ExtResource("7_btn")
 
 [node name="TutorialNext" type="Button" parent="Root/TutorialOverlay/TutorialPanel/VBox/Buttons" unique_id=27313220]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"GreenButton"
-text = "LANJUT"
+text = "CONTINUE"
 script = ExtResource("7_btn")

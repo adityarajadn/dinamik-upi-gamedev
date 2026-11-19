@@ -7,9 +7,11 @@ process_mode = 3
 script = ExtResource("1_am")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
 bus = &"Music"
 
 [node name="SfxPlayers" type="Node" parent="."]
+unique_name_in_owner = true
 
 [node name="Sfx1" type="AudioStreamPlayer" parent="SfxPlayers"]
 bus = &"SFX"
