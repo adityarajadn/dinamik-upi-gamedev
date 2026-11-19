@@ -1,9 +1,13 @@
 extends Node2D
 ## SC-01 Street Hub: jalan A/D, lihat antrean (maks 5), masuk Toko / Bengkel.
 
-@export var queue_bob_height: float = 6.0
+## Animasi "napas" NPC antre: hanya scale vertikal.
+@export var queue_squash_amount: float = 0.04
+
+const StreetBackdrop: GDScript = preload("res://scripts/components/street_backdrop.gd")
 
 @onready var player: PlayerController = $Player
+@onready var backdrop: Node2D = $StreetBackdrop
 @onready var hud: GameHUD = $HUD
 @onready var queue_spots: Array[Node] = $QueueSpots.get_children()
 
@@ -11,6 +15,9 @@ extends Node2D
 func _ready() -> void:
 	if not GameState.is_session_active:
 		GameState.new_game()
+	# Saat main, bengkel & toko sparepart buka (rolling door terangkat).
+	backdrop.set_door_open(StreetBackdrop.Shutter.WORKSHOP, true, false)
+	backdrop.set_door_open(StreetBackdrop.Shutter.PARTS, true, false)
 	player.global_position.x = GameState.street_spawn_x
 	player.reset_physics_interpolation() ## teleport spawn: jangan di-interpolasi dari posisi scene
 	player.interaction.interact_requested.connect(_on_interact_requested)
@@ -47,8 +54,15 @@ func _on_queue_changed(_waiting_count: int) -> void:
 func _start_queue_bobbing() -> void:
 	for i: int in range(queue_spots.size()):
 		var client: Sprite2D = (queue_spots[i] as Node2D).get_node("Client") as Sprite2D
+		var base_scale_y: float = client.scale.y
 		var base_y: float = client.position.y
+		var squash: Callable = func(value: float) -> void:
+			# Geser y supaya kaki (sisi bawah sprite) tetap menapak saat scale vertikal berubah.
+			var height: float = float(client.texture.get_height()) if client.texture else 0.0
+			var feet_local: float = client.offset.y + (height * 0.5 if client.centered else height)
+			client.scale.y = value
+			client.position.y = base_y - feet_local * (value - base_scale_y)
 		var tween: Tween = create_tween().set_loops()
 		tween.tween_interval(0.15 * i)
-		tween.tween_property(client, "position:y", base_y - queue_bob_height, 0.6).set_trans(Tween.TRANS_SINE)
-		tween.tween_property(client, "position:y", base_y, 0.6).set_trans(Tween.TRANS_SINE)
+		tween.tween_method(squash, base_scale_y, base_scale_y * (1.0 + queue_squash_amount), 0.6).set_trans(Tween.TRANS_SINE)
+		tween.tween_method(squash, base_scale_y * (1.0 + queue_squash_amount), base_scale_y, 0.6).set_trans(Tween.TRANS_SINE)

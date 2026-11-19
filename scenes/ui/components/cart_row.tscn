@@ -157,13 +157,10 @@ text = "+"
 
 [node name="RemoveButton" type="Button" parent="HBox"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(34, 34)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_vertical = 4
 focus_mode = 0
-theme_override_font_sizes/font_size = 18
-theme_override_styles/normal = SubResource("Remove_btn")
-theme_override_styles/hover = SubResource("Qty_btn_hover")
-theme_override_styles/pressed = SubResource("Remove_btn")
-theme_override_styles/focus = SubResource("Remove_btn")
-text = "X"
+text = ""
+theme_type_variation = &"CloseButton"
+tooltip_text = "Hapus"

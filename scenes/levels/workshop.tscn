@@ -28,6 +28,18 @@
 [ext_resource type="Texture2D" uid="uid://dfclhoshrbcxp" path="res://assets/baked_processed/fx_screwdriver_blue.png" id="33_smk"]
 [ext_resource type="Texture2D" uid="uid://be1nwh28rfc0e" path="res://assets/baked_processed/fx_screwdriver_red.png" id="34_smk"]
 
+[sub_resource type="Gradient" id="Shadow_grad"]
+offsets = PackedFloat32Array(0, 0.55, 1)
+colors = PackedColorArray(0, 0, 0, 0.75, 0, 0, 0, 0.5, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="Shadow_tex"]
+gradient = SubResource("Shadow_grad")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
 [sub_resource type="CircleShape2D" id="Circle_hot"]
 radius = 95.0
 
@@ -43,7 +55,7 @@ content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
-bg_color = Color(1, 0.0784, 0.5765, 1)
+bg_color = Color(1, 0.902, 0, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
@@ -59,7 +71,7 @@ content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
-bg_color = Color(1, 0.35, 0.7, 1)
+bg_color = Color(1, 0.95, 0.45, 1)
 border_width_left = 4
 border_width_top = 4
 border_width_right = 4
@@ -74,8 +86,31 @@ corner_radius_bottom_left = 14
 script = ExtResource("1_ws")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1330827041]
+modulate = Color(0.72, 0.72, 0.78, 1)
 texture = ExtResource("2_bg")
 centered = false
+
+[node name="Shadows" type="Node2D" parent="." unique_id=2113434590]
+
+[node name="MotorShadow" type="Sprite2D" parent="Shadows" unique_id=1731574171]
+position = Vector2(995, 1000)
+scale = Vector2(6.6, 0.75)
+texture = SubResource("Shadow_tex")
+
+[node name="ClientShadow" type="Sprite2D" parent="Shadows" unique_id=1284769639]
+position = Vector2(357, 1012)
+scale = Vector2(2.4, 0.45)
+texture = SubResource("Shadow_tex")
+
+[node name="CounterShadow" type="Sprite2D" parent="Shadows" unique_id=1555813593]
+position = Vector2(215, 1040)
+scale = Vector2(3.2, 0.5)
+texture = SubResource("Shadow_tex")
+
+[node name="PlayerShadow" type="Sprite2D" parent="Shadows" unique_id=1320699745]
+position = Vector2(1567, 1045)
+scale = Vector2(2.4, 0.45)
+texture = SubResource("Shadow_tex")
 
 [node name="Lift" type="Sprite2D" parent="." unique_id=665922026]
 visible = false
@@ -452,15 +487,14 @@ text = "<"
 
 [node name="Tray" type="PanelContainer" parent="UI/Root" unique_id=1421675069]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -560.0
-offset_top = 725.0
-offset_right = 560.0
-offset_bottom = 1046.0
+offset_left = -620.0
+offset_top = 830.0
+offset_right = 620.0
+offset_bottom = 1060.0
 grow_horizontal = 2
 
 [node name="PopupAnimator" type="Node" parent="UI/Root/Tray" unique_id=407450097]
@@ -506,12 +540,12 @@ text = "TRAY PART: RODA"
 [node name="TrayClose" type="Button" parent="UI/Root/Tray/VBox/Header" unique_id=1157195548]
 unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(200, 56)
+custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
-theme_type_variation = &"DarkButton"
-theme_override_font_sizes/font_size = 22
-text = "BATAL"
+theme_type_variation = &"CloseButton"
+text = ""
 script = ExtResource("21_btn")
+tooltip_text = "Batal"
 
 [node name="DragGhost" type="TextureRect" parent="UI/Root" unique_id=1426244224]
 unique_name_in_owner = true
@@ -551,9 +585,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -760.0
-offset_top = -420.0
+offset_top = -290.0
 offset_right = 760.0
-offset_bottom = 420.0
+offset_bottom = 290.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"TwistPanel"
@@ -568,11 +602,11 @@ theme_override_constants/separation = 24
 
 [node name="TwistPortrait" type="TextureRect" parent="UI/Root/TwistOverlay/TwistPanel/HBox" unique_id=543481300]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(250, 420)
+custom_minimum_size = Vector2(280, 390)
 layout_mode = 2
 texture = ExtResource("22_panic")
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 6
 
 [node name="VBox" type="VBoxContainer" parent="UI/Root/TwistOverlay/TwistPanel/HBox" unique_id=2040523609]
 layout_mode = 2
@@ -581,9 +615,9 @@ theme_override_constants/separation = 12
 
 [node name="TwistTitle" type="Label" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox" unique_id=2124007305]
 layout_mode = 2
-theme_type_variation = &"TitleLabel"
-theme_override_colors/font_color = Color(1, 0.0784, 0.5765, 1)
+theme_type_variation = &"TitleTabLabel"
 text = "REVISI DADAKAN!"
+size_flags_horizontal = 0
 
 [node name="TwistBubble" type="PanelContainer" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox" unique_id=1493529497]
 layout_mode = 2
@@ -613,7 +647,7 @@ size_flags_horizontal = 3
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 72)
 layout_mode = 2
-theme_type_variation = &"OrangeButton"
+theme_type_variation = &"GreenButton"
 theme_override_font_sizes/font_size = 22
 text = "TURUNKAN"
 script = ExtResource("21_btn")
@@ -626,6 +660,7 @@ theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 18
 text = "Ganti sesuai budget."
 autowrap_mode = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 
 [node name="Absorb" type="VBoxContainer" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox/Choices" unique_id=1895609987]
 layout_mode = 2
@@ -648,6 +683,7 @@ theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 18
 text = "Tanggung rugi."
 autowrap_mode = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 
 [node name="Reject" type="VBoxContainer" parent="UI/Root/TwistOverlay/TwistPanel/HBox/VBox/Choices" unique_id=580641789]
 layout_mode = 2
@@ -670,6 +706,7 @@ theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 18
 text = "Tolak."
 autowrap_mode = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 
 [node name="ResultOverlay" type="Control" parent="UI/Root" unique_id=227114275]
 unique_name_in_owner = true

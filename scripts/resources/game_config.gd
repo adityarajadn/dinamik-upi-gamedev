@@ -19,6 +19,8 @@ extends Resource
 @export_range(0.0, 100.0) var lose_satisfaction: float = 10.0
 ## Kalah reputasi baru dicek setelah sejumlah klien dilayani.
 @export var lose_check_min_clients: int = 3
+## Saat kalah, mundur sekian hari ke belakang.
+@export var rollback_days: int = 10
 @export var starter_inventory: Dictionary = {}
 @export var days: Array[DayConfig] = []
 @export var clients: Array[ClientProfile] = []

@@ -13,6 +13,16 @@ const STOCK_CELL_SCENE: PackedScene = preload("res://scenes/ui/components/stock_
 const COLOR_GOOD: Color = Color(0.15, 0.55, 0.25, 1)
 const COLOR_MID: Color = Color(0.85, 0.55, 0, 1)
 const COLOR_BAD: Color = Color(0.8, 0.15, 0.2, 1)
+## Jenis toast -> theme type variation (lihat game_theme.tres).
+const TOAST_X: float = 20.0
+const TOAST_STYLES: Dictionary = {
+	&"info": &"ToastPanel",
+	&"success": &"ToastSuccess",
+	&"warning": &"ToastWarning",
+	&"error": &"ToastError",
+	&"money": &"ToastMoney",
+	&"mini": &"ToastMini",
+}
 
 var _toast_tween: Tween
 var _ledger_page: int = 0
@@ -40,6 +50,7 @@ var _last_cash: int = -1
 @onready var ledger_popup: PopupAnimator = %LedgerPanel/PopupAnimator
 @onready var pause_overlay: Control = %PauseOverlay
 @onready var confirm_dialog: ConfirmDialog = %ConfirmDialog
+@onready var tutorial: Control = %TutorialOverlay
 
 
 func _ready() -> void:
@@ -51,6 +62,7 @@ func _ready() -> void:
 	%MenuButton.pressed.connect(_on_menu_pressed)
 	%QuitButton.pressed.connect(_on_quit_pressed)
 	%LedgerClose.pressed.connect(close_ledger)
+	#%LedgerButton.pressed.connect(func() -> void: close_ledger() if ledger_panel.visible else open_ledger())
 	prev_page_button.pressed.connect(_turn_ledger_page.bind(-1))
 	next_page_button.pressed.connect(_turn_ledger_page.bind(1))
 	_build_stock_cells()
@@ -97,7 +109,16 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func is_modal_open() -> bool:
-	return ledger_panel.visible or pause_overlay.visible or confirm_dialog.visible
+	return ledger_panel.visible or pause_overlay.visible or confirm_dialog.visible or tutorial.visible
+
+
+## Tutorial tiap kali mulai main. Jam berhenti selama tutorial terbuka.
+func show_tutorial() -> void:
+	GameState.tutorial_pending = false
+	GameState.set_clock_running(false)
+	tutorial.start()
+	await tutorial.finished
+	GameState.set_clock_running(true)
 
 
 ## Modal "Yakin?" untuk semua aksi penting supaya tidak salah pencet.
@@ -141,16 +162,34 @@ func close_ledger() -> void:
 	ledger_popup.hide_popup()
 
 
-func show_toast(text: String) -> void:
+func show_toast(text: String, kind: StringName = &"info") -> void:
 	toast_label.text = text
+	toast_panel.theme_type_variation = TOAST_STYLES.get(kind, &"ToastPanel")
+	var is_mini: bool = kind == &"mini"
+	var width: float = 400.0 if is_mini else 560.0
+	# Hitung tinggi teks manual: Label autowrap belum punya lebar saat frame pertama.
+	var text_width: float = width - 177.0 ## content margin kiri 125 + kanan 52
+	var font: Font = toast_label.get_theme_font("font")
+	var font_size: int = toast_label.get_theme_font_size("font_size")
+	var text_height: float = font.get_multiline_string_size(text, HORIZONTAL_ALIGNMENT_CENTER, text_width, font_size).y
+	var height: float = maxf(70.0 if is_mini else 112.0, text_height + 92.0)
+	toast_label.custom_minimum_size = Vector2(text_width, 0.0)
+	toast_label.size = Vector2(text_width, text_height)
+	toast_panel.custom_minimum_size = Vector2(width, height)
+	toast_panel.size = Vector2(width, height)
+	# Ulangi setelah layout frame berikutnya (show_toast bisa dipanggil saat scene baru _ready).
+	(func() -> void: toast_panel.size = Vector2(width, height)).call_deferred()
 	if _toast_tween and _toast_tween.is_running():
 		_toast_tween.kill()
 	toast_panel.visible = true
-	toast_panel.modulate.a = 0.0
+	toast_panel.modulate.a = 1.0
+	var hidden_x: float = -toast_panel.size.x - 40.0
+	toast_panel.position.x = hidden_x
+	# Slide in dari kiri, tahan, lalu slide out lagi ke kiri.
 	_toast_tween = create_tween()
-	_toast_tween.tween_property(toast_panel, "modulate:a", 1.0, 0.18)
+	_toast_tween.tween_property(toast_panel, "position:x", TOAST_X, 0.35).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	_toast_tween.tween_interval(toast_duration)
-	_toast_tween.tween_property(toast_panel, "modulate:a", 0.0, 0.3)
+	_toast_tween.tween_property(toast_panel, "position:x", hidden_x, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
 	_toast_tween.tween_callback(func() -> void: toast_panel.visible = false)
 
 
@@ -247,7 +286,7 @@ func shake_piggy() -> void:
 
 
 func _on_satisfaction_changed(average: float) -> void:
-	satisfaction_label.text = "KEPUASAN: %d%%" % roundi(average)
+	satisfaction_label.text = "%d%%" % roundi(average)
 	satisfaction_bar.value = average
 	var color: Color = Color(1, 0.08, 0.58).lerp(Color(0.35, 1, 0.45), clampf(average / 100.0, 0.0, 1.0))
 	satisfaction_label.add_theme_color_override("font_color", color)

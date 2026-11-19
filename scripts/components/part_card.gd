@@ -26,6 +26,10 @@ func _ready() -> void:
 	mouse_entered.connect(_on_hover.bind(true))
 	mouse_exited.connect(_on_hover.bind(false))
 	resized.connect(func() -> void: pivot_offset = size * 0.5)
+	if mode == Mode.TRAY:
+		# Tray dibuat pendek (bukan diperkecil): nama part pindah ke tooltip.
+		name_label.visible = false
+		custom_minimum_size = Vector2(220, 0)
 
 
 func setup(new_part: PartData, new_stock: int, new_offer_index: int = -1) -> void:

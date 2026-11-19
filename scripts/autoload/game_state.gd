@@ -8,7 +8,7 @@ signal restock_countdown_changed(seconds_left: float)
 signal queue_changed(waiting_count: int)
 signal inventory_changed
 signal shop_restocked
-signal toast_requested(text: String)
+signal toast_requested(text: String, kind: StringName)
 
 const CONFIG: GameConfig = preload("res://resources/configurations/game_config.tres")
 const CATALOG: PartCatalog = preload("res://resources/parts/part_catalog.tres")
@@ -16,6 +16,8 @@ const SCENE_STREET: String = "res://scenes/levels/street_hub.tscn"
 const SCENE_DAY_SUMMARY: String = "res://scenes/main/day_summary.tscn"
 const SCENE_GAME_OVER: String = "res://scenes/main/game_over.tscn"
 const SCENE_MAIN_MENU: String = "res://scenes/main/main_menu.tscn"
+const SCENE_INTRO: String = "res://scenes/main/intro_cutscene.tscn"
+const SCENE_WORKSHOP: String = "res://scenes/levels/workshop.tscn"
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var cash: int = 0
@@ -38,10 +40,12 @@ var shop_offers: Array[Dictionary] = [] ## {part: PartData, stock: int}
 var street_spawn_x: float = 1900.0
 var final_is_win: bool = false
 var final_reason: String = ""
+## Tutorial muncul tiap kali mulai main (game baru), bisa di-skip.
+var tutorial_pending: bool = false
 
 var _spawn_timer: float = 0.0
 var _second_restock_done: bool = false
-var _day_snapshot: Dictionary = {}
+var _day_snapshots: Dictionary = {} ## day -> snapshot awal hari
 
 
 func _process(delta: float) -> void:
@@ -69,26 +73,36 @@ func new_game() -> void:
 	day = 1
 	inventory = CONFIG.starter_inventory.duplicate()
 	satisfaction_history.clear()
+	_day_snapshots.clear()
 	clients_served_total = 0
 	deceptions_caught_total = 0
 	final_is_win = false
 	final_reason = ""
 	is_session_active = true
+	tutorial_pending = true
 	street_spawn_x = 1900.0
 	_take_snapshot()
 	start_day()
 
 
+## Kalah: mundur CONFIG.rollback_days hari ke belakang (min. hari 1), state hari itu dipulihkan.
 func restart_day() -> void:
-	if _day_snapshot.is_empty():
+	var target_day: int = maxi(1, day - CONFIG.rollback_days)
+	if not _day_snapshots.has(target_day):
 		new_game()
 		return
-	cash = _day_snapshot.cash
-	inventory = (_day_snapshot.inventory as Dictionary).duplicate()
-	satisfaction_history = (_day_snapshot.history as Array[float]).duplicate()
-	clients_served_total = _day_snapshot.served_total
-	deceptions_caught_total = _day_snapshot.caught_total
+	var snapshot: Dictionary = _day_snapshots[target_day]
+	day = target_day
+	cash = snapshot.cash
+	inventory = (snapshot.inventory as Dictionary).duplicate()
+	satisfaction_history = (snapshot.history as Array[float]).duplicate()
+	clients_served_total = snapshot.served_total
+	deceptions_caught_total = snapshot.caught_total
+	for key: int in _day_snapshots.keys():
+		if key > target_day:
+			_day_snapshots.erase(key)
 	is_session_active = true
+	street_spawn_x = 1900.0
 	start_day()
 
 
@@ -112,8 +126,10 @@ func start_day() -> void:
 
 ## Dipanggil Day Summary saat tombol lanjut ditekan.
 func advance_after_summary() -> void:
-	if is_bankrupt():
-		trigger_game_over(false, "BANGKRUT! Saldo celengan tidak cukup membeli suku cadang termurah.")
+	if check_bankrupt():
+		return
+	if clients_spawned_today == 0 and cash < CATALOG.get_cheapest_cost() * 3:
+		trigger_game_over(false, "Kepuasan anjlok, tak ada lagi pelanggan yang datang. Bengkel sepi, celengan kosong.")
 		return
 	if day >= CONFIG.total_days:
 		var average: float = get_average_satisfaction()
@@ -198,7 +214,7 @@ func _try_spawn_client() -> void:
 	var occupied: int = queue.size() + (1 if active_order != null else 0)
 	if occupied >= CONFIG.queue_capacity:
 		return
-	if clients_spawned_today >= get_day_config().max_clients:
+	if clients_spawned_today >= get_max_clients_today():
 		return
 	var profile: ClientProfile = _pick_profile()
 	var order: ClientOrder = ClientOrder.create(profile, get_day_config(), CATALOG, rng)
@@ -206,7 +222,13 @@ func _try_spawn_client() -> void:
 	clients_spawned_today += 1
 	queue_changed.emit(queue.size())
 	if is_clock_running:
-		toast_requested.emit("%s datang dan ikut antre!" % profile.client_name)
+		toast_requested.emit("%s datang dan ikut antre!" % profile.client_name, &"info")
+
+
+## Kepuasan rendah = pelanggan makin sedikit (bisa nol), jadi pemasukan seret.
+func get_max_clients_today() -> int:
+	var ratio: float = clampf((get_average_satisfaction() - CONFIG.lose_satisfaction) / (100.0 - CONFIG.lose_satisfaction), 0.0, 1.0)
+	return ceili(get_day_config().max_clients * ratio)
 
 
 func _pick_profile() -> ClientProfile:
@@ -237,6 +259,8 @@ func complete_active_order() -> Dictionary:
 	var satisfaction: float = evaluation.satisfaction
 	cash += payment
 	income_today += payment
+	if payment > 0:
+		toast_requested.emit("+%s diterima!" % Money.format(payment), &"money")
 	satisfaction_history.append(satisfaction)
 	clients_served_total += 1
 	clients_served_today += 1
@@ -266,6 +290,14 @@ func get_average_satisfaction() -> float:
 
 func is_reputation_bankrupt() -> bool:
 	return satisfaction_history.size() >= CONFIG.lose_check_min_clients and get_average_satisfaction() <= CONFIG.lose_satisfaction
+
+
+## Kalah kalau uang habis. Mengembalikan true jika game over dipicu.
+func check_bankrupt() -> bool:
+	if not is_bankrupt():
+		return false
+	trigger_game_over(false, "BANGKRUT! Uang celengan habis dan tak ada stok part untuk dikerjakan.")
+	return true
 
 
 func is_bankrupt() -> bool:
@@ -304,13 +336,13 @@ func purchase(items: Array[Dictionary]) -> bool:
 	for item: Dictionary in items:
 		var offer: Dictionary = shop_offers[item.offer_index]
 		if int(offer.stock) < int(item.quantity):
-			toast_requested.emit("Stok toko tidak cukup!")
+			toast_requested.emit("Stok toko tidak cukup!", &"error")
 			return false
 		total += (offer.part as PartData).cost_price * int(item.quantity)
 	if total <= 0:
 		return false
 	if total > cash:
-		toast_requested.emit("Duit celengan kurang! Butuh %s" % Money.format(total))
+		toast_requested.emit("Duit celengan kurang! Butuh %s" % Money.format(total), &"error")
 		return false
 	cash -= total
 	expense_today += total
@@ -346,7 +378,7 @@ func restock_shop(announce: bool) -> void:
 	shop_restocked.emit()
 	if announce:
 		AudioManager.play_sfx(&"restock")
-		toast_requested.emit("Ding-dong! Toko Sparepart Jaya restock barang baru!")
+		toast_requested.emit("Ding-dong! Toko Sparepart Jaya restock barang baru!", &"success")
 
 
 # ---------------------------------------------------------------- helpers
@@ -356,7 +388,7 @@ func format_money(amount: int) -> String:
 
 
 func _take_snapshot() -> void:
-	_day_snapshot = {
+	_day_snapshots[day] = {
 		"cash": cash,
 		"inventory": inventory.duplicate(),
 		"history": satisfaction_history.duplicate(),

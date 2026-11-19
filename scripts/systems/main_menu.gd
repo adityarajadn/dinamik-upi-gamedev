@@ -13,25 +13,37 @@ func _ready() -> void:
 	get_tree().paused = false
 	info_panel.visible = false
 	play_button.pressed.connect(_on_play_pressed)
-	%HowToButton.pressed.connect(_show_info.bind("CARA MAIN", %HowToText.text))
+	%SettingsPanel.visible = false
+	%SettingsButton.pressed.connect(%SettingsPanel/PopupAnimator.show_popup)
 	%CreditsButton.pressed.connect(_show_info.bind("KREDIT", %CreditsText.text))
-	%QuitButton.pressed.connect(func() -> void: get_tree().quit())
 	%InfoClose.pressed.connect(info_popup.hide_popup)
+	%SettingsClose.pressed.connect(%SettingsPanel/PopupAnimator.hide_popup)
+	%MusicSlider.value = AudioManager.music_volume
+	%SfxSlider.value = AudioManager.sfx_volume
+	%MusicSlider.value_changed.connect(AudioManager.set_music_volume)
+	%SfxSlider.value_changed.connect(func(value: float) -> void:
+		AudioManager.set_sfx_volume(value)
+		AudioManager.play_sfx(&"click"))
 	AudioManager.play_music(&"menu")
 	play_button.grab_focus()
 	_animate_logo()
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("cancel") and info_panel.visible:
+	if not event.is_action_pressed("cancel"):
+		return
+	if info_panel.visible:
 		info_popup.hide_popup()
+		get_viewport().set_input_as_handled()
+	elif %SettingsPanel.visible:
+		%SettingsPanel/PopupAnimator.hide_popup()
 		get_viewport().set_input_as_handled()
 
 
 func _on_play_pressed() -> void:
 	GameState.new_game()
 	AudioManager.play_sfx(&"motor_rev")
-	SceneTransitionManager.change_scene(GameState.SCENE_STREET, "swipe_left")
+	SceneTransitionManager.change_scene(GameState.SCENE_INTRO, "fade")
 
 
 func _show_info(title: String, body: String) -> void:

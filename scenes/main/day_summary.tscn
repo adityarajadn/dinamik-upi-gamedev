@@ -38,9 +38,8 @@ grow_vertical = 2
 
 [node name="Panel" type="PanelContainer" parent="Center"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(1300, 860)
+custom_minimum_size = Vector2(900, 620)
 layout_mode = 2
-theme_type_variation = &"LedgerPanel"
 
 [node name="PopupAnimator" type="Node" parent="Center/Panel"]
 script = ExtResource("5_pop")
@@ -52,85 +51,45 @@ theme_override_constants/separation = 12
 [node name="TitleLabel" type="Label" parent="Center/Panel/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_type_variation = &"DarkLabel"
+theme_type_variation = &"HeaderLabel"
 theme_override_colors/font_color = Color(1, 0.0784, 0.5765, 1)
 theme_override_font_sizes/font_size = 48
 text = "TUTUP BENGKEL - HARI 1"
 horizontal_alignment = 1
-
-[node name="Stars" type="HBoxContainer" parent="Center/Panel/VBox"]
-unique_name_in_owner = true
-layout_mode = 2
-alignment = 1
-
-[node name="Star1" type="Label" parent="Center/Panel/VBox/Stars"]
-layout_mode = 2
-theme_type_variation = &"PriceLabel"
-theme_override_font_sizes/font_size = 64
-text = "★"
-
-[node name="Star2" type="Label" parent="Center/Panel/VBox/Stars"]
-layout_mode = 2
-theme_type_variation = &"PriceLabel"
-theme_override_font_sizes/font_size = 64
-text = "★"
-
-[node name="Star3" type="Label" parent="Center/Panel/VBox/Stars"]
-layout_mode = 2
-theme_type_variation = &"PriceLabel"
-theme_override_font_sizes/font_size = 64
-text = "★"
-
-[node name="Star4" type="Label" parent="Center/Panel/VBox/Stars"]
-layout_mode = 2
-theme_type_variation = &"PriceLabel"
-theme_override_font_sizes/font_size = 64
-text = "★"
-
-[node name="Star5" type="Label" parent="Center/Panel/VBox/Stars"]
-layout_mode = 2
-theme_type_variation = &"PriceLabel"
-theme_override_font_sizes/font_size = 64
-text = "★"
+size_flags_horizontal = 4
 
 [node name="IncomeLabel" type="Label" parent="Center/Panel/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 30
 text = "Pendapatan Kotor:"
 
 [node name="ExpenseLabel" type="Label" parent="Center/Panel/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 30
 text = "Modal Suku Cadang:"
 
 [node name="NetLabel" type="Label" parent="Center/Panel/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 34
 text = "Laba Bersih:"
 
 [node name="CashLabel" type="Label" parent="Center/Panel/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_type_variation = &"DarkLabel"
 theme_override_font_sizes/font_size = 30
 text = "Saldo Celengan:"
 
 [node name="ServedLabel" type="Label" parent="Center/Panel/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_type_variation = &"DarkLabel"
 text = "Klien dilayani:"
 
 [node name="SatLabel" type="Label" parent="Center/Panel/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_type_variation = &"DarkLabel"
 text = "Kepuasan:"
 
 [node name="Spacer" type="Control" parent="Center/Panel/VBox"]

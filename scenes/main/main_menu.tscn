@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cdg6l2lv5g004" path="res://scripts/systems/main_menu.gd" id="1_mm"]
 [ext_resource type="Theme" uid="uid://cc8al127ss4fa" path="res://themes/game_theme.tres" id="2_th"]
-[ext_resource type="Texture2D" uid="uid://cue5fcc5b5u42" path="res://assets/generated/bg_main_menu.png" id="3_bg"]
-[ext_resource type="Texture2D" uid="uid://2gosgjtrx6pf" path="res://assets/generated/ui_logo.png" id="4_logo"]
+[ext_resource type="Texture2D" uid="uid://c7h51bc67slyx" path="res://assets/main menu-1.png" id="3_swlpu"]
+[ext_resource type="Texture2D" uid="uid://c411vr1gjbb8s" path="res://assets/title.png" id="4_nm0l4"]
 [ext_resource type="Script" uid="uid://botktt15830n" path="res://scripts/components/ui_button_animation.gd" id="5_btn"]
 [ext_resource type="Script" uid="uid://7ttfm2yi5jp2" path="res://scripts/components/popup_animator.gd" id="6_pop"]
 
@@ -24,26 +24,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_bg")
+texture = ExtResource("3_swlpu")
 expand_mode = 1
 stretch_mode = 6
-
-[node name="Shade" type="ColorRect" parent="." unique_id=1100086532]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 900.0
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.0941, 0.0941, 0.1216, 0.45)
 
 [node name="SafeArea" type="MarginContainer" parent="." unique_id=54356081]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_left = 1019.0
+offset_left = -1.0
 offset_top = 2.0
-offset_right = 1919.0
+offset_right = 899.0
 offset_bottom = 2.0
 grow_vertical = 2
 theme_override_constants/margin_left = 60
@@ -59,7 +50,7 @@ theme_override_constants/separation = 18
 unique_name_in_owner = true
 custom_minimum_size = Vector2(780, 340)
 layout_mode = 2
-texture = ExtResource("4_logo")
+texture = ExtResource("4_nm0l4")
 expand_mode = 1
 stretch_mode = 5
 
@@ -88,12 +79,12 @@ theme_override_font_sizes/font_size = 38
 text = "MULAI NGEBENGKEL"
 script = ExtResource("5_btn")
 
-[node name="HowToButton" type="Button" parent="SafeArea/MainLayout/MenuButtons" unique_id=1049177281]
+[node name="SettingsButton" type="Button" parent="SafeArea/MainLayout/MenuButtons" unique_id=1049177281]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(440, 80)
 layout_mode = 2
 theme_type_variation = &"OrangeButton"
-text = "CARA MAIN"
+text = "PENGATURAN"
 script = ExtResource("5_btn")
 
 [node name="CreditsButton" type="Button" parent="SafeArea/MainLayout/MenuButtons" unique_id=2090258430]
@@ -102,14 +93,6 @@ custom_minimum_size = Vector2(440, 80)
 layout_mode = 2
 theme_type_variation = &"DarkButton"
 text = "KREDIT"
-script = ExtResource("5_btn")
-
-[node name="QuitButton" type="Button" parent="SafeArea/MainLayout/MenuButtons" unique_id=189488869]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(440, 80)
-layout_mode = 2
-theme_type_variation = &"RedButton"
-text = "KELUAR"
 script = ExtResource("5_btn")
 
 [node name="InfoPanel" type="PanelContainer" parent="." unique_id=490960724]
@@ -157,10 +140,91 @@ autowrap_mode = 3
 
 [node name="InfoClose" type="Button" parent="InfoPanel/VBox" unique_id=1652064769]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 76)
+custom_minimum_size = Vector2(84, 84)
 layout_mode = 2
-size_flags_horizontal = 4
-text = "OKE!"
+size_flags_horizontal = 8
+tooltip_text = "Tutup"
+theme_type_variation = &"CloseButtonBig"
+script = ExtResource("5_btn")
+
+[node name="SettingsPanel" type="PanelContainer" parent="." unique_id=1055176881]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(760, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -380.0
+offset_top = -220.0
+offset_right = 380.0
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PopupAnimator" type="Node" parent="SettingsPanel" unique_id=1709027269]
+script = ExtResource("6_pop")
+
+[node name="VBox" type="VBoxContainer" parent="SettingsPanel" unique_id=199576579]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="Title" type="Label" parent="SettingsPanel/VBox" unique_id=136028682]
+layout_mode = 2
+theme_type_variation = &"TitleLabel"
+text = "PENGATURAN"
+horizontal_alignment = 1
+
+[node name="MusicRow" type="HBoxContainer" parent="SettingsPanel/VBox" unique_id=1144489331]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="SettingsPanel/VBox/MusicRow" unique_id=393971591]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "MUSIK"
+
+[node name="MusicSlider" type="HSlider" parent="SettingsPanel/VBox/MusicRow" unique_id=1006694297]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SfxRow" type="HBoxContainer" parent="SettingsPanel/VBox" unique_id=1752079290]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="SettingsPanel/VBox/SfxRow" unique_id=909450952]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "EFEK SUARA"
+
+[node name="SfxSlider" type="HSlider" parent="SettingsPanel/VBox/SfxRow" unique_id=1168047820]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="FullscreenCheck" type="CheckButton" parent="SettingsPanel/VBox" unique_id=953613031]
+unique_name_in_owner = true
+layout_mode = 2
+text = "LAYAR PENUH"
+
+[node name="SettingsClose" type="Button" parent="SettingsPanel/VBox" unique_id=1948164529]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(84, 84)
+layout_mode = 2
+size_flags_horizontal = 8
+tooltip_text = "Tutup"
+theme_type_variation = &"CloseButtonBig"
 script = ExtResource("5_btn")
 
 [node name="TextData" type="Control" parent="." unique_id=274968941]

@@ -1,0 +1,266 @@
+[gd_scene format=3 uid="uid://bw0hchhd8mdeo"]
+
+[ext_resource type="Script" uid="uid://bk8ufal0wsfo7" path="res://scripts/components/street_backdrop.gd" id="1_sb"]
+[ext_resource type="Texture2D" uid="uid://djga3s3kh4afy" path="res://assets/street/pagi/sky.png" id="2_pa"]
+[ext_resource type="Texture2D" uid="uid://dux7m1jsp7ykf" path="res://assets/street/pagi/buildings.png" id="3_pa"]
+[ext_resource type="Texture2D" uid="uid://wbe8rn7u84kf" path="res://assets/street/pagi/sidewalk.png" id="4_pa"]
+[ext_resource type="Texture2D" uid="uid://x83m8d16rhi1" path="res://assets/street/pagi/shop_workshop.png" id="5_pa"]
+[ext_resource type="Texture2D" uid="uid://dyi1ppunnsdmy" path="res://assets/street/pagi/shop_parts.png" id="6_pa"]
+[ext_resource type="Texture2D" uid="uid://6gmm4gnkyt11" path="res://assets/street/pagi/door_workshop_open.png" id="7_pa"]
+[ext_resource type="Texture2D" uid="uid://dnelguqrxymxp" path="res://assets/street/pagi/door_workshop_closed.png" id="8_pa"]
+[ext_resource type="Texture2D" uid="uid://c107rhmj2coyw" path="res://assets/street/pagi/door_parts_open.png" id="9_pa"]
+[ext_resource type="Texture2D" uid="uid://ccpwni2grtteb" path="res://assets/street/pagi/door_parts_closed.png" id="10_pa"]
+[ext_resource type="Texture2D" uid="uid://daou14s5bi3eq" path="res://assets/street/pagi/cloud_1.png" id="11_pa"]
+[ext_resource type="Texture2D" uid="uid://bsj6dsrfsfg1g" path="res://assets/street/pagi/cloud_2.png" id="12_pa"]
+[ext_resource type="Texture2D" uid="uid://ced5wakcpox2w" path="res://assets/street/pagi/cloud_3.png" id="13_pa"]
+[ext_resource type="Texture2D" uid="uid://bngloth8tlpxl" path="res://assets/street/pagi/cloud_4.png" id="14_pa"]
+[ext_resource type="Texture2D" uid="uid://2icona5gm6v6" path="res://assets/street/sore/sky.png" id="15_so"]
+[ext_resource type="Texture2D" uid="uid://gv7h5myaq3b5" path="res://assets/street/sore/buildings.png" id="16_so"]
+[ext_resource type="Texture2D" uid="uid://g6wfolpq6lij" path="res://assets/street/sore/sidewalk.png" id="17_so"]
+[ext_resource type="Texture2D" uid="uid://b0pwwiv3kp5ln" path="res://assets/street/sore/shop_workshop.png" id="18_so"]
+[ext_resource type="Texture2D" uid="uid://fsjovkrhfkh4" path="res://assets/street/sore/shop_parts.png" id="19_so"]
+[ext_resource type="Texture2D" uid="uid://dmphcnfdjj7a1" path="res://assets/street/sore/door_workshop_open.png" id="20_so"]
+[ext_resource type="Texture2D" uid="uid://brtmvrtxl3die" path="res://assets/street/sore/door_workshop_closed.PNG" id="21_so"]
+[ext_resource type="Texture2D" uid="uid://dnnaettwjb55v" path="res://assets/street/sore/door_parts_open.png" id="22_so"]
+[ext_resource type="Texture2D" uid="uid://bha52ucekx80q" path="res://assets/street/sore/door_parts_closed.png" id="23_so"]
+[ext_resource type="Texture2D" uid="uid://8v1or3v2lijp" path="res://assets/street/sore/cloud_1.png" id="24_so"]
+[ext_resource type="Texture2D" uid="uid://7evu0khwrlel" path="res://assets/street/sore/cloud_2.png" id="25_so"]
+[ext_resource type="Texture2D" uid="uid://cgr66ogtdhj1i" path="res://assets/street/sore/cloud_3.png" id="26_so"]
+[ext_resource type="Texture2D" uid="uid://b5k3tt7neq8hy" path="res://assets/street/sore/cloud_4.png" id="27_so"]
+[ext_resource type="Texture2D" uid="uid://cbxqhtic1xbpf" path="res://assets/street/malam/sky.png" id="28_ma"]
+[ext_resource type="Texture2D" uid="uid://c2ummo4m5yups" path="res://assets/street/malam/buildings.png" id="29_ma"]
+[ext_resource type="Texture2D" uid="uid://dih67sidm3rcr" path="res://assets/street/malam/sidewalk.png" id="30_ma"]
+[ext_resource type="Texture2D" uid="uid://b7pwct6tcsc2j" path="res://assets/street/malam/shop_workshop.png" id="31_ma"]
+[ext_resource type="Texture2D" uid="uid://lc22uak1otfl" path="res://assets/street/malam/shop_parts.png" id="32_ma"]
+[ext_resource type="Texture2D" uid="uid://bco2jd8a0tdtq" path="res://assets/street/malam/door_workshop_open.png" id="33_ma"]
+[ext_resource type="Texture2D" uid="uid://bvygq38hpfwmf" path="res://assets/street/malam/door_workshop_closed.png" id="34_ma"]
+[ext_resource type="Texture2D" uid="uid://d1cpecvugkaho" path="res://assets/street/malam/door_parts_open.png" id="35_ma"]
+[ext_resource type="Texture2D" uid="uid://bvx5eatf4t7yx" path="res://assets/street/malam/door_parts_closed.png" id="36_ma"]
+[ext_resource type="Texture2D" uid="uid://deh1lhfhq2e4r" path="res://assets/street/malam/cloud_1.png" id="37_ma"]
+[ext_resource type="Texture2D" uid="uid://dd3dsu61sbd14" path="res://assets/street/malam/cloud_2.png" id="38_ma"]
+[ext_resource type="Texture2D" uid="uid://dqvqyonbw2svm" path="res://assets/street/malam/cloud_3.png" id="39_ma"]
+[ext_resource type="Texture2D" uid="uid://corc8orj0t4i6" path="res://assets/street/malam/cloud_4.png" id="40_ma"]
+[ext_resource type="Texture2D" uid="uid://y5ypf8ujaip2" path="res://assets/sparepart-title.png" id="41_c7efh"]
+[ext_resource type="Texture2D" uid="uid://c411vr1gjbb8s" path="res://assets/title.png" id="42_k104h"]
+
+[node name="StreetBackdrop" type="Node2D" unique_id=1298874316]
+z_index = -10
+script = ExtResource("1_sb")
+
+[node name="Pagi" type="Node2D" parent="." unique_id=129594749]
+
+[node name="Sky" type="Sprite2D" parent="Pagi" unique_id=1147175185]
+texture = ExtResource("2_pa")
+centered = false
+
+[node name="Clouds" type="Parallax2D" parent="Pagi" unique_id=645567152]
+scroll_scale = Vector2(0.6, 1)
+
+[node name="Cloud1" type="Sprite2D" parent="Pagi/Clouds" unique_id=1788444793]
+position = Vector2(254, 79)
+texture = ExtResource("11_pa")
+centered = false
+
+[node name="Cloud2" type="Sprite2D" parent="Pagi/Clouds" unique_id=829472542]
+position = Vector2(2561, 77)
+texture = ExtResource("12_pa")
+centered = false
+
+[node name="Cloud3" type="Sprite2D" parent="Pagi/Clouds" unique_id=1120575183]
+position = Vector2(919, 72)
+texture = ExtResource("13_pa")
+centered = false
+
+[node name="Cloud4" type="Sprite2D" parent="Pagi/Clouds" unique_id=1343647390]
+position = Vector2(1796, 15)
+texture = ExtResource("14_pa")
+centered = false
+
+[node name="Buildings" type="Sprite2D" parent="Pagi" unique_id=1852713456]
+texture = ExtResource("3_pa")
+centered = false
+
+[node name="Sidewalk" type="Sprite2D" parent="Pagi" unique_id=1999694058]
+texture = ExtResource("4_pa")
+centered = false
+
+[node name="TokoBengkel" type="Sprite2D" parent="Pagi" unique_id=583174555]
+position = Vector2(1342, 163)
+texture = ExtResource("5_pa")
+centered = false
+
+[node name="TokoSparepart" type="Sprite2D" parent="Pagi" unique_id=492116565]
+position = Vector2(2427, 0)
+texture = ExtResource("6_pa")
+centered = false
+
+[node name="DoorWorkshopOpen" type="Sprite2D" parent="Pagi" unique_id=1961641904]
+position = Vector2(1408, 421)
+texture = ExtResource("7_pa")
+centered = false
+
+[node name="DoorWorkshopClosed" type="Sprite2D" parent="Pagi" unique_id=1722287105]
+z_index = 11
+position = Vector2(1420, 466)
+texture = ExtResource("8_pa")
+centered = false
+
+[node name="DoorPartsOpen" type="Sprite2D" parent="Pagi" unique_id=192489654]
+position = Vector2(2463, 219)
+texture = ExtResource("9_pa")
+centered = false
+
+[node name="DoorPartsClosed" type="Sprite2D" parent="Pagi" unique_id=92535773]
+z_index = 11
+position = Vector2(2469, 263)
+texture = ExtResource("10_pa")
+centered = false
+
+[node name="Sore" type="Node2D" parent="." unique_id=1941405605]
+
+[node name="Sky" type="Sprite2D" parent="Sore" unique_id=1969711813]
+texture = ExtResource("15_so")
+centered = false
+
+[node name="Clouds" type="Parallax2D" parent="Sore" unique_id=1289979458]
+scroll_scale = Vector2(0.6, 1)
+
+[node name="Cloud1" type="Sprite2D" parent="Sore/Clouds" unique_id=1963700555]
+position = Vector2(254, 79)
+texture = ExtResource("24_so")
+centered = false
+
+[node name="Cloud2" type="Sprite2D" parent="Sore/Clouds" unique_id=79076271]
+position = Vector2(2561, 77)
+texture = ExtResource("25_so")
+centered = false
+
+[node name="Cloud3" type="Sprite2D" parent="Sore/Clouds" unique_id=785418458]
+position = Vector2(919, 72)
+texture = ExtResource("26_so")
+centered = false
+
+[node name="Cloud4" type="Sprite2D" parent="Sore/Clouds" unique_id=215521376]
+position = Vector2(1796, 15)
+texture = ExtResource("27_so")
+centered = false
+
+[node name="Buildings" type="Sprite2D" parent="Sore" unique_id=1366179068]
+texture = ExtResource("16_so")
+centered = false
+
+[node name="Sidewalk" type="Sprite2D" parent="Sore" unique_id=27918033]
+texture = ExtResource("17_so")
+centered = false
+
+[node name="TokoBengkel" type="Sprite2D" parent="Sore" unique_id=1544291351]
+position = Vector2(1342, 163)
+texture = ExtResource("18_so")
+centered = false
+
+[node name="TokoSparepart" type="Sprite2D" parent="Sore" unique_id=1013914748]
+position = Vector2(2427, 0)
+texture = ExtResource("19_so")
+centered = false
+
+[node name="DoorWorkshopOpen" type="Sprite2D" parent="Sore" unique_id=1797500052]
+position = Vector2(1408, 421)
+texture = ExtResource("20_so")
+centered = false
+
+[node name="DoorWorkshopClosed" type="Sprite2D" parent="Sore" unique_id=2131608012]
+z_index = 11
+position = Vector2(1420, 328)
+texture = ExtResource("21_so")
+centered = false
+
+[node name="DoorPartsOpen" type="Sprite2D" parent="Sore" unique_id=1260477467]
+position = Vector2(2463, 219)
+texture = ExtResource("22_so")
+centered = false
+
+[node name="DoorPartsClosed" type="Sprite2D" parent="Sore" unique_id=804532555]
+z_index = 11
+position = Vector2(2469, 263)
+texture = ExtResource("23_so")
+centered = false
+
+[node name="Malam" type="Node2D" parent="." unique_id=1721583238]
+
+[node name="Sky" type="Sprite2D" parent="Malam" unique_id=1684847657]
+texture = ExtResource("28_ma")
+centered = false
+
+[node name="Clouds" type="Parallax2D" parent="Malam" unique_id=102250678]
+scroll_scale = Vector2(0.6, 1)
+
+[node name="Cloud1" type="Sprite2D" parent="Malam/Clouds" unique_id=216753758]
+position = Vector2(254, 79)
+texture = ExtResource("37_ma")
+centered = false
+
+[node name="Cloud2" type="Sprite2D" parent="Malam/Clouds" unique_id=668178493]
+position = Vector2(2561, 77)
+texture = ExtResource("38_ma")
+centered = false
+
+[node name="Cloud3" type="Sprite2D" parent="Malam/Clouds" unique_id=1012365777]
+position = Vector2(919, 72)
+texture = ExtResource("39_ma")
+centered = false
+
+[node name="Cloud4" type="Sprite2D" parent="Malam/Clouds" unique_id=1766069564]
+position = Vector2(1796, 15)
+texture = ExtResource("40_ma")
+centered = false
+
+[node name="Buildings" type="Sprite2D" parent="Malam" unique_id=114081654]
+texture = ExtResource("29_ma")
+centered = false
+
+[node name="Sidewalk" type="Sprite2D" parent="Malam" unique_id=889755584]
+texture = ExtResource("30_ma")
+centered = false
+
+[node name="TokoBengkel" type="Sprite2D" parent="Malam" unique_id=1152652577]
+position = Vector2(1342, 163)
+texture = ExtResource("31_ma")
+centered = false
+
+[node name="TokoSparepart" type="Sprite2D" parent="Malam" unique_id=1379408510]
+position = Vector2(2427, 0)
+texture = ExtResource("32_ma")
+centered = false
+
+[node name="DoorWorkshopOpen" type="Sprite2D" parent="Malam" unique_id=1641002828]
+position = Vector2(1408, 421)
+texture = ExtResource("33_ma")
+centered = false
+
+[node name="DoorWorkshopClosed" type="Sprite2D" parent="Malam" unique_id=1480494039]
+z_index = 11
+position = Vector2(1416, 464)
+texture = ExtResource("34_ma")
+centered = false
+
+[node name="DoorPartsOpen" type="Sprite2D" parent="Malam" unique_id=1201888815]
+position = Vector2(2463, 219)
+texture = ExtResource("35_ma")
+centered = false
+
+[node name="DoorPartsClosed" type="Sprite2D" parent="Malam" unique_id=1073777355]
+z_index = 11
+position = Vector2(2469, 263)
+texture = ExtResource("36_ma")
+centered = false
+
+[node name="SparepartTitle" type="Sprite2D" parent="Malam" unique_id=858973413]
+position = Vector2(2926, 87)
+rotation = -0.1272096
+scale = Vector2(0.05297454, 0.052974556)
+texture = ExtResource("41_c7efh")
+
+[node name="Title" type="Sprite2D" parent="Malam" unique_id=1996708373]
+position = Vector2(1876.9999, 276)
+scale = Vector2(0.05907192, 0.05907192)
+texture = ExtResource("42_k104h")

@@ -3,6 +3,7 @@ extends Node2D
 
 const ORDER_ROW_SCENE: PackedScene = preload("res://scenes/ui/components/order_row.tscn")
 const TWIST_STATS_SCENE: PackedScene = preload("res://scenes/ui/components/twist_stats.tscn")
+const Typewriter: GDScript = preload("res://scripts/utilities/typewriter.gd")
 
 enum State { IDLE, ZOOMED, DRAGGING, TWIST, RESULT }
 
@@ -90,6 +91,8 @@ func _ready() -> void:
 	GameState.set_clock_running(true)
 	AudioManager.play_music(&"workshop")
 	_load_client()
+	if GameState.tutorial_pending:
+		hud.show_tutorial()
 
 
 func _process(_delta: float) -> void:
@@ -139,6 +142,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _load_client() -> void:
 	order = GameState.take_next_client()
 	motor.show_order(order)
+	($Shadows/ClientShadow as Sprite2D).visible = order != null
 	if order == null:
 		client_sprite.visible = false
 		_show_order_panel(false)
@@ -152,8 +156,9 @@ func _load_client() -> void:
 	var tween: Tween = create_tween().set_parallel(true).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	tween.tween_property(client_sprite, "position:x", base_x, 0.45)
 	tween.tween_property(client_sprite, "modulate:a", 1.0, 0.3)
-	bubble_label.text = "%s:\n\"%s\"" % [order.profile.client_name, order.request_text]
+	AudioManager.play_sfx(&"bell", 0.0)
 	bubble.visible = true
+	Typewriter.play(bubble_label, order.request_text)
 	_show_order_panel(true)
 	_refresh_order_panel()
 
@@ -177,7 +182,7 @@ func _refresh_order_panel() -> void:
 	estimate_label.text = "Estimasi bayar: %s  |  Modal part: %s" % [Money.format(order.get_payment()), Money.format(order.get_parts_cost())]
 	progress_bar.value = order.get_progress() * 100.0
 	deliver_button.disabled = order.twist_pending
-	deliver_button.text = "SERAHKAN MOTOR" if order.get_progress() >= 1.0 else "SERAHKAN (BELUM BERES)"
+	deliver_button.text = "SERAHKAN"
 
 
 # ---------------------------------------------------------------- order panel slide
@@ -217,7 +222,7 @@ func _on_slot_clicked(slot: int) -> void:
 	if order == null or not (state == State.IDLE or state == State.ZOOMED):
 		return
 	if not order.is_slot_ordered(slot):
-		hud.show_toast("Klien nggak minta ganti %s. Fokus ke bagian bertanda *" % PartData.slot_to_name(slot))
+		hud.show_toast("Klien nggak minta ganti %s. Fokus ke bagian bertanda *" % PartData.slot_to_name(slot), &"warning")
 		AudioManager.play_sfx(&"install_fail")
 		return
 	if selected_slot >= 0:
@@ -270,7 +275,7 @@ func _on_card_drag_requested(card: PartCard) -> void:
 		return
 	if card.stock <= 0:
 		AudioManager.play_sfx(&"install_fail")
-		hud.show_toast("Stok %s habis! Beli dulu di Toko Sparepart Jaya." % card.part.part_id)
+		hud.show_toast("Stok %s habis! Beli dulu di Toko Sparepart Jaya." % card.part.part_id, &"error")
 		return
 	dragging_card = card
 	drag_ghost.texture = card.part.get_icon()
@@ -306,7 +311,7 @@ func _cancel_drag() -> void:
 
 func _install_part(part: PartData) -> void:
 	if order.current_parts[part.slot] == part:
-		hud.show_toast("Part itu sudah terpasang!")
+		hud.show_toast("Part itu sudah terpasang!", &"mini")
 		AudioManager.play_sfx(&"install_fail")
 		return
 	if not GameState.remove_stock(part.part_id):
@@ -325,7 +330,7 @@ func _install_part(part: PartData) -> void:
 			await get_tree().create_timer(twist_delay).timeout
 			_show_twist()
 		else:
-			hud.show_toast("Pengerjaan 100%! Klik SERAHKAN MOTOR.")
+			hud.show_toast("Pengerjaan 100%! Klik SERAHKAN MOTOR.", &"success")
 
 
 func _play_install_fx(world_position: Vector2) -> void:
@@ -376,14 +381,14 @@ func _show_twist() -> void:
 	AudioManager.play_sfx(&"plot_twist")
 	client_sprite.texture = order.profile.texture_panic
 	player_sprite.play(&"scratch")
-	twist_portrait.texture = order.profile.texture_panic
-	twist_dialog.text = "\"%s\"" % order.twist_text
+	twist_portrait.texture = _make_bust(order.profile.texture_panic, 0.6)
+	Typewriter.play(twist_dialog, order.twist_text)
 	var slot_name: String = PartData.slot_to_name(order.twist_slot)
 	var affordable: PartData = GameState.CATALOG.get_part_by_slot_tier(order.twist_slot, order.get_affordable_twist_tier())
 	var current_cost: int = order.get_parts_cost()
 	%AcceptDesc.text = "Ganti %s ke T%d %s. Untung, kepuasan turun." % [slot_name, affordable.tier, affordable.display_name]
 	%AbsorbDesc.text = "Tetap pasang. Modal %s, kamu rugi. Kepuasan naik!" % Money.format(current_cost)
-	%RejectDesc.text = "\"Gak bisa Bos!\" Klien bayar pas modal. Kepuasan anjlok."
+	%RejectDesc.text = "Gak bisa Bos! Klien bayar pas modal. Kepuasan anjlok."
 	_show_twist_stats()
 	twist_overlay.visible = true
 	twist_popup.show_popup()
@@ -428,11 +433,11 @@ func _on_twist_choice(choice: ClientOrder.TwistChoice) -> void:
 	player_sprite.play(&"idle")
 	match choice:
 		ClientOrder.TwistChoice.ACCEPT:
-			hud.show_toast("Pasang ulang %s Tier %d sesuai budget baru." % [PartData.slot_to_name(slot), order.target_tiers[slot]])
+			hud.show_toast("Pasang ulang %s Tier %d sesuai budget baru." % [PartData.slot_to_name(slot), order.target_tiers[slot]], &"info")
 		ClientOrder.TwistChoice.ABSORB_LOSS:
-			hud.show_toast("Demi reputasi! Serahkan motornya.")
+			hud.show_toast("Demi reputasi! Serahkan motornya.", &"success")
 		ClientOrder.TwistChoice.REJECT:
-			hud.show_toast("Klien manyun... Serahkan motornya.")
+			hud.show_toast("Klien manyun... Serahkan motornya.", &"warning")
 	_refresh_order_panel()
 
 
@@ -472,9 +477,9 @@ func _on_deliver_pressed() -> void:
 		hud.shake_piggy()
 	else:
 		Juice.bounce(piggy_sprite)
-	bubble_label.text = "%s:\n\"%s\"" % [profile.client_name, line]
+	bubble_label.text = line
 	%ResultTitle.text = "SERAH TERIMA!" if not result.caught else "KETAHUAN NIPU!"
-	%ReactionLabel.text = "\"%s\"" % line
+	Typewriter.play(%ReactionLabel, line)
 	%ResultPortrait.texture = _make_bust(client_sprite.texture)
 	bubble.visible = false
 	# Ringkas: cukup uang masuk + kepuasan, sisanya bikin bingung.
@@ -503,8 +508,7 @@ func _on_result_continue() -> void:
 	await result_popup.hidden
 	result_overlay.visible = false
 	state = State.IDLE
-	if GameState.is_reputation_bankrupt():
-		GameState.trigger_game_over(false, "Rata-rata kepuasan anjlok ke %d%%. Bengkelmu dicap \"Bengkel Penipu\" di medsos, tak ada lagi yang mau antre." % roundi(GameState.get_average_satisfaction()))
+	if GameState.check_bankrupt():
 		return
 	var tween: Tween = create_tween()
 	tween.tween_property(client_sprite, "modulate:a", 0.0, 0.3)

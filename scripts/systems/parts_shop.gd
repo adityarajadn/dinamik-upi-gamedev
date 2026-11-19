@@ -1,6 +1,8 @@
 extends Node2D
 ## SC-03 Toko Sparepart Jaya: katalog 3x3, keranjang, checkout, restock 5 menit.
 
+const Typewriter: GDScript = preload("res://scripts/utilities/typewriter.gd")
+
 const KOH_IDLE: Texture2D = preload("res://assets/baked_processed/char_kohjaya_idle.png")
 const KOH_SMILE: Texture2D = preload("res://assets/baked_processed/char_kohjaya_smile.png")
 const CART_ROW_SCENE: PackedScene = preload("res://scenes/ui/components/cart_row.tscn")
@@ -151,7 +153,7 @@ func _on_countdown_changed(seconds_left: float) -> void:
 
 
 func _koh_say(text: String) -> void:
-	koh_bubble.text = "Koh Jaya: \"%s\"" % text
+	Typewriter.play(koh_bubble, text)
 
 
 func _bob_koh_jaya() -> void:

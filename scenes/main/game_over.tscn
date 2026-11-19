@@ -1,12 +1,12 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene format=3 uid="uid://bo4kaoanvsr8o"]
 
-[ext_resource type="Script" path="res://scripts/systems/game_over.gd" id="1_go"]
-[ext_resource type="Theme" path="res://themes/game_theme.tres" id="2_th"]
-[ext_resource type="Texture2D" path="res://assets/generated/bg_game_over.png" id="3_bg"]
-[ext_resource type="Script" path="res://scripts/components/ui_button_animation.gd" id="4_btn"]
-[ext_resource type="Script" path="res://scripts/components/popup_animator.gd" id="5_pop"]
+[ext_resource type="Script" uid="uid://xrycetfb32q3" path="res://scripts/systems/game_over.gd" id="1_go"]
+[ext_resource type="Theme" uid="uid://cc8al127ss4fa" path="res://themes/game_theme.tres" id="2_th"]
+[ext_resource type="Texture2D" uid="uid://byifx1ca3abqn" path="res://assets/generated/bg_game_over.png" id="3_bg"]
+[ext_resource type="Script" uid="uid://botktt15830n" path="res://scripts/components/ui_button_animation.gd" id="4_btn"]
+[ext_resource type="Script" uid="uid://7ttfm2yi5jp2" path="res://scripts/components/popup_animator.gd" id="5_pop"]
 
-[node name="GameOver" type="Control"]
+[node name="GameOver" type="Control" unique_id=693399360]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,7 +16,7 @@ grow_vertical = 2
 theme = ExtResource("2_th")
 script = ExtResource("1_go")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=1774211951]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -28,7 +28,7 @@ texture = ExtResource("3_bg")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="Center" type="CenterContainer" parent="."]
+[node name="Center" type="CenterContainer" parent="." unique_id=148034736]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,19 +36,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="PanelContainer" parent="Center"]
+[node name="Panel" type="PanelContainer" parent="Center" unique_id=1565102229]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(1100, 0)
 layout_mode = 2
 
-[node name="PopupAnimator" type="Node" parent="Center/Panel"]
+[node name="PopupAnimator" type="Node" parent="Center/Panel" unique_id=1467921833]
 script = ExtResource("5_pop")
 
-[node name="VBox" type="VBoxContainer" parent="Center/Panel"]
+[node name="VBox" type="VBoxContainer" parent="Center/Panel" unique_id=1963155184]
 layout_mode = 2
 theme_override_constants/separation = 18
 
-[node name="TitleLabel" type="Label" parent="Center/Panel/VBox"]
+[node name="TitleLabel" type="Label" parent="Center/Panel/VBox" unique_id=885218285]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"TitleLabel"
@@ -56,7 +56,7 @@ theme_override_font_sizes/font_size = 72
 text = "BENGKEL GULUNG TIKAR!"
 horizontal_alignment = 1
 
-[node name="ReasonLabel" type="Label" parent="Center/Panel/VBox"]
+[node name="ReasonLabel" type="Label" parent="Center/Panel/VBox" unique_id=1618811376]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(1000, 0)
 layout_mode = 2
@@ -65,19 +65,19 @@ text = "Alasan"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="StatsLabel" type="Label" parent="Center/Panel/VBox"]
+[node name="StatsLabel" type="Label" parent="Center/Panel/VBox" unique_id=607739879]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"PriceLabel"
 text = "Statistik"
 horizontal_alignment = 1
 
-[node name="Buttons" type="HBoxContainer" parent="Center/Panel/VBox"]
+[node name="Buttons" type="VBoxContainer" parent="Center/Panel/VBox" unique_id=1726831347]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="RestartDayButton" type="Button" parent="Center/Panel/VBox/Buttons"]
+[node name="RestartDayButton" type="Button" parent="Center/Panel/VBox/Buttons" unique_id=547574866]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(320, 84)
 layout_mode = 2
@@ -85,14 +85,14 @@ theme_type_variation = &"OrangeButton"
 text = "ULANG HARI"
 script = ExtResource("4_btn")
 
-[node name="NewGameButton" type="Button" parent="Center/Panel/VBox/Buttons"]
+[node name="NewGameButton" type="Button" parent="Center/Panel/VBox/Buttons" unique_id=1337573649]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(320, 84)
 layout_mode = 2
 text = "GAME BARU"
 script = ExtResource("4_btn")
 
-[node name="MenuButton" type="Button" parent="Center/Panel/VBox/Buttons"]
+[node name="MenuButton" type="Button" parent="Center/Panel/VBox/Buttons" unique_id=321575921]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(320, 84)
 layout_mode = 2

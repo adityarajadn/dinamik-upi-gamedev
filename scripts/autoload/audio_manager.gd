@@ -2,10 +2,10 @@ extends Node
 ## Audio lintas scene. Semua AudioStreamPlayer sudah ada di scene autoload (tanpa node runtime).
 
 const MUSIC: Dictionary = {
-	&"menu": preload("res://assets/generated/audio/bgm_menu.mp3"),
+	&"menu": preload("res://assets/audio/music/main_menu.mp3"),
 	&"street": preload("res://assets/generated/audio/bgm_street.mp3"),
 	&"workshop": preload("res://assets/generated/audio/bgm_workshop.mp3"),
-	&"shop": preload("res://assets/generated/audio/bgm_shop.mp3"),
+	&"shop": preload("res://assets/audio/music/shop.mp3"),
 }
 
 const SFX: Dictionary = {
@@ -21,11 +21,17 @@ const SFX: Dictionary = {
 	&"angry": preload("res://assets/generated/audio/sfx_client_angry.mp3"),
 	&"restock": preload("res://assets/generated/audio/sfx_restock_ding.mp3"),
 	&"page_flip": preload("res://assets/generated/audio/sfx_page_flip.mp3"),
+	&"talk": preload("res://assets/generated/audio/sfx_talk_blip.mp3"),
+	&"step": preload("res://assets/generated/audio/sfx_step.mp3"),
+	&"bell": preload("res://assets/generated/audio/sfx_service_bell.mp3"),
 }
 
 @export var music_fade_duration: float = 0.6
 @export var music_volume_db: float = 0.0
 
+## Volume linear 0..1 dari menu Pengaturan.
+var music_volume: float = 1.0
+var sfx_volume: float = 1.0
 var current_music: StringName = &""
 var _music_tween: Tween
 var _next_sfx_index: int = 0
@@ -50,7 +56,7 @@ func play_music(music_id: StringName) -> void:
 		music_player.stream = MUSIC[music_id]
 		music_player.volume_db = -40.0
 		music_player.play())
-	_music_tween.tween_property(music_player, "volume_db", music_volume_db, music_fade_duration)
+	_music_tween.tween_property(music_player, "volume_db", _music_target_db(), music_fade_duration)
 
 
 func stop_music() -> void:
@@ -67,3 +73,19 @@ func play_sfx(sfx_id: StringName, pitch_variance: float = 0.06) -> void:
 	player.stream = SFX[sfx_id]
 	player.pitch_scale = 1.0 + randf_range(-pitch_variance, pitch_variance)
 	player.play()
+
+
+func set_music_volume(value: float) -> void:
+	music_volume = clampf(value, 0.0, 1.0)
+	if not (_music_tween and _music_tween.is_running()):
+		music_player.volume_db = _music_target_db()
+
+
+func set_sfx_volume(value: float) -> void:
+	sfx_volume = clampf(value, 0.0, 1.0)
+	for player: Node in sfx_players:
+		(player as AudioStreamPlayer).volume_db = linear_to_db(maxf(sfx_volume, 0.0001))
+
+
+func _music_target_db() -> float:
+	return music_volume_db + linear_to_db(maxf(music_volume, 0.0001))

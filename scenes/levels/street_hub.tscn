@@ -1,19 +1,18 @@
 [gd_scene format=3 uid="uid://d0847pug7jv8v"]
 
 [ext_resource type="Script" uid="uid://cc0i13dfqvln8" path="res://scripts/systems/street_hub.gd" id="1_sh"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/bg_street_buildings.png" id="2_bg"]
 [ext_resource type="Script" uid="uid://c2hnmkye7jh5y" path="res://scripts/components/door.gd" id="3_door"]
 [ext_resource type="Theme" uid="uid://cc8al127ss4fa" path="res://themes/game_theme.tres" id="4_th"]
 [ext_resource type="PackedScene" path="res://scenes/components/motor_preview.tscn" id="5_mp"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/char_sport_idle.png" id="6_cl"]
+[ext_resource type="Texture2D" uid="uid://dh0cju8hfhc8q" path="res://assets/baked_processed/char_sport_idle.png" id="6_cl"]
 [ext_resource type="Script" uid="uid://durfjbw1bs5aj" path="res://scripts/systems/player_controller.gd" id="7_pc"]
 [ext_resource type="Script" uid="uid://b731hd62noafx" path="res://scripts/components/side_scroll_movement.gd" id="8_mv"]
 [ext_resource type="Script" uid="uid://dd8skays7ik6k" path="res://scripts/components/player_animation.gd" id="9_an"]
 [ext_resource type="Script" uid="uid://ccqyav24a24s8" path="res://scripts/components/player_interaction.gd" id="10_in"]
-[ext_resource type="SpriteFrames" path="res://resources/characters/player_frames.tres" id="11_fr"]
-[ext_resource type="PackedScene" path="res://scenes/ui/hud/hud.tscn" id="12_hud"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/bg_street_sky.png" id="13_far"]
-[ext_resource type="Texture2D" path="res://assets/baked_processed/bg_street_clouds.png" id="14_cloud"]
+[ext_resource type="SpriteFrames" uid="uid://bpxtng70b83ja" path="res://resources/characters/player_frames.tres" id="11_fr"]
+[ext_resource type="PackedScene" uid="uid://i3xf8p2mjf8v" path="res://scenes/ui/hud/hud.tscn" id="12_hud"]
+[ext_resource type="PackedScene" uid="uid://bw0hchhd8mdeo" path="res://scenes/components/street_backdrop.tscn" id="15_sb"]
+[ext_resource type="Texture2D" uid="uid://d165vsk4m4wwx" path="res://assets/ui_kit/prompt_e.png" id="20_key"]
 
 [sub_resource type="RectangleShape2D" id="Shape_door"]
 size = Vector2(300, 420)
@@ -30,26 +29,7 @@ size = Vector2(40, 1200)
 [node name="StreetHub" type="Node2D" unique_id=1768586084]
 script = ExtResource("1_sh")
 
-[node name="FarSky" type="Parallax2D" parent="." unique_id=37380475]
-scroll_scale = Vector2(0.15, 1)
-repeat_size = Vector2(3564, 0)
-
-[node name="Sky" type="Sprite2D" parent="FarSky" unique_id=1683371126]
-position = Vector2(1782, 540)
-texture = ExtResource("13_far")
-
-[node name="Clouds" type="Parallax2D" parent="." unique_id=37380476]
-scroll_scale = Vector2(0.35, 1)
-repeat_size = Vector2(3564, 0)
-autoscroll = Vector2(-12, 0)
-
-[node name="CloudSprite" type="Sprite2D" parent="Clouds" unique_id=1683371127]
-position = Vector2(1782, 540)
-texture = ExtResource("14_cloud")
-
-[node name="Background" type="Sprite2D" parent="." unique_id=2083096324]
-texture = ExtResource("2_bg")
-centered = false
+[node name="StreetBackdrop" parent="." unique_id=1312338915 instance=ExtResource("15_sb")]
 
 [node name="ShopDoor" type="Area2D" parent="." unique_id=1252297549]
 position = Vector2(2810, 700)
@@ -63,19 +43,15 @@ return_spawn_x = 2810.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShopDoor" unique_id=1011215196]
 shape = SubResource("Shape_door")
 
-[node name="Prompt" type="PanelContainer" parent="ShopDoor" unique_id=1919938556]
-offset_left = -190.0
-offset_top = -330.0
-offset_right = 190.0
-offset_bottom = -260.0
+[node name="Prompt" type="TextureRect" parent="ShopDoor" unique_id=1919938556]
+offset_left = -48.0
+offset_top = -340.0
+offset_right = 48.0
+offset_bottom = -244.0
 mouse_filter = 2
-theme = ExtResource("4_th")
-
-[node name="Label" type="Label" parent="ShopDoor/Prompt" unique_id=269525783]
-layout_mode = 2
-theme_type_variation = &"PriceLabel"
-text = "[E] TOKO SPAREPART JAYA"
-horizontal_alignment = 1
+texture = ExtResource("20_key")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="WorkshopDoor" type="Area2D" parent="." unique_id=842736127]
 position = Vector2(1900, 700)
@@ -89,28 +65,24 @@ return_spawn_x = 1900.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorkshopDoor" unique_id=580706116]
 shape = SubResource("Shape_door")
 
-[node name="Prompt" type="PanelContainer" parent="WorkshopDoor" unique_id=1858422583]
-offset_left = -190.0
-offset_top = -330.0
-offset_right = 190.0
-offset_bottom = -260.0
+[node name="Prompt" type="TextureRect" parent="WorkshopDoor" unique_id=1858422583]
+offset_left = -48.0
+offset_top = -340.0
+offset_right = 48.0
+offset_bottom = -244.0
 mouse_filter = 2
-theme = ExtResource("4_th")
-
-[node name="Label" type="Label" parent="WorkshopDoor/Prompt" unique_id=1022712172]
-layout_mode = 2
-theme_type_variation = &"PinkLabel"
-text = "[E] MASUK BENGKEL"
-horizontal_alignment = 1
+texture = ExtResource("20_key")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="QueueSpots" type="Node2D" parent="." unique_id=1274009834]
 
 [node name="Spot1" type="Node2D" parent="QueueSpots" unique_id=583384212]
 position = Vector2(1640, 885)
 
-[node name="Motor" parent="QueueSpots/Spot1" instance=ExtResource("5_mp")]
-position = Vector2(-110, -62)
-scale = Vector2(0.28, 0.28)
+[node name="Motor" parent="QueueSpots/Spot1" unique_id=1099655353 instance=ExtResource("5_mp")]
+position = Vector2(-125, -80)
+scale = Vector2(0.38, 0.38)
 
 [node name="Client" type="Sprite2D" parent="QueueSpots/Spot1" unique_id=1704935979]
 position = Vector2(40, 0)
@@ -119,6 +91,7 @@ texture = ExtResource("6_cl")
 offset = Vector2(0, -320)
 
 [node name="NameTag" type="Label" parent="QueueSpots/Spot1" unique_id=456548706]
+visible = false
 offset_left = -80.0
 offset_top = -320.0
 offset_right = 160.0
@@ -129,11 +102,11 @@ text = "Doni"
 horizontal_alignment = 1
 
 [node name="Spot2" type="Node2D" parent="QueueSpots" unique_id=370429899]
-position = Vector2(1420, 885)
+position = Vector2(1370, 885)
 
-[node name="Motor" parent="QueueSpots/Spot2" instance=ExtResource("5_mp")]
-position = Vector2(-110, -62)
-scale = Vector2(0.28, 0.28)
+[node name="Motor" parent="QueueSpots/Spot2" unique_id=1621026437 instance=ExtResource("5_mp")]
+position = Vector2(-125, -80)
+scale = Vector2(0.38, 0.38)
 
 [node name="Client" type="Sprite2D" parent="QueueSpots/Spot2" unique_id=2073905243]
 position = Vector2(40, 0)
@@ -142,6 +115,7 @@ texture = ExtResource("6_cl")
 offset = Vector2(0, -320)
 
 [node name="NameTag" type="Label" parent="QueueSpots/Spot2" unique_id=1157809797]
+visible = false
 offset_left = -80.0
 offset_top = -320.0
 offset_right = 160.0
@@ -152,11 +126,11 @@ text = "Doni"
 horizontal_alignment = 1
 
 [node name="Spot3" type="Node2D" parent="QueueSpots" unique_id=382737562]
-position = Vector2(1200, 885)
+position = Vector2(1100, 885)
 
-[node name="Motor" parent="QueueSpots/Spot3" instance=ExtResource("5_mp")]
-position = Vector2(-110, -62)
-scale = Vector2(0.28, 0.28)
+[node name="Motor" parent="QueueSpots/Spot3" unique_id=1005426212 instance=ExtResource("5_mp")]
+position = Vector2(-125, -80)
+scale = Vector2(0.38, 0.38)
 
 [node name="Client" type="Sprite2D" parent="QueueSpots/Spot3" unique_id=131911624]
 position = Vector2(40, 0)
@@ -165,6 +139,7 @@ texture = ExtResource("6_cl")
 offset = Vector2(0, -320)
 
 [node name="NameTag" type="Label" parent="QueueSpots/Spot3" unique_id=278850252]
+visible = false
 offset_left = -80.0
 offset_top = -320.0
 offset_right = 160.0
@@ -175,11 +150,11 @@ text = "Doni"
 horizontal_alignment = 1
 
 [node name="Spot4" type="Node2D" parent="QueueSpots" unique_id=1853292027]
-position = Vector2(980, 885)
+position = Vector2(830, 885)
 
-[node name="Motor" parent="QueueSpots/Spot4" instance=ExtResource("5_mp")]
-position = Vector2(-110, -62)
-scale = Vector2(0.28, 0.28)
+[node name="Motor" parent="QueueSpots/Spot4" unique_id=1206394095 instance=ExtResource("5_mp")]
+position = Vector2(-125, -80)
+scale = Vector2(0.38, 0.38)
 
 [node name="Client" type="Sprite2D" parent="QueueSpots/Spot4" unique_id=776080599]
 position = Vector2(40, 0)
@@ -188,6 +163,7 @@ texture = ExtResource("6_cl")
 offset = Vector2(0, -320)
 
 [node name="NameTag" type="Label" parent="QueueSpots/Spot4" unique_id=727687854]
+visible = false
 offset_left = -80.0
 offset_top = -320.0
 offset_right = 160.0
@@ -198,11 +174,11 @@ text = "Doni"
 horizontal_alignment = 1
 
 [node name="Spot5" type="Node2D" parent="QueueSpots" unique_id=890365668]
-position = Vector2(760, 885)
+position = Vector2(560, 885)
 
-[node name="Motor" parent="QueueSpots/Spot5" instance=ExtResource("5_mp")]
-position = Vector2(-110, -62)
-scale = Vector2(0.28, 0.28)
+[node name="Motor" parent="QueueSpots/Spot5" unique_id=1887383112 instance=ExtResource("5_mp")]
+position = Vector2(-125, -80)
+scale = Vector2(0.38, 0.38)
 
 [node name="Client" type="Sprite2D" parent="QueueSpots/Spot5" unique_id=1700588773]
 position = Vector2(40, 0)
@@ -211,6 +187,7 @@ texture = ExtResource("6_cl")
 offset = Vector2(0, -320)
 
 [node name="NameTag" type="Label" parent="QueueSpots/Spot5" unique_id=2029013324]
+visible = false
 offset_left = -80.0
 offset_top = -320.0
 offset_right = 160.0
